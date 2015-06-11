@@ -3,17 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | swagon</title>
+  <title>swagon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我的代码很烂">
-<meta property="og:type" content="website">
+  <meta name="description" content="CoreText字符（Character）和字形（Glyphs）coreText入门
+
+Core Text一开始便是定位于桌面的排版系统，使用了传统的原点在左下角的坐标系，所以它在绘制文本的时候都是参照左下角的原点进行绘制的
+Corec Text，将需要显示的文本内容，位置，字体，字形直接传递给(Core Graphics)Quartz
+关于static inline 用在循环中会有显著的效果">
+<meta property="og:type" content="article">
 <meta property="og:title" content="swagon">
-<meta property="og:url" content="yoursite.com/archives/2015/index.html">
+<meta property="og:url" content="yoursite.com/2015/06/09/coretext/index.html">
 <meta property="og:site_name" content="swagon">
-<meta property="og:description" content="我的代码很烂">
+<meta property="og:description" content="CoreText字符（Character）和字形（Glyphs）coreText入门
+
+Core Text一开始便是定位于桌面的排版系统，使用了传统的原点在左下角的坐标系，所以它在绘制文本的时候都是参照左下角的原点进行绘制的
+Corec Text，将需要显示的文本内容，位置，字体，字形直接传递给(Core Graphics)Quartz
+关于static inline 用在循环中会有显著的效果">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swagon">
-<meta name="twitter:description" content="我的代码很烂">
+<meta name="twitter:description" content="CoreText字符（Character）和字形（Glyphs）coreText入门
+
+Core Text一开始便是定位于桌面的排版系统，使用了传统的原点在左下角的坐标系，所以它在绘制文本的时候都是参照左下角的原点进行绘制的
+Corec Text，将需要显示的文本内容，位置，字体，字形直接传递给(Core Graphics)Quartz
+关于static inline 用在循环中会有显著的效果">
   
     <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
   
@@ -193,230 +205,100 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-coretext" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2015/06/09/coretext/" class="article-date">
+  	<time datetime="2015-06-09T11:48:00.000Z" itemprop="datePublished">6月 9 2015</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <h2 id="CoreText">CoreText</h2><h3 id="字符（Character）和字形（Glyphs）">字符（Character）和字形（Glyphs）</h3><p><a href="http://geeklu.com/2013/03/core-text/" target="_blank" rel="external">coreText入门</a></p>
+<ol>
+<li>Core Text一开始便是定位于桌面的排版系统，使用了传统的原点在左下角的坐标系，所以它在绘制文本的时候都是参照左下角的原点进行绘制的</li>
+<li>Corec Text，将需要显示的<strong>文本内容，位置，字体，字形</strong>直接传递给(<strong>Core Graphics</strong>)Quartz</li>
+<li>关于static inline 用在循环中会有显著的效果  push and pop things on/off the stack like parameters and the return address</li>
+<li>As to advantages, if you are calling a small function from a loop then it can make a significant difference in performance.</li>
+<li><a href="http://www.brighttj.com/ios/use-coretext-make-typesetting-picture-and-text.html" target="_blank" rel="external">ss</a></li>
+<li>这三句话的理解// 步骤2：翻转当前的坐标系（因为对于底层绘制引擎来说，屏幕左下角为（0，0））<br>CGContextSetTextMatrix(context, CGAffineTransformIdentity);<br>CGContextTranslateCTM(context, 0, self.bounds.size.height);<br>CGContextScaleCTM(context, 1.0, -1.0);</li>
+<li>在配置NSMutableAttributedString 的Attribute的时候，用到了很多这样的(__bridge id)标识，来解释下：这个因为addAttribute:是OC的方法，需要Object C 对象，而CTParagraphStyleRef这些是由C语言实现的Core Foundation Framework 框架中的对象，这两种类型可以相互转换和操作。Core Foundation Framework 框架中的对象也有引用计数的概念，但是不是Cocoa Framework中的release/retain不同，而是使用自身的CFRetain/CFRelease接口，</li>
+<li>CFAttributedStringRef ：属性字符串，用于存储需要绘制的文字字符和字符属性<br>CTFramesetterRef：通过CFAttributedStringRef进行初始化，作为CTFrame对象的生产工厂，负责根据path创建对应的CTFrame<br>CTFrame：用于绘制文字的类，可以通过CTFrameDraw函数，直接将文字绘制到context上<br>CTLine：在CTFrame内部是由多个CTLine来组成的，每个CTLine代表一行<br>CTRun：每个CTLine又是由多个CTRun组成的，每个CTRun代表一组显示风格一致的文本</li>
+</ol>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/11/xcode文档术语/" class="archive-article-date">
-  	<time datetime="2015-06-11T06:43:42.000Z" itemprop="datePublished">6月 11</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/10/ui/" class="archive-article-date">
-  	<time datetime="2015-06-10T10:55:37.000Z" itemprop="datePublished">6月 10</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+    <a href="/2015/06/10/reveal/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/09/最爱的快捷键/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/10/reveal/" class="archive-article-date">
-  	<time datetime="2015-06-10T00:39:16.000Z" itemprop="datePublished">6月 10</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+</article>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/09/coretext/" class="archive-article-date">
-  	<time datetime="2015-06-09T11:48:00.000Z" itemprop="datePublished">6月 9</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/09/最爱的快捷键/" class="archive-article-date">
-  	<time datetime="2015-06-09T03:18:41.000Z" itemprop="datePublished">6月 9</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/08/runloop/" class="archive-article-date">
-  	<time datetime="2015-06-08T01:42:31.000Z" itemprop="datePublished">6月 8</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/05/Untitled/" class="archive-article-date">
-  	<time datetime="2015-06-05T07:18:36.000Z" itemprop="datePublished">6月 5</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/04/熟悉objective-c/" class="archive-article-date">
-  	<time datetime="2015-06-04T13:59:14.000Z" itemprop="datePublished">6月 4</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="coretext" data-title="" data-url="yoursite.com/2015/06/09/coretext/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/03/开发问题/" class="archive-article-date">
-  	<time datetime="2015-06-03T01:56:07.000Z" itemprop="datePublished">6月 3</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/02/开源项目阅读/" class="archive-article-date">
-  	<time datetime="2015-06-02T15:19:48.000Z" itemprop="datePublished">6月 2</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 </div>
       <footer id="footer">
   <div class="outer">

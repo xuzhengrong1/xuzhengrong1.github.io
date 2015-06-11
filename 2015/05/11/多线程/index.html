@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>swagon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="多线程NSThread
+需要管理线程的生命周期，获取当前线程线程对象[NSThread currentThread],num相当于线程id,
+获取主线程[NSThread mainThread]
+创建一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start方法2：[NSThread detachNewThre">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swagon">
+<meta property="og:url" content="yoursite.com/2015/05/11/多线程/index.html">
+<meta property="og:site_name" content="swagon">
+<meta property="og:description" content="多线程NSThread
+需要管理线程的生命周期，获取当前线程线程对象[NSThread currentThread],num相当于线程id,
+获取主线程[NSThread mainThread]
+创建一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start方法2：[NSThread detachNewThre">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swagon">
+<meta name="twitter:description" content="多线程NSThread
+需要管理线程的生命周期，获取当前线程线程对象[NSThread currentThread],num相当于线程id,
+获取主线程[NSThread mainThread]
+创建一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start方法2：[NSThread detachNewThre">
+  
+    <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">swagon</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">原谅我不堪回首的过去</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">swagon</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">swagon</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">原谅我不堪回首的过去</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-多线程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/11/多线程/" class="article-date">
+  	<time datetime="2015-05-11T15:19:35.000Z" itemprop="datePublished">5月 11 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="多线程">多线程</h2><h3 id="NSThread">NSThread</h3><ol>
+<li>需要管理线程的生命周期，<strong>获取当前线程</strong>线程对象[NSThread currentThread],num相当于线程id,</li>
+<li><strong>获取主线程</strong>[NSThread mainThread]</li>
+<li><strong>创建</strong>一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start<br>方法2：[NSThread detachNewThreadSlector] 马上启动线程</li>
+<li>隐氏创<strong>建线程</strong>[self  performSelectorInBackground]</li>
+<li><strong>暂停</strong>线程<code>[NSThread sleepTimeInterval:2]</code><br>[NSThread untilDate:date]</li>
+<li>在当前线程执行操作[self performselector] </li>
+<li>在指定线程执行某个操作  [self performSelect:(sel) onTherad] waitUntilDone:No会马上返回</li>
+<li>[self performSelectOnMainThread]  下载图片后返回到主线程[self.imageView performSelectorOnMainThread]</li>
+<li>下载图片  进度条，imageview  imageView.contentMode  scaleAspectFit(保持原来的宽高比)</li>
+<li></li>
+</ol>
+<h3 id="NSOperation">NSOperation</h3><ol>
+<li>不需要考虑线程生命周期，同步，加锁等问题</li>
+<li>将操作封装在NSOperation对象</li>
+<li>把对象添加到NSOperationQueue中，<strong>设置依赖关系</strong></li>
+<li>使用NSOperation的子类<br><strong>NSInvocationOperation</strong>:    [NSInvocationOperation alloc] initWithTarget:   调用autoRelease<br>启动操作[operation start]  默认是同步执行，在主线程中执行<br>监听完成操作，<code>operation.CompletionBlock=^{}</code>，执行完了之后调用</li>
+</ol>
+<p><strong>NSBlockOperation</strong>:[NSBlockOperation BlockOperationWithBlock] ,添加附加的操作， operation addExecutionBlock 并行执行，多个操作开启多个线程，并发执行<br>cancle取消某个操作</p>
+<p><strong>自定义NSOperation</strong>  ：重载main方法 <code>-（void）main{ @autoRelease{ if(self.isCancled){ return } 下载图片 判断有没有被取消  }  }</code> 异步执行，main方法可能在其他线程调用，就不能访问主线程的自动释放池，新建一个属于当前线程的自动释放池<br>把对象传递给外面：1.代理  2. Block：  retain对Block没有作用，copy才有用<br>要在dealloc中作释放操作<br>_表示内部<br>属性不能跟父类重复</p>
+<p>NSOperation<strong>Queue</strong>：当前方法在哪里调用，就在哪里执行<br> [Queue addOperation:]马上执行操作，不用调用Start，异步操作，做一次Retain操作   先加的就先执行<br> 添加一组<br> 添加依赖：addDependency  队列和队列中的操作之间也可以添加依赖（跨队列） 不能环形依赖<br> 限制并发操作数量：setMaxConcurentOperationCount<br> 取消所有操作[queue cancleallOperation]<br> [queue setSuspended:Yes]:暂停 正在进行不会暂停，执行完后才暂停<br> &lt;#可替换的代码块#&gt;</p>
+<h3 id="GCD">GCD</h3><ol>
+<li>定义好操作，添加到调度队列中</li>
+<li>并行队列（并发执行），串行队列</li>
+<li>全局并行队列dispath<em>get_globle_quque(,0)<br> 获取全局队列：<code>dispath_get_globle_quque</code><br> 异步并行：<code>dispath_get_globle_quque</code> <code>dispathc_async(quque,block)</code><br> 异步串行：手动创建：dispatch_quque_create(“xzr”,null) 开启异步任务 `dispathc</em><strong>async</strong><code>同步执行：</code>dispath<em>get_globle_quque<code>开启同步任务</code>dispathc</em><strong>sync</strong>`<br> 循环：dispatch_apply(次数，手动创建/并发队列)</li>
+<li>获取跟主队列 dispatch_get_main_queue();dispatch_async()</li>
+<li>开启异步任务去下载图片，把操作放到一个异步线程中去计算，  </li>
+<li>依赖关系：组dispatch_group_async_crate()，并发执行 dispatch_group_async(group,queue,block)，一起执行完， dispatch_group_notify(group,main,block)</li>
+<li>dispatch_releleas（组和Create的队列）</li>
+<li>队列的类型只决定任务是并发还是串行，函数名称代表是异步还是同步</li>
+</ol>
+<h3 id="图片">图片</h3><ol>
+<li>图像自动调整大小 <code>【self.imageView sizeToFit】</code></li>
+<li>设置睡眠时间：<code>[NSThread sleepForTimeInterval:2]</code></li>
+<li>获取当前线程<code>[NSThread CurrentThread]</code></li>
+<li>在后台线程中(非主线程)执行:<code>[self performSelectInbackground:]</code>  不能自动回收线程，会建立大量的子线程。所以是<strong>不正确</strong>的，应该使用<code>[self performSelectOnMainThread]</code> waitUntiDone:YES阻塞当前线程，No不会</li>
+<li>使用NSThread的线程，不会自动添加到自动释放池中，使用GCD和NSOpertation也会自动添加自动释放池，NSThread和NSobject不会，需要自己加autoReleasePool</li>
+<li>缓存策略：使用0（会使用本地缓存）,1(忽视本地内存缓存)  206状态码：加载一部分</li>
+<li>写入文件：追加文件 FileHandle （视5频的拖动播放） <code>fp seekToEndOfEnd</code>  <code>fp writeData</code></li>
+<li>InlineBlock快捷代码 在主线程更新UI,回到主线程    <code>dispatch_get_main_queue()</code>   创建一个线程，<code>dispatch_queue_create(&quot;download&quot;,dispatch_queue_serial)</code> ,<code>dispatch_async(q,block)</code></li>
+</ol>
+<h3 id="上传">上传</h3><ol>
+<li>post格式：content=”multipart/form-data”</li>
+<li>put不支持浏览器操作<br>3.</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/05/12/面试准备/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/09/文件下载/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="多线程" data-title="" data-url="yoursite.com/2015/05/11/多线程/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 swagon
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

@@ -3,17 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2015 | swagon</title>
+  <title>swagon</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="我的代码很烂">
-<meta property="og:type" content="website">
+  <meta name="description" content="View生命周期
+第一次访问UIViewController的view时，view为nil，然后就会调用loadView方法创建view
+view创建完毕后会调用viewDidLoad方法进行界面元素的初始化
+当内存警告时，系统可能会释放UIViewController的view，将view赋值为nil，并且调用viewDidUnload方法
+当再次访问UIViewController的view时">
+<meta property="og:type" content="article">
 <meta property="og:title" content="swagon">
-<meta property="og:url" content="yoursite.com/archives/2015/index.html">
+<meta property="og:url" content="yoursite.com/2015/05/13/View的生命周期/index.html">
 <meta property="og:site_name" content="swagon">
-<meta property="og:description" content="我的代码很烂">
+<meta property="og:description" content="View生命周期
+第一次访问UIViewController的view时，view为nil，然后就会调用loadView方法创建view
+view创建完毕后会调用viewDidLoad方法进行界面元素的初始化
+当内存警告时，系统可能会释放UIViewController的view，将view赋值为nil，并且调用viewDidUnload方法
+当再次访问UIViewController的view时">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swagon">
-<meta name="twitter:description" content="我的代码很烂">
+<meta name="twitter:description" content="View生命周期
+第一次访问UIViewController的view时，view为nil，然后就会调用loadView方法创建view
+view创建完毕后会调用viewDidLoad方法进行界面元素的初始化
+当内存警告时，系统可能会释放UIViewController的view，将view赋值为nil，并且调用viewDidUnload方法
+当再次访问UIViewController的view时">
   
     <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
   
@@ -193,230 +205,114 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-View的生命周期" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2015/05/13/View的生命周期/" class="article-date">
+  	<time datetime="2015-05-13T02:42:37.000Z" itemprop="datePublished">5月 13 2015</time>
+</a>
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+    <div class="article-entry" itemprop="articleBody">
       
+        <h2 id="View">View</h2><h3 id="生命周期">生命周期</h3><ol>
+<li>第一次访问UIViewController的view时，view为nil，然后就会调用loadView方法创建view</li>
+<li>view创建完毕后会调用viewDidLoad方法进行界面元素的初始化</li>
+<li>当内存警告时，系统可能会释放UIViewController的view，将view赋值为nil，并且调用viewDidUnload方法</li>
+<li>当再次访问UIViewController的view时，view已经在3中被赋值为nil，所以又会调用loadView方法重新创建view</li>
+<li>view被重新创建完毕后，还是会调用viewDidLoad方法进行界面元素的初始化</li>
+<li>viewDidUnload方法时，只是释放了view，并没有释放UIViewController，所以并不会调用dealloc方法。即viewDidUnload和dealloc方法并没有任何关系，dealloc方法只会在UIViewController被释放的时候调用<br>loadView-&gt;viewDidLoad-&gt;viewDidUnload(内存警告)-&gt;viewWillDisappear-&gt;viewDidDisappear-&gt;viewWillAppear-&gt;viewDidAppear</li>
+</ol>
+<h3 id="appdelegate生命周期">appdelegate生命周期</h3><ol>
+<li>application didFinishLaunchingWithOptions：当应用程序启动时执行，应用程序启动入口，只在应用程序启动时执行一次。若用户直接启动，lauchOptions内无数据,若通过其他方式启动应用，lauchOptions包含对应方式的内容。</li>
+<li>applicationWillResignActive：在应用程序将要由活动状态切换到非活动状态时候，要执行的委托调用，如 按下 home 按钮，返回主屏幕，或全屏之间切换应用程序等。</li>
+<li>applicationDidEnterBackground：在应用程序已进入后台程序时，要执行的委托调用。</li>
+<li>applicationWillEnterForeground：在应用程序将要进入前台时(被激活)，要执行的委托调用，刚好与applicationWillResignActive 方法相对应。</li>
+<li>applicationDidBecomeActive：在应用程序已被激活后，要执行的委托调用，刚好与applicationDidEnterBackground 方法相对应。</li>
+<li>applicationWillTerminate：在应用程序要完全推出的时候，要执行的委托调用，这个需要要设置UIApplicationExitsOnSuspend的键值。<br>顺序如下:<br>didFinishLaunchingWithOptions<br>applicationDidBecomeActive<br>applicationWillResignActive<br>applicationDidEnterBackground<br>applicationWillEnterForeground<br>applicationDidBecomeActive 进入前台后被激活</li>
+</ol>
+<p>view在uiviewController生命周期  </p>
+<ul>
+<li>(void)viewDidLoad；  </li>
+<li>(void)viewDidUnload；  </li>
+<li>(void)viewWillAppear:(BOOL)animated；  </li>
+<li>(void)viewDidAppear:(BOOL)animated；  </li>
+<li>(void)viewWillDisappear:(BOOL)animated；  </li>
+<li>(void)viewDidDisappear:(BOOL)animated； </li>
+</ul>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/11/xcode文档术语/" class="archive-article-date">
-  	<time datetime="2015-06-11T06:43:42.000Z" itemprop="datePublished">6月 11</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/10/ui/" class="archive-article-date">
-  	<time datetime="2015-06-10T10:55:37.000Z" itemprop="datePublished">6月 10</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<nav id="article-nav">
+  
+    <a href="/2015/05/13/内存管理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/05/13/核心动画/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/10/reveal/" class="archive-article-date">
-  	<time datetime="2015-06-10T00:39:16.000Z" itemprop="datePublished">6月 10</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+</article>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/09/coretext/" class="archive-article-date">
-  	<time datetime="2015-06-09T11:48:00.000Z" itemprop="datePublished">6月 9</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/09/最爱的快捷键/" class="archive-article-date">
-  	<time datetime="2015-06-09T03:18:41.000Z" itemprop="datePublished">6月 9</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/08/runloop/" class="archive-article-date">
-  	<time datetime="2015-06-08T01:42:31.000Z" itemprop="datePublished">6月 8</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/05/Untitled/" class="archive-article-date">
-  	<time datetime="2015-06-05T07:18:36.000Z" itemprop="datePublished">6月 5</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/04/熟悉objective-c/" class="archive-article-date">
-  	<time datetime="2015-06-04T13:59:14.000Z" itemprop="datePublished">6月 4</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="View的生命周期" data-title="" data-url="yoursite.com/2015/05/13/View的生命周期/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/03/开发问题/" class="archive-article-date">
-  	<time datetime="2015-06-03T01:56:07.000Z" itemprop="datePublished">6月 3</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2015/06/02/开源项目阅读/" class="archive-article-date">
-  	<time datetime="2015-06-02T15:19:48.000Z" itemprop="datePublished">6月 2</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 </div>
       <footer id="footer">
   <div class="outer">

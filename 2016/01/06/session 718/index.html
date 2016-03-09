@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>swagon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="session 718watchOS and iOS Multitasking place increased demands on your application’s efficiency and responsiveness. With expert guidance from the GCD team, learn about threads, queues, runloops and b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swagon">
+<meta property="og:url" content="yoursite.com/2016/01/06/session 718/index.html">
+<meta property="og:site_name" content="swagon">
+<meta property="og:description" content="session 718watchOS and iOS Multitasking place increased demands on your application’s efficiency and responsiveness. With expert guidance from the GCD team, learn about threads, queues, runloops and b">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swagon">
+<meta name="twitter:description" content="session 718watchOS and iOS Multitasking place increased demands on your application’s efficiency and responsiveness. With expert guidance from the GCD team, learn about threads, queues, runloops and b">
+  
+    <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">swagon</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">原谅我不堪回首的过去</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">swagon</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">swagon</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">原谅我不堪回首的过去</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-session 718" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/06/session 718/" class="article-date">
+  	<time datetime="2016-01-06T02:59:17.000Z" itemprop="datePublished">1月 6 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="session_718">session 718</h1><h3 id="watchOS_and_iOS_Multitasking_place_increased_demands_on_your_application’s_efficiency_and_responsiveness-_With_expert_guidance_from_the_GCD_team,_learn_about_threads,_queues,_runloops_and_best_practices_for_their_use_in_a_modern_app-_Take_a_deep_dive_into_QoS,_its_propagation_and_advanced_techniques_for_debugging_your_GCD-enabled_app-">watchOS and iOS Multitasking place increased demands on your application’s efficiency and responsiveness. With expert guidance from the GCD team, learn about threads, queues, runloops and best practices for their use in a modern app. Take a deep dive into QoS, its propagation and advanced techniques for debugging your GCD-enabled app.</h3><p>[Applause]</p>
+<p>ANTHONY CHIVETTA: Good morning and welcome to building responsive and efficient apps with GCD.</p>
+<p>We’re so excited to see so many of you here interested in learning about how Grand Central Dispatch can help you adapt your application to all of our platforms.</p>
+<p>I’m Anthony and my teammate Daniel will be presenting this talk with me.</p>
+<p>Grand Central Dispatch or GCD is a technology that was introduced with OS X Snow Leopard( /‘lɛpɚd/   豹 ).</p>
+<p>At that time our brand new Mac was the MacBook Pro with the Core II Duo. (处理器)</p>
+<p>One of the selling points of GCD at the time was that it would allow you to take advantage of both cores, running different parts of your application concurrently, and make threading really, really easy.</p>
+<p><u>We think that use of GCD has really stood the test of time.</u></p>
+<p>Today our top-of-the-line Mac Pro has many, many more Cores and GCD is still a great way to take advantage of all of those computing resources.</p>
+<p>But just as GCD is a great way to use all the resources on the high end it can help your application adapt to smaller environments.</p>
+<p>For example, the new MacBook that we recently released is the first paneless design.</p>
+<p><u>While this is an advantage in terms of size of the machine, it also presents unique challenges in terms of how we manage the thermal ( /‘θɝml/ 热) properties.</u></p>
+<p>I’ll talk a little bit later about how your app can use GCD to run more efficiently in this environment.</p>
+<p>We also have iOS 9 with new multitasking features.</p>
+<p>This is the first time your app had to run side-by-side, quite literally( 完全不同), with other applications on the system.</p>
+<p>GCD can inform(通知) the system what kind of work you’re doing and better share resources between your app and the other apps present on the screen.</p>
+<p>Of course, Watch OS brings your code to our smallest platform.</p>
+<p>GCD is a way that you can help the system know which parts of your code you should run in order to be able to have a responsive application on a device this size.</p>
+<p>So a brief outline of what we are going to go through today.</p>
+<p>I’m going to start by introducing something called Quality of Service classes.</p>
+<p>This is an API that we released with iOS 8 and OS X Yosemite.</p>
+<p>Daniel’s going to come up and go through some design patterns for using GCD, and how to integrate QLS with these patterns.</p>
+<p>I’ll then go through some details about threads, queues, and run loops that can make using GCD easier.</p>
+<p>And finally, we’ll conclude with a brief section on how to understand crash reports when you’re using GCD.</p>
+<p>But first a little bit of background.</p>
+<p>So we have your awesome app.</p>
+<p>And you start executing the app, the user taps the icon, loads it from a finder.</p>
+<p>We will begin executing your code in main and you’ll have your initial main thread that every app starts with.</p>
+<p>You call UI application main, or NSApplication main, and that’s going to bring up a run loop on the thread and the Framework code.</p>
+<p>And then that thread is going to sit there waiting for events.</p>
+<p>At some point something is going to happen.</p>
+<p>Maybe you’ll get a delegate method call out to your UI application delegate.</p>
+<p>At this point, your code begins to run and needs to do something; let’s say it wants to read from a database.</p>
+<p>You go out and, you’ll access that file on disk.</p>
+<p>That data will come back.</p>
+<p>You’ll update the user interface.</p>
+<p>And then finally return control back to the Frameworks and continue waiting for events on the thread.</p>
+<p>This works great until that read from the database takes a little bit of time.</p>
+<p>At that point on OS X you might see a spinning wait cursor.</p>
+<p>On iOS the app would hang and might even get terminated.</p>
+<p>This is a poor and unresponsive user experience.</p>
+<p>And this is where GCD can come in and help make things a little bit easier.</p>
+<p>You’ll get your delegate method of call out.</p>
+<p>But instead of doing the work immediately you can create a GCD queue, use dispatch async to move the work on to the cue.</p>
+<p>Your code executes asynchronously with respect to the main thread.</p>
+<p>When you have the data available, you can dispatch async back to the main thread, update the UI.</p>
+<p>Now, the advantage here is that while your work is happening on that GCD queue, the main thread can continue waiting for events.</p>
+<p>It stays responsive.</p>
+<p>The user continues to get a great experience, and everyone is happy.</p>
+<p>Now, I’m hoping this is a pattern that is familiar to all of you.</p>
+<p>We are not going to go through the details of how to accomplish this.</p>
+<p>If this is not familiar, I highly encourage you to head up to Presidio after this and check out the talk there which will go through the pattern in detail.</p>
+<p>One thing you might have not thought about before, is we now have two threads that both want to execute code.</p>
+<p>Your main thread wants to handle new events and the GCD queue wants to execute the block you dispatched to it.</p>
+<p>And maybe we’re only on a single core device.</p>
+<p>In this case, which thread do we execute?</p>
+<p>This is where Quality of Service classes come into play.</p>
+<p>As I mentioned this is a new API in iOS 8 and 10 Yosemite that we released last year.</p>
+<p>We have four Quality of Service classes: user interactive, user initiated, utility and background.</p>
+<p>These are ways you tell the system what kind of work you’re doing, and in turn, it allows the system to provide a variety of resource controlsto most effectively execute your code.</p>
+<p>When I say resource controls, what am I talking about?</p>
+<p>Our system has support for CPU scheduling priority, which threads do we run, in what order?</p>
+<p>I/O priority, how do we execute I/O with deference to other I/O in the system.</p>
+<p>Timer coalescing, which is a power-saving feature.</p>
+<p>And whether we run the CPU in through-put or in efficiency-oriented mode.</p>
+<p>Do we want to get the most performance, or do we want to execute the code in the most energy-efficient manner?</p>
+<p>In an ideal world we tune each of these configuration values for each platform or device and piece of code that’s running, but obviously this would get out of hand quickly.</p>
+<p>There’s a lot of values hard to tune correctly and a lot of platforms where your code can run.</p>
+<p>Quality of Service Classes are designed to be a single abstract parameter that you can use to communicate the intent and classification of your work.</p>
+<p>Rather than trying to tune all of these specific configuration values you simply say “I’m doing user initiated work” and the system will automatically pick the right values for that platform and device.</p>
+<p>So I mentioned we have four Quality of Service classes.</p>
+<p>Let me talk through them briefly and what they are used for.</p>
+<p>The first is user interactive.</p>
+<p>This is the main thread.</p>
+<p>Imagine you have an iOS app, the user has their finger on the screen and is dragging.</p>
+<p>The main thread needs to be responsive in order to deliver the next frame of animation as the user is dragging.</p>
+<p>The main user interactive code is specifically the code needed in order to keep that 60 frames per second animation running smoothly.</p>
+<p>So you want to ask yourself: Is this work actively involved in updating the UI when considering whether something should be user-interactive.</p>
+<p>This isn’t loading the content potentially of that scroll view.</p>
+<p>It is just drawing the new animation.</p>
+<p>We talk about user initiated as being loading the results of an action done by the user.</p>
+<p>So this might be as I’m scrolling through scroll view loading the data for the next cells or if I’m in a photo or mail application and tap an emailor photo, loading the full size photo or e-mail, those kinds of actions are what we talk about as user initiated.</p>
+<p>The question is, is this work required to continue user interaction?</p>
+<p>It’s helpful not to any about it as user initiated but user blocking.</p>
+<p>If the user can’t continue to make meaningful progress with your application, user initiated is the correct class.</p>
+<p>Utility is for those things that the user may have started, or may have started automatically, but are longer running tasks that don’t prevent the user from continuing to use your app.</p>
+<p>You want to ask yourself, is the user aware of the progress of this work?</p>
+<p>If you were a magazine app downloading a new issue, is something that the user can continue to use the app while it’s happening.</p>
+<p>They can read old issues or browse around.</p>
+<p>You may have a progress bar and the user is aware of the progress.</p>
+<p>This is a great thing to classify as utility.</p>
+<p>Finally, background is for everything else.</p>
+<p>The user is not actively watching.</p>
+<p>Any kind of maintenance task, cleanup work, database vacuuming would all be background.</p>
+<p>And the question is basically, is the user unaware of this work?</p>
+<p>Now background work is interesting because you want to think about when you’re doing it.</p>
+<p>I encourage you to take a look at the writing energy efficient code sessions from last year that talk about how to do background work effectively if your app has significant work in this class.</p>
+<p>So I mentioned our new MacBook.</p>
+<p>As I said, this is the first fanless Mac.</p>
+<p>In previous MacBooks that had a fan, as the machine is doing more and more work and generating more and more energy and therefore heat we can bring up the fan speed to help dissipate the heat faster.</p>
+<p>The new MacBook is incredibly energy efficient.</p>
+<p>We don’t need a fan to dissipate heat in most circumstances, but running this machine at full speed is still going to generate some energy we need to dissipate.</p>
+<p>But our ability to dissipate heat is at a constant rate.</p>
+<p>We have other techniques to make sure we can keep the enclosure of the machine at an appropriate temperature for the user.</p>
+<p>Imagine you have an app using and you have work happening at all four Quality of Service classes.</p>
+<p>You are driving the machine hard, using a lot of energy and we need to help control that amount of energy in order to keep the machine at a reasonable temperature.</p>
+<p>Well, what we can do is we can start to squeeze the amount of work we are going to do at the less important Quality of Service classes.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/06/生活/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/05/paintCode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="session 718" data-title="" data-url="yoursite.com/2016/01/06/session 718/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 swagon
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

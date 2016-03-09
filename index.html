@@ -195,11 +195,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-xcode文档术语" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-多线程" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/11/xcode文档术语/" class="article-date">
-  	<time datetime="2015-06-11T06:43:42.000Z" itemprop="datePublished">6月 11 2015</time>
+      <a href="/2016/03/08/多线程/" class="article-date">
+  	<time datetime="2016-03-08T05:37:08.000Z" itemprop="datePublished">3月 8 2016</time>
 </a>
     </div>
   
@@ -210,140 +210,199 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Xcode文档">Xcode文档</h2><ol>
-<li>UIBarMetrics  Constants(常量) 横竖屏导航栏的模式 tasks overview</li>
-<li>应用程序对象， 应用程序委托</li>
+        <h2 id="多线程">多线程</h2><h3 id="NSThread">NSThread</h3><ol>
+<li><p>需要管理线程的生命周期，<strong>获取当前线程</strong>线程对象[NSThread currentThread],num相当于线程id,</p>
+</li>
+<li><p><strong>获取主线程</strong>[NSThread mainThread]</p>
+</li>
+<li><p><strong>创建</strong>一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start   </p>
+<p>方法2：[NSThread detachNewThreadSlector] 马上启动线程</p>
+</li>
+<li><p>隐氏创<strong>建线程</strong>[self  performSelectorInBackground]</p>
+</li>
+<li><p><strong>暂停</strong>线程<code>[NSThread sleepTimeInterval:2]</code>  </p>
+<p>[NSThread untilDate:date]</p>
+</li>
+<li><p>在当前线程执行操作[self performselector] </p>
+</li>
+<li><p>在指定线程执行某个操作  [self performSelect:(sel) onTherad] waitUntilDone:No会马上返回</p>
+</li>
+<li><p>[self performSelectOnMainThread]  下载图片后返回到主线程[self.imageView performSelectorOnMainThread]</p>
+</li>
+<li><p>下载图片  进度条，imageview  imageView.contentMode  scaleAspectFit(保持原来的宽高比)</p>
+<p>10.</p>
+</li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-ui" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/10/ui/" class="article-date">
-  	<time datetime="2015-06-10T10:55:37.000Z" itemprop="datePublished">6月 10 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="UI">UI</h2><h3 id="storyBoard">storyBoard</h3><p>Use size Classes</p>
-<h3 id="UITableView高度自动计算">UITableView高度自动计算</h3><h3 id="方法追踪">方法追踪</h3><p>class_replaceMethod<br>method_exchangeImplementations  </p>
+<h3 id="NSOperation">NSOperation</h3><ol>
+<li><p>不需要考虑线程生命周期，同步，加锁等问题</p>
+</li>
+<li><p>将操作封装在NSOperation对象</p>
+</li>
+<li><p>把对象添加到NSOperationQueue中，<strong>设置依赖关系</strong></p>
+</li>
+<li><p>使用NSOperation的子类  </p>
+<p><strong>NSInvocationOperation</strong>:    [NSInvocationOperation alloc] initWithTarget:   调用autoRelease    </p>
+<p>启动操作[operation start]  默认是同步执行，在主线程中执行  </p>
+<p>监听完成操作，<code>operation.CompletionBlock=^{}</code>，执行完了之后调用</p>
+</li>
+</ol>
+<p><strong>NSBlockOperation</strong>:[NSBlockOperation BlockOperationWithBlock] ,添加附加的操作， operation addExecutionBlock 并行执行，多个操作开启多个线程，并发执行  </p>
+<p>cancle取消某个操作</p>
+<p><strong>自定义NSOperation</strong>  ：重载main方法 <code>-（void）main{ @autoRelease{ if(self.isCancled){ return } 下载图片 判断有没有被取消  }  }</code> 异步执行，main方法可能在其他线程调用，就不能访问主线程的自动释放池，新建一个属于当前线程的自动释放池  </p>
+<p>把对象传递给外面：1.代理  2. Block：  retain对Block没有作用，copy才有用  </p>
+<p>要在dealloc中作释放操作  </p>
+<p>_表示内部  </p>
+<p>属性不能跟父类重复</p>
+<p>NSOperation<strong>Queue</strong>：当前方法在哪里调用，就在哪里执行</p>
+<p> [Queue addOperation:]马上执行操作，不用调用Start，异步操作，做一次Retain操作   先加的就先执行 </p>
+<p> 添加一组  </p>
+<p> 添加依赖：addDependency  队列和队列中的操作之间也可以添加依赖（跨队列） 不能环形依赖  </p>
+<p> 限制并发操作数量：setMaxConcurentOperationCount  </p>
+<p> 取消所有操作[queue cancleallOperation]  </p>
+<p> [queue setSuspended:Yes]:暂停 正在进行不会暂停，执行完后才暂停</p>
+<p> &lt;#可替换的代码块#&gt;</p>
+<h3 id="GCD">GCD</h3><h4 id="使用">使用</h4><ol>
+<li><p>定义好操作，添加到调度队列中</p>
+</li>
+<li><p>并行队列（并发执行），串行队列</p>
+</li>
+<li><p>全局并行队列dispath_get_globle_quque(,0)  </p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取全局队列：<span class="escape">`d</span>ispath_get_globle_quque<span class="escape">` </span>  </span><br><span class="line">异步并行：<span class="escape">`d</span>ispath_get_globle_quque<span class="escape">` </span><span class="escape">`d</span>ispathc_async(quque,block)<span class="escape">` </span>  </span><br><span class="line">异步串行：手动创建：dispatch_quque_create(<span class="string">"xzr"</span>,null) 开启异步任务 <span class="escape">`d</span>ispathc_**async**<span class="escape">`</span><br><span class="line"></span>同步执行：<span class="escape">`d</span>ispath_get_globle_quque<span class="escape">` </span>开启同步任务 <span class="escape">`d</span>ispathc_**sync**<span class="escape">` </span> </span><br><span class="line">循环：dispatch_apply(次数，手动创建/并发队列)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 <ol>
-<li>对象通过实例变量保存属性的值</li>
-<li>图片缩放<br><a href="http://pan.baidu.com/share/link?shareid=314639287&amp;uk=1040625628#path=%252FiOS_Animations_by_Tutorials%252FiOS%2520Animation%2520with%2520Swift%2520Series" target="_blank" rel="external">资源</a></li>
+<li><p>获取跟主队列 dispatch_get_main_queue();dispatch_async()</p>
+</li>
+<li><p>开启异步任务去下载图片，把操作放到一个异步线程中去计算，  </p>
+</li>
+<li><p>依赖关系：组dispatch_group_async_crate()，并发执行 dispatch_group_async(group,queue,block)，一起执行完， dispatch_group_notify(group,main,block)</p>
+</li>
+<li><p>dispatch_releleas（组和Create的队列）</p>
+</li>
+<li><p>队列的类型只决定任务是并发还是串行，函数名称代表是<strong>异步还是同步</strong> （同步和异步是相对于当前线程）</p>
+</li>
+<li><h5 id="dispatch_once_t每次检测Block是否执行完毕。dispatch_once的作用正如其名：对于某个任务执行一次，且只执行一次。_dispatch_once函数有两个参数，第一个参数predicate用来保证执行一次，第二个参数是要执行一次的任务block。"><code>dispatch_once_t</code>每次检测Block是否执行完毕。<code>dispatch_once</code>的作用正如其名：对于某个任务执行一次，且只执行一次。 <code>dispatch_once</code>函数有两个参数，第一个参数<code>predicate</code>用来保证执行一次，第二个参数是要执行一次的任务block。</h5></li>
+<li><p>dispatch_once，低负载、高可依赖性、接口简单等特性<a href="http://www.dreamingwish.com/article/gcd-guide-dispatch-once-1.html" target="_blank" rel="external">地址</a>，</p>
+</li>
+<li><p>GCD使用函数指针或者上下文指针（取代block），Dispatch queues 和 dispatch sources（后面会介绍到）可以被挂起和恢复</p>
+</li>
+<li><p>GCD的基本概念就是dispatch queue。dispatch queue是一个对象，它可以接受任务，并将任务以先到先执行的顺序来执行。dispatch queue可以是并发的或串行的。并发任务会像NSOperationQueue那样基于系统负载来合适地并发进行，串行队列同一时间只执行单一任务</p>
+<p>​</p>
+</li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-reveal" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/10/reveal/" class="article-date">
-  	<time datetime="2015-06-10T00:39:16.000Z" itemprop="datePublished">6月 10 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="reveal">reveal</h3><ol>
-<li>命令 reveal_load_sim</li>
+<h4 id="概念性指引">概念性指引</h4><ol>
+<li>同步和异步（函数返回） ，并发和串行（任务执行）</li>
+<li>死锁 所谓的死锁是指它们都卡住了</li>
+<li>Race Condition 基于特定序列或时机的事件的软件系统以不受控制的方式运行的行为</li>
+<li>Critical Section 两个线程不能同时执行这段代码</li>
+<li>Context Switch 上下文切换 （切换不同线程，恢复执行）多任务应用</li>
+<li>线程安全</li>
+<li>并发和并行    </li>
+<li>调度队列（dispatch queues）自身都是线程安全</li>
+<li>并发队列中的任务能得到的保证是它们会按照被添加的顺序开始执行</li>
+<li>dispatch_async 添加一个 Block 到队列就立即返回了。任务会在之后由 GCD 决定执行。当你需要在后台执行一个基于网络或 CPU 紧张的任务时就使用 dispatch_async ，这样就不会阻塞当前线程。</li>
+<li>并行要求并发，但并发并不能保证并行（不保证）</li>
 </ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-coretext" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/09/coretext/" class="article-date">
-  	<time datetime="2015-06-09T11:48:00.000Z" itemprop="datePublished">6月 9 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="CoreText">CoreText</h2><h3 id="字符（Character）和字形（Glyphs）">字符（Character）和字形（Glyphs）</h3><p><a href="http://geeklu.com/2013/03/core-text/" target="_blank" rel="external">coreText入门</a></p>
+<h3 id="gcd">gcd</h3><p>添加任务到合适的队列，GCD生成必要的线程并计划执行任务，开发者只需要把任务添加到合适的队列</p>
+<p>上下文切换，保存线程执行路径</p>
+<p>消耗内存资源，死锁，数据竞争</p>
+<p>串行队列使用一个线程，并行队列使用多个线程</p>
+<p>XUN内核决定应当使用的线程数</p>
+<p>多个串行队列的任务是可以并行执行的，多少个串行队列就有多少个线程</p>
+<p>多个线程更新资源导致数据竞争采用串行队列，但是线程的生成要限制，比如更新数据库表用一个线程</p>
+<p>队列穿件出来后，要自己释放，管理通过retain release</p>
+<p>block会持有这个队列</p>
+<p>系统定义的队列，主， 全局（高/默认/低/后台)</p>
 <ol>
-<li>Core Text一开始便是定位于桌面的排版系统，使用了传统的原点在左下角的坐标系，所以它在绘制文本的时候都是参照左下角的原点进行绘制的</li>
-<li>Corec Text，将需要显示的<strong>文本内容，位置，字体，字形</strong>直接传递给(<strong>Core Graphics</strong>)Quartz</li>
-<li>关于static inline 用在循环中会有显著的效果  push and pop things on/off the stack like parameters and the return address</li>
-<li>As to advantages, if you are calling a small function from a loop then it can make a significant difference in performance.</li>
-<li><a href="http://www.brighttj.com/ios/use-coretext-make-typesetting-picture-and-text.html" target="_blank" rel="external">ss</a></li>
-<li>这三句话的理解// 步骤2：翻转当前的坐标系（因为对于底层绘制引擎来说，屏幕左下角为（0，0））<br>CGContextSetTextMatrix(context, CGAffineTransformIdentity);<br>CGContextTranslateCTM(context, 0, self.bounds.size.height);<br>CGContextScaleCTM(context, 1.0, -1.0);</li>
-<li>在配置NSMutableAttributedString 的Attribute的时候，用到了很多这样的(__bridge id)标识，来解释下：这个因为addAttribute:是OC的方法，需要Object C 对象，而CTParagraphStyleRef这些是由C语言实现的Core Foundation Framework 框架中的对象，这两种类型可以相互转换和操作。Core Foundation Framework 框架中的对象也有引用计数的概念，但是不是Cocoa Framework中的release/retain不同，而是使用自身的CFRetain/CFRelease接口，</li>
-<li>CFAttributedStringRef ：属性字符串，用于存储需要绘制的文字字符和字符属性<br>CTFramesetterRef：通过CFAttributedStringRef进行初始化，作为CTFrame对象的生产工厂，负责根据path创建对应的CTFrame<br>CTFrame：用于绘制文字的类，可以通过CTFrameDraw函数，直接将文字绘制到context上<br>CTLine：在CTFrame内部是由多个CTLine来组成的，每个CTLine代表一行<br>CTRun：每个CTLine又是由多个CTRun组成的，每个CTRun代表一组显示风格一致的文本</li>
+<li><p>One of the technologies for starting tasks asynchronously is Grand Central Dispatch (GCD)；开始异步任务的技术，把线程管理的代码移到系统级别，我们只需要定义要执行的任务-&gt;加到合适的分发队列，gcd管理线程的创建和运行</p>
+</li>
+<li><p>more elegant，更优雅的代码 it works more effectively 更高效</p>
+</li>
+<li><p>GCD全局dispatch queue仅仅是工作线程池的抽象。这些队列中的Block一旦可用，就会被dispatch到工作线程中。提交至用户队列的Block最终也会通过全局队列进入相同的工作线程池（除非你的用户队列的目标是主线程，但是为了提高运行速度，我们绝不会这么干）。</p>
+</li>
+<li><p>By “drain” the pool is released <strong>immediately</strong> even in an environment with garbage collection enabled. 没有用garbage collection，用release也是可以的</p>
+</li>
+<li><p>线程和cpu的执行是等价的 still one CPU core can execute just one CPU bytecode</p>
+</li>
+<li><p>such as system calls, an executing state for a path, including CPU registers, is stored in one of the memory blocks assigned to each path.</p>
+</li>
+<li><p>内存快回保存每个线程执行路径is stored in one of the <strong>memory blocks</strong> assigned to each path</p>
+</li>
+<li><p>多核CPU the number of threads <strong>equals</strong> the number of CPU cores that can really run in parallel</p>
+<h4 id="多线程引发的问题">多线程引发的问题</h4></li>
+<li><p>更新同一份数据，导致数据不一致 race condition</p>
+</li>
+<li><p>死锁：When multiple threads await an event at the same time (deadlock)</p>
+</li>
+<li><p>内存消耗</p>
+<h4 id="更好的响应">更好的响应</h4></li>
+<li><p>dispatch_set_target_queue:变更优先级通过这个函数，第一个参数是自定义队列，第二参数是目标队列的,把多个串行队列设置到一个串行队列中，那么原本并行执行的几个串行队列，现在将会并行执行</p>
+</li>
+<li><p>dispatch_after,不是指定时间后执行，<strong>而是指定时间后追加到队列</strong>，主线程每隔1/60秒进行runloop</p>
+<p>​</p>
+</li>
+</ol>
+<p>dispatch queue</p>
+<p>a queue to store tasks to be executed（队列存储要执行的任务）</p>
+<ol>
+<li><p>主线程是一个串行队列，Global queuses并发队列（高中低三个优先级），多个串行队列在同一个时间运行，也能达到并发的效果</p>
+</li>
+<li><p>DISPATCH_QUEUE_CONCURRENT    dispatch_queue_t myConcurrentDispatchQueue = dispatch_queue_create( “com.example.gcd.MyConcurrentDispatchQueue”, DISPATCH_QUEUE_CONCURRENT); 第一个参数的目的是为了Debug，在崩溃日志中会显示，调试也很有用</p>
+</li>
+<li><p>不会被当做OC对象 isn’t treated as an Objective-C object dispatch_release(mySerialDispatchQueue);</p>
+</li>
+<li><p>不再使用锁，同步执行</p>
+</li>
+<li><p>When a Block is added to a dispatch queue by a dispatch_async function, say, the Block has ownership of the dispatch queue by the dispatch_retain function</p>
+</li>
+<li><p>f you call the dispatch_retain or dispatch_release function on the main dispatch queue or on a global dispatch queue, nothing happens. No problem</p>
+</li>
+<li><p>使用group的方式 ：dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</p>
+<p>dispatch_group_t group = dispatch_group_create();</p>
+<p>for(id obj in array)</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">dispatch_group_async</span>(group, queue, ^&#123;</span><br><span class="line">    <span class="attr_selector">[self doSomethingIntensiveWith:obj]</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   dispatch_group_wait(group, DISPATCH_TIME_FOREVER);</p>
+<p>   dispatch_release(group);</p>
+<p>   [self doSomethingWith:array];</p>
+<ol>
+<li><p>dispatch_apply 并平行运算，然后等待所有运算结束</p>
+</li>
+<li><p>但是将block提交至queue还是很消耗资源的——block需要被拷贝和入队，同时适当的工作线程需要被通知。不要将一张图片的每个像素作为一个block提交至队列，GCD的优点就半途夭折了。如果你不确定，那么请进行试验。将程序平行计算化是一种优化措施，在修改代码之前你必须再三思索，确定修改是有益的（还有确保你修改了正确的地方）。</p>
+</li>
+<li><p>dispatchI/O  dispatchdata</p>
+</li>
+<li><p>​</p>
+<h2 id="dispatchsource">dispatchsource</h2><p>​</p>
+<ol>
+<li>​</li>
+</ol>
+</li>
+</ol>
+<h3 id="图片">图片</h3><ol>
+<li>图像自动调整大小 <code>【self.imageView sizeToFit】</code></li>
+<li>设置睡眠时间：<code>[NSThread sleepForTimeInterval:2]</code></li>
+<li>获取当前线程<code>[NSThread CurrentThread]</code></li>
+<li>在后台线程中(非主线程)执行:<code>[self performSelectInbackground:]</code>  不能自动回收线程，会建立大量的子线程。所以是<strong>不正确</strong>的，应该使用<code>[self performSelectOnMainThread]</code> waitUntiDone:YES阻塞当前线程，No不会</li>
+<li>使用NSThread的线程，不会自动添加到自动释放池中，使用GCD和NSOpertation也会自动添加自动释放池，NSThread和NSobject不会，需要自己加autoReleasePool</li>
+<li>缓存策略：使用0（会使用本地缓存）,1(忽视本地内存缓存)  206状态码：加载一部分</li>
+<li>写入文件：追加文件 FileHandle （视5频的拖动播放） <code>fp seekToEndOfEnd</code>  <code>fp writeData</code></li>
+<li>InlineBlock快捷代码 在主线程更新UI,回到主线程    <code>dispatch_get_main_queue()</code>   创建一个线程，<code>dispatch_queue_create(&quot;download&quot;,dispatch_queue_serial)</code> ,<code>dispatch_async(q,block)</code></li>
+</ol>
+<h3 id="上传">上传</h3><ol>
+<li><p>post格式：content=”multipart/form-data”</p>
+</li>
+<li><p>put不支持浏览器操作</p>
+<p>3.</p>
+</li>
+</ol>
+<h4 id="死锁造成的原因">死锁造成的原因</h4><ol>
+<li>队列是先进先出，所有会造成死锁，在主线程中加入同步任务，就会造成死锁</li>
+</ol>
+<h2 id="GCD实现">GCD实现</h2><ol>
+<li>XUN上实现</li>
+<li>派发队列通过结构体和链表</li>
 </ol>
 
       
@@ -367,11 +426,11 @@
 
 
   
-    <article id="post-最爱的快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-内存管理" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/09/最爱的快捷键/" class="article-date">
-  	<time datetime="2015-06-09T03:18:41.000Z" itemprop="datePublished">6月 9 2015</time>
+      <a href="/2016/03/06/内存管理/" class="article-date">
+  	<time datetime="2016-03-06T08:58:13.000Z" itemprop="datePublished">3月 6 2016</time>
 </a>
     </div>
   
@@ -382,48 +441,241 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="最爱的快捷键">最爱的快捷键</h2><h3 id="xcode快捷键">xcode快捷键</h3><h4 id="组合技能1">组合技能1</h4><ol>
-<li>首先通过<strong>Cmd + shift +o</strong> 打开快速查找文件。</li>
-<li>然后呢，我们想要快速找到它在项目中的位置，可以通过<strong>Cmd + shift +j</strong>直接得到它在项目中得位置，方便我们对于文件进行复制，移动等操作。</li>
-<li>此时，如果我们懒着通过鼠标聚焦到editor中，可以通过Cmd + j 聚焦到编辑器中。</li>
-<li>最后如果我们想要在文件中查找到具体的某个函数，可以通过<strong>ctrl + 6</strong> 来输入相应的函数名字来查找对应的函数。（也可以直接通过ctrl + 6查看本页面中有哪些函数。）</li>
+        <h1 id="内存管理">内存管理</h1><h2 id="创建一个对象所作的操作">创建一个对象所作的操作</h2><p>ARC内存管理是编译器的工作</p>
+<p>首先这里会涉及到一个堆和栈的感念，系统已知数据类型是保存在堆中，如果要程序员自动定义的类型则是保存在栈当中，因为程序不知道为我们分配具体多大的内存空间</p>
+<p>创建一个对象所作的操作</p>
+<p>1.变量类型已知，分配就在栈上，如果是未知类型（如Person），需要自己申请的， 这样的就会分配在堆中</p>
+<p>2.栈的入栈操作是压栈,从顶开始分配，堆地址从低内存地址向高内存地址增长</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="name">Person</span> *<span class="atom">p</span>=[[<span class="name">Person</span> <span class="atom">alloc</span>] <span class="atom">init</span>];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>分配内存空间，对应alloc方法;</li>
+<li>初始化成员变量，对应init方法;</li>
+<li>返回堆空间的地址到栈上面;</li>
+<li>内存管理原则(配对原则):只要出现了new,alloc,retain,就一定要出现一个release,autorelease</li>
 </ol>
-<h4 id="组合技能2">组合技能2</h4><ol>
-<li>首先我在两个地方打了两个断点，打断点的方式可以直接在所在行的左边直接点击空白处，也可以通过快捷键<strong>cmd +(delte 下面的那个键)</strong>。</li>
-<li>然后呢， 我点击进入别的页面，通过<strong>Cmd + 7</strong>,可以快速定位的断点选择栏。</li>
-<li>此时，我通过上下移动方向键，可以快速回到我打断点的地方。</li>
-<li>然后我又通过<strong>Cmd + y</strong>的方式来使所有的断点无效。最后加了这么多得断点了，我们需要移除断点，所以通过<strong>option + 方向</strong>键快读定位到workSpace,点击delete的方式吧所有的断点删除。</li>
-<li><p>cmd +shift+Y—-&gt;<strong>打开关闭控制台</strong><br>6</p>
+<h3 id="属性">属性</h3><ol>
+<li><p>管理范围：任何继承NSObject的对象都要进行内存管理，普通对象是存放在栈中的（栈会自动回收），所以不需要进行内存管理；</p>
 </li>
-<li><p>cmd+0  <strong>打开左侧菜单栏</strong>  opt+cmd+0右侧</p>
+<li><p>系统判断对象怎么回收：引用计数器（被引用的次数），操作对象的引用计数器（alloc,new,copy默认为<strong>1</strong>） retianCount当前引用计数器的值</p>
 </li>
-<li>帮助栏opt+cmd+1 —-2</li>
-<li><p>control+cmd+comd+(1~4)</p>
+<li><p>property可以生成Get和Set方法：  </p>
+<p><strong>retian</strong>：release旧的值(-1)，retian新值（+1） oc对象类型 </p>
+<p><strong>assgin</strong>:直接赋值  </p>
+<p><strong>copy</strong>:-&gt;copywithZone   release旧值，Copy新值  </p>
+<p><strong>setter,getter</strong>:setter方法要带<strong>冒号</strong>，一般用在bool类型  </p>
+<p>在.h文件中，用@class,在.中使用#import  </p>
+<p>出现循环引用，可以一段用retain，另一端用assign</p>
 </li>
-<li><p>cmd+enter标准的编辑器格式</p>
-</li>
-<li>opt +cmd+enter</li>
-<li>opt +cmd +shift+enter 历史记录</li>
-<li>ctrl+opt+方向，后退和前进</li>
 </ol>
-<h4 id="组合技能3">组合技能3</h4><ol>
-<li>首先我通过快捷键<strong>Cmd + t</strong> 来快速打开一个tab标签。</li>
-<li>然后呢，我又通过doubleClick的方式在带开了一个UIWindow的标签，但是没有关闭原来的标签。</li>
-<li>在Uiwindow这个文件里我可能想查看一个控制器的代码，但是不想关闭当前UIWindow.我通过<strong>option + 控制器源文件</strong>,就在assitant editor中打开了这个文件，查看完我通过<strong>cmd+ enter</strong>键来关闭这个辅助视图。</li>
-<li>最后打开了这么多得tab标签是不是看很复杂，我们在想要留下的文件的tab标签是按着<strong>option键点击x按钮</strong>，这样就会只留下自己想看的tab,而其它的tab都关闭了，这样tab界面看起来会清爽很多。<h3 id="单独快捷键">单独快捷键</h3></li>
-<li>cmd+k lldb调试信息清楚</li>
-<li>show blame for line     Control+C<em>**</em></li>
-<li>.m和.h页面之间切换的快捷键 Control + Command + 上键/下键</li>
-<li>cmd+数字打开左边的菜单栏， control+数字打开右边的显示栏</li>
+<p>野指针也可能可以访问到的原因：（被系统回收的对象叫做僵尸对象）xcode为了提高编码效率，不会实时检测僵尸对象,如果要实时检测：Edit Scheme-&gt; enable zoombie objects 耗性能</p>
+<ul>
+<li><p><strong>野指针</strong>：在手机中可能出现闪退,对象的retainCount为0时，调用对象的retain方法无法让对象可以复活</p>
+</li>
+<li><p><strong>内存泄露</strong>：(1)对象的retainCount！=0，就一直存在内存中，不使用的对象，一直存在内存中，没有被销毁。</p>
+<p>(2)p=nil操作在，对象的retainCount&gt;0的情况下，<code>[nil release]</code></p>
+</li>
+</ul>
+<p>避免野指针：确定当前作用域中的对象已经不再被使用，为了防止野指针，不使用的指针变量赋值为<code>nil</code></p>
+<p>对象被销毁会调用dealloc函数</p>
+<h2 id="多个对象的内存管理">多个对象的内存管理</h2><ul>
+<li>为了让一个对象的方法和属性(另外一个对象)都能用，如果不是同一个对象的时候  调用set的时候先释放掉之前的存的对象，然后retain,在dealloc的时候释放掉</li>
+</ul>
+<h2 id="自动释放池">自动释放池</h2><ul>
+<li>autorelease就会放到释放池中，池中存放的是地址，过了大括号就会释放对象</li>
+<li>只有在autoreleasepool中调用autorelease才能把对象放到池中</li>
+<li>一个对象自动释放两次，会产生什么情况，出了大括号会出现野指针</li>
+<li>autoreleasepool嵌套，对象调用autorelease什么时候销毁,在哪调用就在哪里销毁</li>
+<li>Person *p这样定义是会有地址存在的（相当于野指针）)，不是nil</li>
+<li>创建对象不能马上调用release，所以可以调用autorelease，然后让释放池管理对</li>
+<li><code>[[self alloc] init]</code>注意这个坑</li>
+</ul>
+<p>使用情况如下</p>
+<ul>
+<li>提供一个快速给外面访问的方法；</li>
+<li>一个对象在创建后不能马上释放，让他在释放池中释放</li>
+</ul>
+<h2 id="ARC机制">ARC机制</h2><p>iphone4,iOS4.3之后的产品出现ARC机制  </p>
+<p>编译特性 :dealloc中不能调用[super dealloc] ,编译时加上释放代码</p>
+<ul>
+<li>强指针：只要有强指针指向一个对象，系统就不会回收这个对象，只要没有强指针指向，就立即</li>
+<li>弱指针：用完之后复制为nil,原来就会被回收，局部变量会自动回收</li>
+<li>循环引用：一端用Strong,一端用__weak</li>
+</ul>
+<h2 id="Block：本质还是结构体:用于保存代码">Block：本质还是结构体:用于保存代码</h2><ol>
+<li><p>block 只是 Objective-C 对<strong>闭包的实现</strong> ,block 本身也是一个 Objective-C 对象，声明一个结构体，结构体内部调用定义的函数，有个值描述当前block, clang -rewrite-objc</p>
+</li>
+<li><p>定义<code>void(^myblock)()=^{};</code>  指向函数的指针；block默认不能修改局部变量（要修改要加上__block），全局变量是可以修改</p>
+</li>
+<li><p>使用Typedef定义block类型 typedef int (^myblock)(int,int)</p>
+</li>
+<li><p>根据Block在内存中的位置分为三种类型：NSGlobalBlock，NSStackBlock, NSMallocBlock。  </p>
+<p><strong>NSGlobalBlock</strong>:blk1放到了text代码段  </p>
+<p><strong>NSStackBlock</strong>:有拷贝外部变量到栈上，拷贝的是值的副本（是一个常量，不能修改它的值）， 加上__block修身符之后，就会拷贝这个对象的地址?  </p>
+<p><strong>NSMallocBlock</strong>：位于堆内存。</p>
+</li>
+<li><p>Block不仅实现函数的功能，还能携带函数的执行环境。</p>
+</li>
+<li><p>Copy block（会复制到堆中）：有时候是需要block的生命周期长于一开始的stack，而block2被移动到heap中，很可能生命周期会长于stack，所以，shared也被复制到了heap中，<a href="http://www.tanhao.me/pieces/310.html/&quot;Title&quot;" target="_blank" rel="external">参考文档:老谭笔记</a>，在block中调用<code>[block2 release]</code> ,对象会被销毁</p>
+</li>
+<li><p><strong>block变量和block变量都在栈上，如果没有加 </strong>block的变量是原有变量的一份拷贝，在block中成为一个常量，所以不能修改</p>
+</li>
+<li><p>而对于copy到heap中的block 再copy时，行为同普通对象retain一样，会使引用计数+1</p>
+</li>
+<li><p>不可变对象调用Copy都是指针复制，可变对象调用copymutableCopy都是浅复制</p>
+</li>
+<li><p>block中使用的普通变量（int， char *）导入是const copy。普通对象则会retain。__block 类型变量则什么不做，只是保存一个指针，全局变量也只是保存一个简单的指针    </p>
+</li>
+<li><p>我们发现原来 <strong>静态变量</strong> 是通过指针传递<a href="https://www.zybuluo.com/MicroCai/note/57603" target="_blank" rel="external">block和变量的内存管理</a>， __block的真身：实质是传递了指针</p>
+</li>
+<li><p><a href="http://blog.csdn.net/ljianhui/article/details/21666327" target="_blank" rel="external">内存空间分段</a></p>
+<p><strong>bss</strong>:是指那些没有初始化的和初始化为0的全局变量,占内存空间，但是不占文件空间  </p>
+<p><strong>data</strong>:data指那些初始化过（非零）的非const的全局变量，以上两者都占  </p>
+<p><strong>rodata</strong>的意义同样明显，ro代表read only，即只读数据(const)，多个进程间是共享</p>
+</li>
 </ol>
-<h3 id="mac快捷键">mac快捷键</h3><p>今天xcode的快捷键先介绍这么多，下面说一些mac OSx的常用快捷键，这里只介绍一些，后续会逐渐补充。</p>
-<p>cmd + delte 删除一个文件。</p>
-<p>cmd + shift + delte 删除垃圾桶。（这样不需要每次都到回收站中删除垃圾桶的文件了）</p>
-<p>cmd + shit + n 在finder中创建一个文件夹</p>
-<p>ctrl + shift + （最右上角那个键）能够快速锁屏电脑，有了它再也不用触摸脚休眠了。</p>
-<p>cmd + shift +d 在finder的应用程序active的时候（即使没有聚焦）能够快速打开桌面</p>
-<p>cmd + o 快速打开一个文件。</p>
-<p>cmd+f3 显示桌面<br><strong>ctrl + cmd + space 调出emoji表情</strong>，如这样?</p>
+<ol>
+<li><p>id的定义：`typedef struct objc_object {  </p>
+<p>Class isa;</p>
+<p>} *id;`  </p>
+<p>Class的定义：`typedef struct objc_class *Class;</p>
+<p>struct objc_class {</p>
+<p>Class isa;  //指向对象类型  </p>
+<p>Class super_class; //指向父类的</p>
+<p>const char *name; //类名</p>
+<p>long version; //类的版本信息,默认为0</p>
+<p>long info; //供运行期使用的一些位标识。</p>
+<p>long instance_size; //类的实例变量大小</p>
+<p>struct objc_ivar_list *ivars; //成员变量的数组</p>
+<p>struct objc_method_list <strong>methodList; //方法定义的数组，注意这里是“</strong>”</p>
+<p>struct objc_cache; //指向最近使用的方法，用于方法调用的优化.</p>
+<p>struct objc_protocol_list *protocols; //协议的数组  </p>
+<p>}`   </p>
+<p><strong>methodList</strong>是指针的指针，所以可以通过修改该指针指向的指针的地址，来动态增加方法，这也是 Category 的实现原理 </p>
+<p><strong>objc_cache</strong>：为了优化方法调用速度，就将调用过的一些方法缓存到到 objc_cache 中  </p>
+<p>此结构体存放类的 <strong>元数据</strong>（metadata)  </p>
+<p>对象所属的类型（即 isa 指针所指向的对象类型）是另一个类，叫做 <strong>元类</strong>（metaclass)，类方法就定义在这个地方 ，类是元类的实例</p>
+</li>
+<li><h3 id="OwnerShip修饰符（对象所有者）">OwnerShip修饰符（对象所有者）</h3><ol>
+<li><p>__strong这是默认的修饰符,{} 超出作用范围就会被释放,一个指向的过程，<strong>有个线拉着对象的内存</strong></p>
+<ol>
+<li>方法参数带上，废弃对象的同事，怎样废弃属性（堆空间地址失效-&gt;然后失效？），初始化为nil</li>
+</ol>
+</li>
+<li><p>环(weak)</p>
+<ol>
+<li>(循环引用是对象的内部循环引用（属性指向另外一个对象），对象和对象之间不会出现)</li>
+<li>对象的属性引用对象本身</li>
+</ol>
+</li>
+<li><p>__unsafe_unretained（不属于编译器的工作），不安全的修饰符，不持有对象这点和_weak是一样的，出了作用域会出现悬挂指针(确定要真是存在)</p>
+</li>
+<li><p><strong>autoreleasing 修饰符，对对象调用</strong>autoreleas方法 </p>
+<ol>
+<li>编译器会判断方法名，然后自动注册到autoreleasepool中</li>
+<li>使用对象作为函数的返回值，编译器会自动注册到autoreleasepool中</li>
+</ol>
+</li>
+<li><p><em>*作为  id </em>obj  编译器内部转化<code>NSError *error=nil;</code></p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSError <span class="keyword">*</span>__strong <span class="keyword">*</span>pErr=&amp;error;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li><p>dealloc移除通知</p>
+</li>
+<li><p><strong>bridge (转化过程,保持对象的原来的引用)      </strong>bridge_retained(都有)   __bridge_transfer（CFBridgingRelease）（被复制对象retain, 原对象release ）</p>
+</li>
+<li><p>autoreleasereturnValue注册到释放池中</p>
+</li>
+<li><p>不支持加attribute objc_arc_weak_reference_unavailable</p>
+</li>
+<li><p>​</p>
+</li>
+<li><p>​</p>
+</li>
+</ol>
+<p>​    </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-pop" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/04/pop/" class="article-date">
+  	<time datetime="2016-03-04T09:41:48.000Z" itemprop="datePublished">3月 4 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pop">pop</h2><ol>
+<li><p>pop animation 为什么可以作用于任何NSObject</p>
+</li>
+<li><p>类簇的概念，参考<a href="http://blog.sunnyxx.com/2014/12/18/class-cluster/" target="_blank" rel="external">博客</a> </p>
+</li>
+<li><p>concrete具体的子类</p>
+</li>
+<li><p>@public</p>
+<p>  POPStaticAnimatablePropertyState *_state;</p>
+<p>对外公布一个成员变量</p>
+</li>
+<li><p>POPAnimatableProperty的类族</p>
+<p> POPConcreteAnimatableProperty：继承POPAnimatableProperty</p>
+<p> POPMutableAnimatableProperty:继承POPAnimatableProperty</p>
+<p> POPPlaceholderAnimatableProperty：继承POPAnimatableProperty</p>
+<p> POPStaticAnimatableProperty：继承POPAnimatableProperty</p>
+<p>​</p>
+</li>
+<li><p>NSObject  -&gt;继承关系</p>
+<p>   POPAnimation</p>
+<pre><code><span class="title">POPPropertyAnimation</span>
+
+    POPBasicAnimation
+
+    POPDecayAnimation
+
+    POPSpringAnimation
+
+POPCustomAnimation
+</code></pre><p>   _POPAnimationState</p>
+<pre><code><span class="title">_POPPropertyAnimationState</span>
+
+    _POPBasicAnimationState
+
+    _POPDecayAnimationState
+
+    _POPSpringAnimationState
+</code></pre></li>
+<li><p>调用copy会调用copyWithZone</p>
+<p>​</p>
+<p>​</p>
+</li>
+</ol>
 
       
     </div>
@@ -449,8 +701,8 @@
     <article id="post-runloop" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/08/runloop/" class="article-date">
-  	<time datetime="2015-06-08T01:42:31.000Z" itemprop="datePublished">6月 8 2015</time>
+      <a href="/2016/03/03/runloop/" class="article-date">
+  	<time datetime="2016-03-03T04:21:34.000Z" itemprop="datePublished">3月 3 2016</time>
 </a>
     </div>
   
@@ -461,20 +713,186 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="RunLoop">RunLoop</h2><h3 id="tips">tips</h3><ol>
-<li>CGD中Dispatch到 main queue的block被分发到main runLoop中执行；</li>
-<li>mach_port端口</li>
-<li>NSDelayPerforming</li>
-<li>AFNetworking [runLoop addPort]</li>
-<li>优化TableView加载图片 delegate -&gt;<code>[self.avatarImageView performSlector:@selector(setImage:) afterDelay:0 inModels:[NSDefaultRunLoopMode]]</code> </li>
-<li>GCD源码 libdispatch  内核  <code>mac_vm_size_t</code></li>
-<li>CoreFoundation</li>
-<li>setNeedsDisplay然后向等待重绘的视图发送DrawRect消息</li>
-<li>不重绘没有改变的视图，自定义的消息要手动调用SetNeedsDisplay   </li>
-<li>只绘制一个区域SetNeedsDisplayInRect</li>
-<li>视图属性为nil默认会调用loadView方法</li>
-<li>loadView能够自动处理nib文件包含的视图层次结构</li>
-<li></li>
+        <h1 id="RunLoop">RunLoop</h1><h3 id="参考文章">参考文章</h3><ol>
+<li><a href="http://www.dreamingwish.com/article/ios-multithread-program-runloop-the.html" target="_blank" rel="external">http://www.dreamingwish.com/article/ios-multithread-program-runloop-the.html</a></li>
+</ol>
+<h3 id="tips">tips</h3><ol>
+<li><p>CGD中Dispatch到 main queue的block被分发到main runLoop中执行；</p>
+</li>
+<li><p>事件处理的循环,用来不停的调度工作以及处理输入事件。使用run loop的目的是让你的线程在有工作的时候忙于工作，而没工作的时候处于休眠状态。每个线程有与之对应的runloop，只有辅助线程才需要显式的运行它的run loop</p>
+</li>
+<li><p>两种源input sourece和time source <a href="http://www.dreamingwish.com/article/ios-multithread-program-runloop-the.html" target="_blank" rel="external">地址</a>     </p>
+<ol>
+<li><p>输入源传递异步事件，通常消息来自于其他线程或程序。并调用runUntilDate:方法来退出(在线程里面相关的NSRunLoop对象调用)。</p>
+<ul>
+<li>基于端口的输入源<ul>
+<li>在Cocoa里面你从来不需要直接创建输入源。你只要简单的创建端口对象，并使用NSPort的方法把该端口添加到run loop。端口对象会自己处理创建和配置输入源。</li>
+</ul>
+</li>
+<li>自定义的输入源<ul>
+<li>除了定义在事件到达时自定义输入源的行为，你也必须定义消息传递机制。</li>
+<li>为了创建自定义输入源，必须使用Core Foundation里面的CFRunLoopSourceRef类型相关的函数来创建。你可以使用回调函数来配置自定义输入源。Core Fundation会在配置源的不同地方调用回调函数，处理输入事件，在源从run loop移除的时候清理它。</li>
+</ul>
+</li>
+<li>区别：基于端口的输入源由内核自动发送，而自定义的则需要人工从其他线程发送。</li>
+<li>若某一源在当前模式下不被监听，那么任何其生成的消息只在run loop运行在其关联的模式下才会被传递。</li>
+<li><strong>Cocoa </strong>执行 Selector 的源</li>
+</ul>
+<p>​</p>
+</li>
+<li><p>定时源则传递同步事件，发生在特定时间或者重复的时间间隔。</p>
+<ol>
+<li>定时器所在的模式当前未被run loop监视，那么定时器将不会开始直到run loop运行在相应的模式下。</li>
+</ol>
+</li>
+<li><p>两种源都使用程序的某一特定的处理例程来处理到达的事件。</p>
+</li>
+<li><p>定时源则直接传递消息给处理例程，但并不会退出run loop。 </p>
+</li>
+<li><p>除了处理输入源，run loops也会生成关于run loop行为的通知(notifications)。注册的run loop观察者(run-loop Observers)可以收到这些通知，并在线程上面使用它们来做额外的处理。你可以使用Core Foundation在你的线程注册run-loop观察者。</p>
+</li>
+</ol>
+</li>
+<li><p>run-loop观察者</p>
+<ol>
+<li>源是合适的同步或异步事件发生时触发，而run loop观察者则是在run loop本身运行的<strong>特定时候</strong>触发。你可以使用run loop观察者来为处理某一特定事件或是进入休眠的线程做准备</li>
+<li>定时器类似，run loop观察者可以只用一次或循环使用。</li>
+</ol>
+</li>
+<li><p>runloop事件队列</p>
+<ol>
+<li>每次运行run loop，你线程的run loop对会自动处理之前未处理的消息，并通知相关的观察者。具体的顺序如下：<ol>
+<li>通知观察者run loop已经启动</li>
+<li>通知观察者任何即将要开始的定时器</li>
+<li>通知观察者任何即将启动的非基于端口的源</li>
+<li>启动任何准备好的非基于端口的源</li>
+<li>如果基于端口的源准备好并处于等待状态，立即启动；并进入步骤9。</li>
+<li>通知观察者线程进入休眠</li>
+<li>将线程置于休眠直到任一下面的事件发生：<ul>
+<li>某一事件到达基于端口的源</li>
+<li>定时器启动</li>
+<li>Run loop设置的时间已经超时</li>
+<li>run loop被显式唤醒</li>
+</ul>
+</li>
+<li>通知观察者线程将被唤醒。</li>
+<li>处理未处理的事件<ul>
+<li>如果用户定义的定时器启动，处理定时器事件并重启run loop。进入步骤2</li>
+<li>如果输入源启动，传递相应的消息</li>
+<li>如果run loop被显式唤醒而且时间还没超时，重启run loop。进入步骤2</li>
+</ul>
+</li>
+<li>通知观察者run loop结束。</li>
+</ol>
+</li>
+<li>​</li>
+</ol>
+<p>​</p>
+</li>
+<li><p>runloop模式</p>
+<ul>
+<li><p>Run loop模式是所有要监视的输入源和定时源以及要通知的run loop注册观察者的集合。</p>
+</li>
+<li><p>每次运行你的run loop，你都要指定（无论显示还是隐式）其运行个模式。</p>
+</li>
+<li><p>大多数时候，run loop都是运行在系统定义的默认模式上。但是模态面板（modal panel）可以运行在 “modal”模式下。</p>
+</li>
+<li><p><em>模式区分基于事件的源而非事件的种类。例如，你不可以使用模式只选择处理鼠标按下或者键盘事件。你可以使用模式监听端口，暂停定时器或者改变其他源或者当前模式下处于监听状态run loop观察者。</em></p>
+</li>
+<li><p>| Mode           | Name                                     | Description                              |<br>| ——————— | ———————————————————— | ———————————————————— |<br>| Default        | <a href="http://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSRunLoop_Class/Reference/Reference.html#//apple_ref/c/data/NSDefaultRunLoopMode" target="_blank" rel="external">NSDefaultRunLoopMode</a>(Cocoa)<a href="http://developer.apple.com/library/ios/documentation/CoreFoundation/Reference/CFRunLoopRef/Reference/reference.html#//apple_ref/c/data/kCFRunLoopDefaultMode" target="_blank" rel="external">kCFRunLoopDefaultMode</a> (Core Foundation) | The default mode is the one used for most operations. Most of the time, you should use this mode to start your run loop and configure your input sources. |<br>| Connection     | NSConnectionReplyMode(Cocoa)             | Cocoa uses this mode in conjunction with NSConnection objects to monitor replies. You should rarely need to use this mode yourself. |<br>| Modal          | NSModalPanelRunLoopMode(Cocoa)           | Cocoa uses this mode to identify events intended for modal panels. |<br>| Event tracking | NSEventTrackingRunLoopMode(Cocoa)        | Cocoa uses this mode to restrict incoming events during mouse-dragging loops and other sorts of user interface tracking loops. |<br>| Common modes   | <a href="http://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSRunLoop_Class/Reference/Reference.html#//apple_ref/c/data/NSRunLoopCommonModes" target="_blank" rel="external">NSRunLoopCommonModes</a>(Cocoa)<a href="http://developer.apple.com/library/ios/documentation/CoreFoundation/Reference/CFRunLoopRef/Reference/reference.html#//apple_ref/c/data/kCFRunLoopCommonModes" target="_blank" rel="external">kCFRunLoopCommonModes</a> (Core Foundation) | This is a configurable group of commonly used modes. Associating an input source with this mode also associates it with each of the modes in the group. For Cocoa applications, this set includes the default, modal, and event tracking modes by default. Core Foundation includes just the default mode initially. You can add custom modes to the set using the <a href="http://developer.apple.com/library/ios/documentation/CoreFoundation/Reference/CFRunLoopRef/Reference/reference.html#//apple_ref/c/func/CFRunLoopAddCommonMode" target="_blank" rel="external">CFRunLoopAddCommonMode</a> function. |</p>
+<p>​</p>
+</li>
+</ul>
+<p>​</p>
+</li>
+<li><p>mach_port端口</p>
+</li>
+<li><p>NSDelayPerforming</p>
+</li>
+<li><p>AFNetworking [runLoop addPort]</p>
+</li>
+<li><p>优化TableView加载图片 delegate -&gt;<code>[self.avatarImageView performSlector:@selector(setImage:) afterDelay:0 inModels:[NSDefaultRunLoopMode]]</code> </p>
+</li>
+<li><p>GCD源码 libdispatch  内核  <code>mac_vm_size_t</code></p>
+</li>
+<li><p>CoreFoundation</p>
+</li>
+<li><p>setNeedsDisplay然后向等待重绘的视图发送DrawRect消息</p>
+</li>
+<li><p>不重绘没有改变的视图，自定义的消息要手动调用SetNeedsDisplay   </p>
+</li>
+<li><p>只绘制一个区域SetNeedsDisplayInRect</p>
+</li>
+<li><p>视图属性为nil默认会调用loadView方法</p>
+</li>
+<li><p>loadView能够自动处理nib文件包含的视图层次结构</p>
+</li>
+</ol>
+<h3 id="Event_Loop">Event Loop</h3><p>function loop() {</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">initialize();</span><br><span class="line">do &#123;</span><br><span class="line">    var <span class="keyword">message</span> = get_next_message();</span><br><span class="line">    process_message(<span class="keyword">message</span>);</span><br><span class="line">&#125; <span class="keyword">while</span> (<span class="keyword">message</span> != quit);</span><br></pre></td></tr></table></figure>
+<p>}</p>
+<p>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。</p>
+<p>NSRunLoop 是基于 CFRunLoopRef 的封装，提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+<p>从上面的代码可以看出，线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你只能在一个线程的内部获取其 RunLoop（主线程除外）。</p>
+<p><strong>CFRunLoopSourceRef</strong> 是事件产生的地方。Source有两个版本：Source0 和 Source1。</p>
+<p>Source0 只包含了一个回调（函数指针），它并不能主动触发事件。使用时，你需要先调用 CFRunLoopSourceSignal(source)，将这个 Source 标记为待处理，然后手动调用 CFRunLoopWakeUp(runloop) 来唤醒 RunLoop，让其处理这个事件</p>
+<p>Source1 包含了一个 mach_port 和一个回调（函数指针），被用于通过内核和其他线程相互发送消息。这种 Source 能主动唤醒 RunLoop 的线程，其原理在下面会讲到。</p>
+<p><strong>CFRunLoopTimerRef</strong> 是基于时间的触发器，它和 NSTimer 是toll-free bridged 的，可以混用。其包含一个时间长度和一个回调（函数指针）。当其加入到 RunLoop 时，RunLoop会注册对应的时间点，当时间点到时，RunLoop会被唤醒以执行那个回调。</p>
+<p><strong>CFRunLoopObserverRef</strong> 是观察者，每个 Observer 都包含了一个回调（函数指针），当 RunLoop 的状态发生变化时，观察者就能通过回调接受到这个变化。可以观测的时间点有以下几个：</p>
+<p>typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kCFRunLoopEntry         = (<span class="number">1U</span>L &lt;&lt; <span class="number">0</span>), <span class="comment">// 即将进入Loop</span></span><br><span class="line">kCFRunLoopBeforeTimers  = (<span class="number">1U</span>L &lt;&lt; <span class="number">1</span>), <span class="comment">// 即将处理 Timer</span></span><br><span class="line">kCFRunLoopBeforeSources = (<span class="number">1U</span>L &lt;&lt; <span class="number">2</span>), <span class="comment">// 即将处理 Source</span></span><br><span class="line">kCFRunLoopBeforeWaiting = (<span class="number">1U</span>L &lt;&lt; <span class="number">5</span>), <span class="comment">// 即将进入休眠</span></span><br><span class="line">kCFRunLoopAfterWaiting  = (<span class="number">1U</span>L &lt;&lt; <span class="number">6</span>), <span class="comment">// 刚从休眠中唤醒</span></span><br><span class="line">kCFRunLoopExit          = (<span class="number">1U</span>L &lt;&lt; <span class="number">7</span>), <span class="comment">// 即将退出Loop</span></span><br></pre></td></tr></table></figure>
+<p>};</p>
+<p>上面的 Source/Timer/Observer 被统称为 mode item，一个 item 可以被同时加入多个 mode。但一个 item 被重复加入同一个 mode 时是不会有效果的。如果一个 mode 中一个 item 都没有，则 RunLoop 会直接退出，不进入循环。</p>
+<p>RunLoop 的核心就是一个 mach_msg() </p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-多线程和内存管理(书)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/03/多线程和内存管理(书)/" class="article-date">
+  	<time datetime="2016-03-03T02:24:02.000Z" itemprop="datePublished">3月 3 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="多线程和内存管理(书)">多线程和内存管理(书)</h2><ol>
+<li><p>类族，隐藏实现细节</p>
+</li>
+<li><p>设置关联对象，透明的（完全相同的指针才能匹配到同一个对象） 使用静态全局变量</p>
+</li>
+<li><p>多个弹出框可以用关联对象来简化处理</p>
+</li>
+<li><p>动态绑定， 到运行期才确定，@seclector是方法的名字</p>
+</li>
+<li><p>把消息的全部细节封装在NSInvocation</p>
+<p>​</p>
+</li>
 </ol>
 
       
@@ -498,11 +916,11 @@
 
 
   
-    <article id="post-Untitled" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-简历" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/05/Untitled/" class="article-date">
-  	<time datetime="2015-06-05T07:18:36.000Z" itemprop="datePublished">6月 5 2015</time>
+      <a href="/2016/03/02/简历/" class="article-date">
+  	<time datetime="2016-03-02T06:21:24.000Z" itemprop="datePublished">3月 2 2016</time>
 </a>
     </div>
   
@@ -513,7 +931,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>取出没一个属性的名字， 然后到对应的字典中取到值<br>传入字典<br>//调用获取所有成员变量<br>//获取类型</p>
+        <h1 id="简历">简历</h1><h3 id="个人信息">个人信息</h3><p>姓名：许正荣</p>
+<p>学历：本科</p>
+<p>毕业院校：江西师范大学</p>
+<p>专业：软件工程</p>
+<p>手机：13539717664</p>
+<p>邮箱：swagon@163.com</p>
+<h3 id="技能列表">技能列表</h3><ol>
+<li>熟悉Objective-C/.NET语言，熟悉Objective-C runtime编程和内存管理机制;</li>
+<li>熟悉iOS开发，包含但不限于Xcode、Interface Builder、多线程与多任务、核心动画、网络访问、json数据解析;</li>
+<li>熟练使用reveal,Pixel Winch,Charles等软件辅助开发;</li>
+<li>熟练使用lldb；</li>
+<li>熟练使用GCD,Block；</li>
+<li>了解Reactive Cocoa、pop、chisel、AFNetworking、SDWebImage等第三方框架，阅读过AFNetworking、SDWebImage、pop等框架源码；</li>
+<li>了解runloop；</li>
+<li>熟悉html+css+js,jQuery,EasyUI,AngularJS；</li>
+<li>有良好的英语阅读能力；</li>
+</ol>
+<h2 id="项目经验">项目经验</h2><h5 id="工作时间：2015/8-2016/2">工作时间：2015/8-2016/2</h5><h5 id="公司名称：深圳利市通科技有限公司">公司名称：深圳利市通科技有限公司</h5><h5 id="职_位：iOS高级工程师">职    位：iOS高级工程师</h5><h2 id="工厂宝"><strong>工厂宝</strong></h2><h3 id="项目介绍">项目介绍</h3><p>工厂宝一款服务中小型制造业的iPhone应用，包含打卡，沟通，办公等功能，支持iOS7以上版本。</p>
+<h3 id="个人职责">个人职责</h3><ul>
+<li>利用GPUImage完成打卡，完成人脸识别和人脸的录入；</li>
+<li>采用CoreGraphic上下文，获取打卡图片，大大降低CPU的占用率；</li>
+<li>使用MVVM完成项目架构，独立完成项目架构的搭建和代码的编写；</li>
+<li>集成环信完成即时通讯功能；</li>
+<li>集成极光完成消息的推送；</li>
+<li>利用JS完成app本地和Web页面的交互；</li>
+<li>使用<code>YTKKeyValueStore</code>完成常用姓名，头像等数据的缓存；</li>
+<li>使用网络管理类统一管理网络请求，让代码更加简洁；</li>
+<li>使用<code>runtime</code>实现AOP的操作，例如去除导航栏的返回文字，利用<code>runtime</code>给<code>alertview</code>添加额外对象，<code>alertview</code>在声明的时候就知道要怎么处理delegate事件；</li>
+<li>把数据源和代理不声明在ViewController，让ViewController“瘦身”；</li>
+<li>使用Masonry完成布局；</li>
+<li>负责项目架构的搭建，利用Pods来管理第三方库。</li>
+<li>App Stroe地址：<a href="https://appsto.re/cn/Bbzn_.i" target="_blank" rel="external">https://appsto.re/cn/Bbzn_.i</a></li>
+</ul>
+<h2 id="项目经验-1">项目经验</h2><h5 id="工作时间：2013/7-2015/7">工作时间：2013/7-2015/7</h5><h5 id="公司名称：北京宇信易诚科技有限公司">公司名称：北京宇信易诚科技有限公司</h5><h5 id="职_位：iOS软件工程师">职    位：iOS软件工程师</h5><h2 id="善融商城">善融商城</h2><h3 id="项目简介">项目简介</h3><p>善融商城是一款商城类iPhone应用，包含订单管理，商品展示，摇一摇，购物车等功能，支持iOS 7以上版本。</p>
+<h3 id="个人职责-1">个人职责</h3><ul>
+<li>使用 <code>Objective-C runtime</code> 进行方法混写，实现非一级页面隐藏 <code>Tab Bar</code>，解决传统实现中采用基类处理此情况所带来的多余父类及耦合问题；混写 <code>NSArry objectAtIndex:</code> 、 <code>NSMutableArray insertObject:atIndex:</code> 等为调试及运行状态作不同处理，降低程序崩溃次数，同时为调试提供更多信息；</li>
+<li>通过 <code>Appearance Proxy</code> 全局处理预置控件外观，使团队成员拥有更多精力实现业务功能；</li>
+<li>基于AFNetworking实现RESTful网络访问模块；</li>
+<li>基于LRU算法实现缓存层，透明化内存、闪存数据与服务器数据交互，并采用外观模式简化调用接口；</li>
+<li>性能优化，包含但不限于内存泄露、视图调试、代码流程；</li>
+<li>App Stroe地址：<a href="https://appsto.re/cn/GyKc7.i" target="_blank" rel="external">https://appsto.re/cn/GyKc7.i</a></li>
+</ul>
+<h2 id="运营宝">运营宝</h2><h3 id="项目简介-1">项目简介</h3><p>运营宝是一款针对商户的iPhone应用，包含订单管理，商品管理，数据统计，支持iOS 7以上版本。</p>
+<h3 id="个人职责-2">个人职责</h3><ul>
+<li>遵循MVC设计模式，进行分模块式开发，以降低程序的耦合度；</li>
+<li>负责需求文档的分析，协助项目经理管理开发进度；</li>
+</ul>
+<ul>
+<li>添加网络管理类，对AFNetworking进行封装,统一管理网络请求；</li>
+<li>对冗余代码的重构，项目代码的优化；</li>
+</ul>
+<ul>
+<li><p>利用Runtime运行时机制，来解决服务器数据和数据模型属性不对称是的字典转模型；</p>
+</li>
+<li><p>使用各种图表直观的展示销售数据，生成PV，UV图；</p>
+<p>​</p>
+</li>
+</ul>
+<h2 id="惠生活">惠生活</h2><h3 id="项目简介-2">项目简介</h3><p>惠生活是一款生活消费类 App，惠生活的目的是颠覆传统消费模式。</p>
+<h3 id="个人职责-3">个人职责</h3><ul>
+<li>封装UI框架，完成项目架构设计；</li>
+<li>负责团队编码的规范与调优，编写重要的核心模块，公用工具库编写，提升团队的开发效；</li>
+<li>优化<code>TableviewCell</code>中图片的加载；</li>
+<li>封装AFN框架，屏蔽网络请求，让程序跟第三方框架解耦；</li>
+<li>使用<code>SDWebImage</code>框架对图片进行缓存;</li>
+<li>使用oc运行时特性简化字典转模型过程和归档过程；</li>
+<li>使用方法混写实现AOP，简化代码；</li>
+<li>使用block 优化代码结构；</li>
+</ul>
+<h3 id="个人博客">个人博客</h3><p>博客地址：<a href="http://xuzhengrong1.github.io" target="_blank" rel="external">http://xuzhengrong1.github.io</a></p>
+<h3 id="自我评价">自我评价</h3><p>热爱技术，具有良好的面向对象设计思想，具备独立分析和解决问题的能力；有较好的团队协作和沟通能力，有强烈的责任心；喜欢逛国外的技术网站，喜欢代码的优美，享受编程的快乐！</p>
 
       
     </div>
@@ -536,11 +1024,11 @@
 
 
   
-    <article id="post-熟悉objective-c" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-面试准备" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/04/熟悉objective-c/" class="article-date">
-  	<time datetime="2015-06-04T13:59:14.000Z" itemprop="datePublished">6月 4 2015</time>
+      <a href="/2016/02/26/面试准备/" class="article-date">
+  	<time datetime="2016-02-26T05:32:31.000Z" itemprop="datePublished">2月 26 2016</time>
 </a>
     </div>
   
@@ -551,101 +1039,74 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="熟悉Objective-C">熟悉Objective-C</h2><p>使用消息结构的语言，运行时所执行的代码由运行环境决定，而使用函数调用的语言，由编译器决定。<br>尽量减少引入头文件<br>@class只能告诉你有个这个类，不能告诉你类里面有什么</p>
-<p>字面量数组比按常规创建的数组的语法要安全，遇到nil会报错，但是如果用常规方法的话，如果1，3有值，第二个元素为Nil，那么创建出来的数组元素只有第一个元素，会<strong>丢失数据</strong></p>
-<p><strong>字面量字典</strong><br>字符串，数组，字典对象都是不可变的，但是要可变就要复制一份<br><strong>多用类型常量，少用#define</strong><br>define没有类型，重复定义不会报错<br>如果文件局限于.m文件，则在常量前面加K，在类之外也可看到就加前缀<br>常量名称，为了避免命名冲突，所以加上类型作为前缀</p>
-<h3 id="属性">属性</h3><p>属性用于封装数据<br>语义：copy<br>在对象内部读取数据时，应该直接通过实例变量来读，写入数据时，通过属性来</p>
-<h3 id="理解objec_msgSend">理解objec_msgSend</h3><ol>
-<li>步骤：[someObject messageName:parameter]=void objec_msgSend(id self,sel cmd,…)  在方法列表中找，如果能找到，就执行，如果不能找到就往上找，最终找不到，就调用messaggeForWarding</li>
-<li>缓存（fast map）每个类都有这样一块缓存</li>
-<li>objc_msgSend_stret,objec_msgSend_fpret</li>
-<li>消息转发过程<code>reolveInstanceMethod-&gt;forwardingTargetForSelector(备援)-&gt;forwardInvocation</code><h3 id="方法混写">方法混写</h3>每个方法对于相对的实现，我们可以交换方法的实现<br>方法混写滥用会造成代码不易懂和难以维护<h3 id="类对象">类对象</h3>消息的接受者究竟是神马？<br>oc对象实例是指向某块内存的指针，变量会指向该实例<br>kind代表一种（有继承），member代表成员<br>类对象是单例<h3 id="实现description">实现description</h3></li>
+        <h2 id="面试准备">面试准备</h2><h3 id="TCP与UDP">TCP与UDP</h3><p>UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。</p>
+<ol>
+<li><p>三次握手：第一次：甲 – 乙，乙反应</p>
+<p>第二次：乙反应正确，乙 – 甲，第三次：甲正确反应，成功</p>
+<p>如果乙听到了甲说的话，那么第一次对话成功，接下来进行第二次对话。第二次对话：</p>
+<p>如果乙听到了甲的话，做出了正确的应答，并且还进行了反问：我吃饭了，你呢？那么第二次握手成功。</p>
+<p>通过前两次对话证明了乙能够听懂甲说的话，并且能做出正确的应答。</p>
+<p>接下来进行第三次对话。第三次对话：</p>
+<p>如果甲也做出了正确的应答：我也吃了。那么第三次对话成功，两人已经建立起了顺畅的沟通渠道，接下来开始持续的聊天。</p>
+</li>
+<li><p>指针与地址的区别</p>
+</li>
+<li><p>进程和线程的区别：程序运行的基本单元，线程只是一个进程中的不同执行路径，线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉  但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</p>
+</li>
+<li><p>内存管理：你弄出来，你要负责</p>
+</li>
+<li><p>什么是KVC和KVO？答：就是一种通过字符串去间接操作对象属性的机制， KVC(Key-Value-Coding)内部的实现：一个对象在调用setValue的时候，（1）首先根据方法名找到运行方法的时候所需要的环境参数。（2）他会从自己isa指针结合环境参数，找到具体的方法实现的接口。（3）再直接查找得来的具体的方法实现。KVO（Key-Value- Observing）：kvo 就是一个在语言框架层面实现的观察者模式 通过kvc的方式修改属性时，会主动通知观察者 </p>
+</li>
+<li><p>类别：具有更高的优先级，相当于扩展方法，你要在类上扩展一个其他方法可以使用这个  </p>
+<p>继承：继承可以增加，修改或者删除方法，并且可以增加属性。</p>
+</li>
+<li><p>代理的作用，是为了解耦，我告诉我的助理去做某件事，而不是我亲自去做</p>
+</li>
+<li><p>代理（一对一 has a所谓控制链）和通知（一对多）</p>
+</li>
+<li><p>响应链：相当于冒泡时间，点击后向下传递，（实现父类方法）再一层层往上传</p>
+</li>
+<li><p>selector和Method：一个名字，一个名字和实现的结合体</p>
+</li>
+<li><p>IMP就是实现方法</p>
+</li>
+<li><p>ASIDownloadCache 设置下载缓存</p>
+</li>
+<li><p>UIView本身更像是一个CALayer的管理器，一个UIView上可以有n个CALayer</p>
+</li>
+<li><p>而#import比起#include的好处就是不会引起重复包含</p>
+</li>
+<li><p>延展（extension）:在自己类的实现文件中添加类目来声明私有方法。另外后者添加的方法是必须要实现的。</p>
+</li>
+<li><p>#define定义宏的指令，程序在预处理阶段将用#define所定义的内容只是进行了替换。因此程序运行时，常量表中并没有用#define所定义的宏，系统并不为它分配内存，而且在编译时不会检查数据类型，出错的概率要大一些。</p>
+</li>
+<li><p>const定义的常量，在程序运行时是存放在常量表中，系统会为它分配内存，而且在编译时会进行类型检查。</p>
+</li>
+<li><p>定时器要设置为失效，不然会常驻内存</p>
+</li>
+<li><p>delegate: assign weak</p>
+</li>
+<li><p>TCP和UDP</p>
+<ol>
+<li>TCP：面向连接、传输可靠（保证数据正确性，保证数据顺序传输）、用于传输大量数据(流模式)、速度慢，建立连接需要开销较多(时间，系统资源)。</li>
+<li>UDP：面向非连接、传输不可靠、用于传输少量数据(数据包模式)、速度快，传输的是报文。</li>
 </ol>
-<h3 id="理解NSCopying">理解NSCopying</h3><h3 id="prorocol：声明一些方法，相当于接口（代理模式，观察者模式）">prorocol：声明一些方法，相当于接口（代理模式，观察者模式）</h3><ol>
-<li>&lt;&gt;遵守协议，：实现继承 ()分类   {}字典 （）可以是数组</li>
-<li>基协议：类似继承，基类会遵守基协</li>
-<li>要求对象遵守自定义协议，NSObject<myprotocol></myprotocol></li>
-<li>属性必须遵守某个协议  id<myprotocol> obj,成为属性也要遵守协议</myprotocol></li>
+</li>
+<li><p>MD5 和Base64  MD5是不可以拟的   Base64是可以解密</p>
+<p>​</p>
+<p>​</p>
+</li>
+<li><p>302是请求重定向。</p>
+</li>
+<li><p>500及以上是服务器错误，如503表示服务器找不到、3840表示服务器返回无效JSON。</p>
+</li>
+<li><p>400及以上是请求链接错误或者找不到服务器，如常见的404。</p>
+</li>
+<li><p>200及以上是正确，如常见的是200表示请求正常。</p>
+</li>
+<li><p>100及以上是请求接受成功</p>
+</li>
 </ol>
-<h3 id="分类">分类</h3><p>@interface Person(Add)</p>
-<p>提供类方法快捷访问<br>分类会覆盖原类的方法：</p>
-<h3 id="NSMutableString">NSMutableString</h3><ol>
-<li>继承NSString 可变字符串可以在字符串对象的内容  增加和删除，删除是从零开始的</li>
-<li>rangeOfString,获取在字符串的位置（删除固定的字符串）</li>
-<li>NSArray(集合类),ocs数组只能存放oc对象，不能存放非OC对象，nil是数组元素结束的标记，编译器特性@[]</li>
-<li>NSSet:没有顺序的</li>
-<li>关键字以@开头</li>
-<li>先把类加载到内存</li>
-<li><em>str str代表内存空间地址  </em>str代表找到对应的存储空间  &amp;str是str的地址  **str代表地址<h3 id="裁剪">裁剪</h3></li>
-<li>MasksToBounds(clipToBounds):方法告诉layer将位于它之下的layer都<strong>遮盖住</strong></li>
-<li>views是独立的，内部细节是不需要让控制器知道的</li>
-</ol>
-<h3 id="UIContentMode中的fill和_fit_aspect">UIContentMode中的fill和 fit  aspect</h3><ol>
-<li>fill相当于是横屏；</li>
-<li>fit相当于是竖屏；</li>
-<li>aspect是等比,ASPECT RATIO 画面比例影像放映在银幕上的纵横（高宽）比例。</li>
-<li>记录代码的运行时间<code>#define TICK   NSDate *startTime = [NSDate date] #define TOCK   NSLog(@&quot;Time: %f&quot;, -[startTime timeIntervalSinceNow])</code></li>
-<li>Antialia  self.layer.allowsEdgeAntialiasing = YES;//反锯齿</li>
-<li>修复xcode 插件失效<br>find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID</li>
-<li><a href="http://qiufeng.me/xcode-format%20copy/" target="_blank" rel="external">clangformat 插件修改</a> 重命名vm 改名字为系统禁止改的形式，要用终端</li>
-</ol>
-<h3 id="nil和NULL">nil和NULL</h3><ol>
-<li>NSURL <em>url = nil；<br>Class class = Nil；<br>int </em>pointerInt = NULL；<br>nil是一个对象指针为空，Nil是一个类指针为空，NULL是基本数据类型为空。<h3 id="Unsafe_unretained_=_assgin">Unsafe_unretained = assgin</h3></li>
-<li>对应基本数据类型<h3 id="copy">copy</h3></li>
-<li>当某个属性是指向其他对象的指针，而且改对象的类有可修改的子类，应该设置为copy(只有可变对象才要用Coopy)  <a href="http://v.youku.com/v_show/id_XOTMwMjcwNTgw.html?f=23636745&amp;from=y1.2-3.4.17" target="_blank" rel="external">视频</a></li>
-<li>copy <strong>语法是创建一个副本，改变对象不影响原来的对象</strong>  string array dictionary copy产生的都是不可变   mutableCopy产生的都是可变</li>
-<li>调用string copy 并没有产生一个新的对象 在这里copy就相当于retian  ,不可变变成不可变才是浅拷贝，其余都是深度拷贝   Mutable对象 MutableCopy都是深拷贝</li>
-<li><p>`  NSString *str=@”111”;<br>p.name=str;</p>
-<p>str=@”222”;<br>NSLog(@”%@”,p.name); ///111<br>NSLog(@”%@”,str); ///222`</p>
-<h3 id="自动释放池">自动释放池</h3></li>
-<li>不使用alloc init创建的对象，一般放在自动释放池里管理</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-开发问题" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/03/开发问题/" class="article-date">
-  	<time datetime="2015-06-03T01:56:07.000Z" itemprop="datePublished">6月 3 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="开发">开发</h2><h3 id="不同字体设置背景颜色">不同字体设置背景颜色</h3><p> <code>UILabel *lable= [[UILabel alloc] initWithFrame:CGRectMake(50, 50, 100, 15)];
-    NSMutableAttributedString *s =
-    [[NSMutableAttributedString alloc] initWithString:@&quot;111&quot;];
-    [s addAttribute:NSBackgroundColorAttributeName
-              value:[UIColor greenColor]
-              range:NSMakeRange(0, s.length-2)];
-    lable.attributedText = s;
-    [self.view addSubview:lable];</code></p>
-<h3 id="新的_IB_和_Size_Classes_系统可以说无情地给手写代码判了个死缓">新的 IB 和 Size Classes 系统可以说无情地给手写代码判了个死缓</h3><p>缓存池本质是NSSet NSArray NSDictionnary Cell的本质是NSSet</p>
 
       
     </div>
@@ -671,8 +1132,8 @@
     <article id="post-开源项目阅读" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/06/02/开源项目阅读/" class="article-date">
-  	<time datetime="2015-06-02T15:19:48.000Z" itemprop="datePublished">6月 2 2015</time>
+      <a href="/2016/02/21/开源项目阅读/" class="article-date">
+  	<time datetime="2016-02-21T13:54:49.000Z" itemprop="datePublished">2月 21 2016</time>
 </a>
     </div>
   
@@ -684,23 +1145,205 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="开源项目阅读">开源项目阅读</h2><ol>
-<li><a href="http://www.jianshu.com/collection/19dbe28002a3" target="_blank" rel="external">iOS开发技巧</a>  </li>
-<li><p><a href="http://www.jianshu.com/p/057f79e3d3d0" target="_blank" rel="external">开源项目</a><br>抽屉导航<br>刷新和下拉加载的组件</p>
+<li><p><a href="http://www.jianshu.com/collection/19dbe28002a3" target="_blank" rel="external">iOS开发技巧</a>  </p>
+</li>
+<li><p><a href="http://www.jianshu.com/p/057f79e3d3d0" target="_blank" rel="external">开源项目</a>  </p>
+<p>抽屉导航  </p>
+<p>刷新和下拉加载的组件</p>
 </li>
 <li><p><a href="http://www.jianshu.com/p/4521f3d76e97" target="_blank" rel="external">插件和开源项目</a></p>
 </li>
 <li><p><a href="http://www.jianshu.com/p/35ae342c60f6" target="_blank" rel="external">iOS通用模块</a></p>
 </li>
-<li><a href="https://github.com/honghaoz/UW-Quest-iOS" target="_blank" rel="external">UWQuest</a></li>
-<li><a href="https://github.com/lexrus/LTJelloSwitch" target="_blank" rel="external">LTJelloSwitch</a></li>
-<li><a href="http://bawn.github.io/ios/2014/09/20/iOS8.html" target="_blank" rel="external">博客</a></li>
-<li><a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="external">自动算高工具UITableView-FDTemplateLayoutCell</a></li>
-<li><a href="http://blog.sunnyxx.com/" target="_blank" rel="external">优秀博客</a></li>
-<li><a href="http://www.kuqin.com/shuoit/20150410/345650.html" target="_blank" rel="external">github优秀开源项目大全-iOS</a></li>
-<li>mach kenel   mach port</li>
+<li><p><a href="https://github.com/honghaoz/UW-Quest-iOS" target="_blank" rel="external">UWQuest</a></p>
+</li>
+<li><p><a href="https://github.com/lexrus/LTJelloSwitch" target="_blank" rel="external">LTJelloSwitch</a></p>
+</li>
+<li><p><a href="http://bawn.github.io/ios/2014/09/20/iOS8.html" target="_blank" rel="external">bawn博客</a></p>
+</li>
+<li><p><a href="http://gracelancy.com/blog/archives/" target="_blank" rel="external">gracelancy博客猿题库架构师</a></p>
+</li>
+<li><p><a href="https://github.com/forkingdog/UITableView-FDTemplateLayoutCell" target="_blank" rel="external">自动算高工具UITableView-FDTemplateLayoutCell</a></p>
+</li>
+<li><p><a href="http://blog.sunnyxx.com/" target="_blank" rel="external">sunnyxx博客</a></p>
+</li>
+<li><p><a href="http://limboy.me/" target="_blank" rel="external">萝卜半糖</a></p>
+</li>
+<li><p><a href="http://www.kuqin.com/shuoit/20150410/345650.html" target="_blank" rel="external">github优秀开源项目大全-iOS</a></p>
+</li>
+<li><p>mach kenel   mach port</p>
+</li>
+<li><p><a href="https://github.com/jimple/JCiOSProjectSampleWithRAC" target="_blank" rel="external">rac项目</a></p>
+</li>
+<li><p><a href="https://github.com/saitjr/ReactiveCocoa-MVVM-AFNetworking-FMDB" target="_blank" rel="external">rac项目2</a></p>
+</li>
+<li><p><a href="http://pan.baidu.com/share/link?shareid=1415689753&amp;uk=3151998&amp;fid=751426196316754" target="_blank" rel="external">http://pan.baidu.com/share/link?shareid=1415689753&amp;uk=3151998&amp;fid=751426196316754</a></p>
+</li>
 </ol>
 <p>OC高级编程 iOS与OS X</p>
-<h3 id="Cpu时间片">Cpu时间片</h3><p>dyld<br>GSSEvent</p>
+<h3 id="Cpu时间片">Cpu时间片</h3><p>dyld</p>
+<p>GSSEvent</p>
+<h3 id="文章阅读">文章阅读</h3><p><a href="!http://leeyin.iteye.com/blog/1040362">loadView/viewDidLoad/initWithNibName/awakeFromNib/initWithCoder的用法</a></p>
+<p><a href="http://www.jianshu.com/p/d79f9e710052" target="_blank" rel="external">loadView/viewDidLoad/initWithNibName/awakeFromNib/initWithCoder</a></p>
+<p><a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">深入理解RunLoop</a></p>
+<p><a href="https://medium.com/ios-os-x-development/27-ios-open-source-libraries-to-skyrocket-your-development-301b67d3124c" target="_blank" rel="external">27-ios-open-source-libraries-to-skyrocket-your-development</a></p>
+<p><a href="http://cocoasamurai.blogspot.jp/2010/01/understanding-objective-c-runtime.html" target="_blank" rel="external">runtime</a></p>
+<p><a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/" target="_blank" rel="external">runtime2</a></p>
+<p><a href="http://www.jianshu.com/p/9cbf52eb39dd?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=writer_share&amp;utm_source=weibo" target="_blank" rel="external">3d动画</a></p>
+<p><a href="http://casatwy.com/iosying-yong-jia-gou-tan-wang-luo-ceng-she-ji-fang-an.html" target="_blank" rel="external">网络架构</a></p>
+<p><a href="http://blog.csdn.net/womendeaiwoming/article/details/44968501" target="_blank" rel="external">runloop</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-YYModle" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/05/YYModle/" class="article-date">
+  	<time datetime="2016-02-05T14:45:28.000Z" itemprop="datePublished">2月 5 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="YYModle">YYModle</h2><ol>
+<li>获取所有的方法</li>
+<li>遍历， 获取方法名，方法实现</li>
+<li>kindleof</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-52个高效的技巧（书籍）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/31/52个高效的技巧（书籍）/" class="article-date">
+  	<time datetime="2016-01-31T08:04:21.000Z" itemprop="datePublished">1月 31 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一章">第一章</h2><p>编译器完成的工作，推到运行期</p>
+<ol>
+<li><p>Mac OS X  cocoa -&gt;  iOS   Cocoa Touch</p>
+</li>
+<li><p>c 添加了面向对象的特性</p>
+</li>
+<li><p>方法名长， 易读</p>
+</li>
+<li><p>编写一个爱看书app</p>
+</li>
+<li><p>栈里存放的是指针</p>
+</li>
+<li><p>堆里的内存是需要自己管理的，但是栈里的东西会在出栈的时候弹出</p>
+</li>
+<li><p>创建对象比创建结构体，需要额外的开销,非对象类型使用CGRect </p>
+</li>
+<li><p>运行期间检查对象类型， 接受消息之后，执行什么何种代码，由运行环境决定而不是编译器</p>
+</li>
+<li><p>引入头文件 fowarding declaring,头文件@class， 实现类导入头文件（需要使用时），引入头文件的时机要尽量延后</p>
+<p>​</p>
+</li>
+<li><p>申明一个子类，要引入父类，不能使用向前申明，第二条关于协议，协议相当于接口</p>
+</li>
+<li><p>​</p>
+</li>
+<li><p>字面量表示语法局限性，创建的对象属于Foundation框架，自定义NSString的NSDictionary的子类没有办法使用字面量表示法</p>
+</li>
+<li><p>多用类型常量，少用#define   比如#define ANIMATION_DURATION 0.3 预处理会把 ANIMATION_DURATION换成0.3   Static cost NSTimeInterval kAnimationduration=0.3 局限于某个实现文件中，以k开头  以类名作为前缀  。 Static cost保证不能修改  </p>
+</li>
+<li><p>notification的定义，不一样  ，extern NSString <em> const EOCLoginManagerDidLoginNotification (<em>*类名为前缀</em></em>)声明在头文件中，在实现文件中进行定义（赋值），全局符号表中，有一个这样变量  编译器在数据段为常量分配空间，避免冲突，</p>
+</li>
+<li><p>对比：无法修改，不使用预处理定义常量，因为不含类型，容易被修改  static cost局部常量，extern全局常量（注意隔离）</p>
+</li>
+<li><p>枚举，指定底层数据类型，支持新标准用新式语法 NS_Eumu ,NS_OPTHIONS</p>
+</li>
+<li><p>将值定义为2的幂，选项的时候P30</p>
+</li>
+<li><p>采用开发者所选的数据类型，而不是编译器所选择的数据类型</p>
+<ol>
+<li>属性 access method  实例变量存储偏移量</li>
+</ol>
+</li>
+<li><p>@synthesize</p>
+</li>
+<li><p>@dynamic不自动创建实例变量和存取方法</p>
+</li>
+<li><p>unsafe_unretain  不安全，不保留</p>
+</li>
+<li><p>读取实例变量采用直接访问，设置时候通过属性来访问</p>
+</li>
+<li><p>直接访问属性，绕过了内存管理的定义</p>
+</li>
+<li><p>把对象放入set之后在进行拷贝是一件很危险的事情，新对象和原来的对象可能会合并</p>
+</li>
+<li><p>今天看到第46页</p>
+</li>
+<li><p>组合模拟多继承    ， 修改方法表的布局</p>
+</li>
+<li><p>对象有个isa指针</p>
+</li>
+<li><p>实现description方法  po debugDescripttion</p>
+</li>
+<li><p>尽量使用不可变对象</p>
+</li>
+<li><p>私有方法加前缀，不单用一个下划线做前缀，苹果的做法，使用类名作为私有方法的前缀</p>
+</li>
+<li><p>指针指的对象，会在方法执行完之后自动释放</p>
+</li>
+<li><p>重写setDelegate</p>
+</li>
+<li><p>​</p>
+</li>
+</ol>
 
       
     </div>
@@ -725,7 +1368,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>
@@ -733,7 +1376,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 swagon
+    		&copy; 2016 swagon
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

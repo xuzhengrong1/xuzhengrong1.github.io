@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>swagon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="熟悉Objective-C使用消息结构的语言，运行时所执行的代码由运行环境决定，而使用函数调用的语言，由编译器决定。尽量减少引入头文件@class只能告诉你有个这个类，不能告诉你类里面有什么
+字面量数组比按常规创建的数组的语法要安全，遇到nil会报错，但是如果用常规方法的话，如果1，3有值，第二个元素为Nil，那么创建出来的数组元素只有第一个元素，会丢失数据
+字面量字典字符串，数组，字典对象都是不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swagon">
+<meta property="og:url" content="yoursite.com/2015/07/14/熟悉objective-c/index.html">
+<meta property="og:site_name" content="swagon">
+<meta property="og:description" content="熟悉Objective-C使用消息结构的语言，运行时所执行的代码由运行环境决定，而使用函数调用的语言，由编译器决定。尽量减少引入头文件@class只能告诉你有个这个类，不能告诉你类里面有什么
+字面量数组比按常规创建的数组的语法要安全，遇到nil会报错，但是如果用常规方法的话，如果1，3有值，第二个元素为Nil，那么创建出来的数组元素只有第一个元素，会丢失数据
+字面量字典字符串，数组，字典对象都是不">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swagon">
+<meta name="twitter:description" content="熟悉Objective-C使用消息结构的语言，运行时所执行的代码由运行环境决定，而使用函数调用的语言，由编译器决定。尽量减少引入头文件@class只能告诉你有个这个类，不能告诉你类里面有什么
+字面量数组比按常规创建的数组的语法要安全，遇到nil会报错，但是如果用常规方法的话，如果1，3有值，第二个元素为Nil，那么创建出来的数组元素只有第一个元素，会丢失数据
+字面量字典字符串，数组，字典对象都是不">
+  
+    <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">swagon</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">原谅我不堪回首的过去</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">swagon</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">swagon</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">原谅我不堪回首的过去</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-熟悉objective-c" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/14/熟悉objective-c/" class="article-date">
+  	<time datetime="2015-07-14T07:48:05.000Z" itemprop="datePublished">7月 14 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="熟悉Objective-C">熟悉Objective-C</h2><p>使用消息结构的语言，运行时所执行的代码由运行环境决定，而使用函数调用的语言，由编译器决定。<br>尽量减少引入头文件<br>@class只能告诉你有个这个类，不能告诉你类里面有什么</p>
+<p>字面量数组比按常规创建的数组的语法要安全，遇到nil会报错，但是如果用常规方法的话，如果1，3有值，第二个元素为Nil，那么创建出来的数组元素只有第一个元素，会<strong>丢失数据</strong></p>
+<p><strong>字面量字典</strong><br>字符串，数组，字典对象都是不可变的，但是要可变就要复制一份<br><strong>多用类型常量，少用#define</strong><br>define没有类型，重复定义不会报错<br>如果文件局限于.m文件，则在常量前面加K，在类之外也可看到就加前缀<br>常量名称，为了避免命名冲突，所以加上类型作为前缀</p>
+<h3 id="属性">属性</h3><p>属性用于封装数据<br>语义：copy<br>在对象内部读取数据时，应该直接通过实例变量来读，写入数据时，通过属性来</p>
+<h3 id="实例变量">实例变量</h3><ol>
+<li>声明 @interface MainController {<br>  ASIHTTPRequest *request;<br>}</li>
+</ol>
+<h3 id="理解objec_msgSend">理解objec_msgSend</h3><ol>
+<li>步骤：[someObject messageName:parameter]=void objec_msgSend(id self,sel cmd,…)  在方法列表中找，如果能找到，就执行，如果不能找到就往上找，最终找不到，就调用messaggeForWarding</li>
+<li>缓存（fast map）每个类都有这样一块缓存</li>
+<li>objc_msgSend_stret,objec_msgSend_fpret</li>
+<li>消息转发过程<code>reolveInstanceMethod-&gt;forwardingTargetForSelector(备援)-&gt;forwardInvocation</code><h3 id="方法混写">方法混写</h3>每个方法对于相对的实现，我们可以交换方法的实现<br>方法混写滥用会造成代码不易懂和难以维护<h3 id="类对象">类对象</h3>消息的接受者究竟是神马？<br>oc对象实例是指向某块内存的指针，变量会指向该实例<br>kind代表一种（有继承），member代表成员<br>类对象是单例<h3 id="实现description">实现description</h3></li>
+</ol>
+<h3 id="理解NSCopying">理解NSCopying</h3><h3 id="prorocol：声明一些方法，相当于接口（代理模式，观察者模式）">prorocol：声明一些方法，相当于接口（代理模式，观察者模式）</h3><ol>
+<li>&lt;&gt;遵守协议，：实现继承 ()分类   {}字典 （）可以是数组</li>
+<li>基协议：类似继承，基类会遵守基协</li>
+<li>要求对象遵守自定义协议，NSObject<myprotocol></myprotocol></li>
+<li>属性必须遵守某个协议  id<myprotocol> obj,成为属性也要遵守协议</myprotocol></li>
+</ol>
+<h3 id="分类">分类</h3><p>@interface Person(Add)</p>
+<p>提供类方法快捷访问<br>分类会覆盖原类的方法：</p>
+<h3 id="NSMutableString">NSMutableString</h3><ol>
+<li>继承NSString 可变字符串可以在字符串对象的内容  增加和删除，删除是从零开始的</li>
+<li>rangeOfString,获取在字符串的位置（删除固定的字符串）</li>
+<li>NSArray(集合类),ocs数组只能存放oc对象，不能存放非OC对象，nil是数组元素结束的标记，编译器特性@[]</li>
+<li>NSSet:没有顺序的</li>
+<li>关键字以@开头</li>
+<li>先把类加载到内存</li>
+<li><em>str str代表内存空间地址  </em>str代表找到对应的存储空间  &amp;str是str的地址  **str代表地址<h3 id="裁剪">裁剪</h3></li>
+<li>MasksToBounds(clipToBounds):方法告诉layer将位于它之下的layer都<strong>遮盖住</strong></li>
+<li>views是独立的，内部细节是不需要让控制器知道的</li>
+</ol>
+<h3 id="UIContentMode中的fill和_fit_aspect">UIContentMode中的fill和 fit  aspect</h3><ol>
+<li>fill相当于是横屏(相当于去横屏进行缩放)； //房间里很快挤满了人 （横向的）</li>
+<li>fit相当于是竖屏(相当于去竖屏进行缩放)；  //That jacket fits well. 衣服是一个竖向的东西</li>
+<li>aspect是等比,ASPECT RATIO 画面比例影像放映在银幕上的纵横（高宽）比例。</li>
+<li>记录代码的运行时间<code>#define TICK   NSDate *startTime = [NSDate date] #define TOCK   NSLog(@&quot;Time: %f&quot;, -[startTime timeIntervalSinceNow])</code></li>
+<li>Antialia  self.layer.allowsEdgeAntialiasing = YES;//反锯齿</li>
+<li>修复xcode 插件失效<br>find ~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins -name Info.plist -maxdepth 3 | xargs -I{} defaults write {} DVTPlugInCompatibilityUUIDs -array-add `defaults read /Applications/Xcode.app/Contents/Info.plist DVTPlugInCompatibilityUUID</li>
+<li><a href="http://qiufeng.me/xcode-format%20copy/" target="_blank" rel="external">clangformat 插件修改</a> 重命名vm 改名字为系统禁止改的形式，要用终端</li>
+</ol>
+<h3 id="nil和NULL">nil和NULL</h3><ol>
+<li>NSURL <em>url = nil；<br>Class class = Nil；<br>int </em>pointerInt = NULL；<br>nil是一个对象指针为空，Nil是一个类指针为空，NULL是基本数据类型为空。<h3 id="Unsafe_unretained_=_assgin">Unsafe_unretained = assgin</h3></li>
+<li>对应基本数据类型<h3 id="copy">copy</h3></li>
+<li>当某个属性是指向其他对象的指针，而且改对象的类有可修改的子类，应该设置为copy(只有可变对象才要用Coopy)  <a href="http://v.youku.com/v_show/id_XOTMwMjcwNTgw.html?f=23636745&amp;from=y1.2-3.4.17" target="_blank" rel="external">视频</a></li>
+<li>copy <strong>语法是创建一个副本，改变对象不影响原来的对象</strong>  string array dictionary copy产生的都是不可变   mutableCopy产生的都是可变</li>
+<li>调用string copy 并没有产生一个新的对象 在这里copy就相当于retian  ,不可变变成不可变才是浅拷贝，其余都是深度拷贝   Mutable对象 MutableCopy都是深拷贝</li>
+<li><p>`  NSString *str=@”111”;<br>p.name=str;</p>
+<p>str=@”222”;<br>NSLog(@”%@”,p.name); ///111<br>NSLog(@”%@”,str); ///222`</p>
+<h3 id="自动释放池">自动释放池</h3></li>
+<li>不使用alloc init创建的对象，一般放在自动释放池里管理</li>
+<li>在没有手加Autorelease Pool的情况下，Autorelease对象是在当前的runloop迭代结束时释放的，而它能够释放的原因是系统在每个runloop迭代中都加入了自动释放池Push和Pop</li>
+<li>AutoreleasePoolPage</li>
+<li>AutoreleasePoolPage每个对象会开辟4096字节内存（也就是虚拟内存一页的大小）</li>
+<li>释放是由高向低进行释放，所以Autorelease Pool嵌套，不会有影响</li>
+</ol>
+<h4 id="uiimage和imageWithContentsOfFile">uiimage和imageWithContentsOfFile</h4><ol>
+<li><1>+imageNamed：该方法使用系统缓存，适合表视图重复加载图像的情形。同时该API根据UIScreen的scale，自动查找包含对应高倍图后缀名（@2x）的文件，如果没找到设置默认image.scale=1.0。因此，使用该方法，无需特意指定高倍图后缀。在实际运行时，系统如果发现当前设备是Retina屏（scale=2），会自动寻找”*@2x.png”命名格式的图片，加载针对Retina屏的图片素材，否则会失真。<ol>
+<li><2>+imageWithContentsOfFile/+imageWithData:(scale:)/-initWithContentsOfFile:/-initWithData:(scale:)<br>这组方法创建的UIImage对象没有使用系统缓存，并且指定文件名必须包含明确的高倍图后缀。如果文件名包含@2x后缀，则image.scale=2.0；否则默认image.scale=1.0，同样对于Retina屏将会失真。</2></li>
+</ol>
+</1></li>
+</ol>
+<h4 id="loadView/viewDidLoad/initWithNibName/awakeFromNib/initWithCoder的用法">loadView/viewDidLoad/initWithNibName/awakeFromNib/initWithCoder的用法</h4><p>大前提是UIViewController有一个UIView.同时,需要厘清两个概念,创建一个类和实例化一个类.在XCode中创建一个类和实例化一个类很容易区分,但是在IB(Interface Builder)中有时候就会迷糊.其实也很好区分,孤零零地创建了一个nib文件,没有和其他可被实例化的类有直接或间接关系的时候,这个类或这些类(一个nib文件俺也可能包含多个类)是没有机会被实例化的,所以这种情况只是通过ib创建了一个类,而没有实例化.真正的实例化还需要通过在Xcode用代码来读取这个nib文件.知道这两这的区别后这些方法也就容易辨认多了 </p>
+<p>viewDidLoad其实没什么可混淆的,无论通过什么途径加载(Xcode或者IB,这里的加载属于实例化)完view后肯定会执行这个方法. </p>
+<p>loadView需要分两种情况.当你通过Xcode实例化一个类的时候就需要自己在controller中实现这个方法.而在IB中实例化就不需要实现它. </p>
+<p>initWithNibName这个方法是在controller的类在IB中创建,但是通过Xcode实例化controller的时候用的. </p>
+<p>awakeFromNib这个方法是一个类在IB中被实例化是被调用的.看了帖子发现大家都推荐使用viewDidLoad而不要使用awakeFromNib,应为viewDidLoad会被多次调用,而awakeFromNib只会当从nib文件中unarchive的时候才会被调用一次.实际测试中发现,<strong>当一个类的awakeFromNib被调用的时候,那么这个类的viewDidLoad就不会被调用了</strong>,这个感觉很奇怪. </p>
+<p>initWithCoder是一个类在IB中创建但在xocdde中被实例化时被调用的.比如,通过IB创建一个controller的nib文件,然后在xocde中通过initWithNibName来实例化这个controller,那么这个controller的initWithCoder会被调用. </p>
+<p>如果你的对象是UIViewControler的子类，那么你<strong>必须调用</strong>- (id)initWithNibName:(NSString <em>)nibNameOrNil bundle:(NSBundle</em>)nibBundleOrNil;方法去调用NIB文件初始化自身，即使那没有使用nib文件也会调用这个函数（默认情况下init方法已经为你的做这件事情了），如果你调用这个方法，并传递的两个参数为空（nil），然后类会调用-loadView去读取一个名字和你的UIViewController名字相同的nib文件，来初始化自身。如果没有这样的nib文件，你必须调用-setView:来设置一个self.view。或者重载-loadView 方法 </p>
+<p>（2）<strong>initWithCoder: &amp; initWithFrame:</strong><br>initWithCoder：使用文件加载的对象调用（如从xib或stroyboard中创建）<br>initWithFrame：使用代码加载的对象调用（使用纯代码创建） <strong>init会调用这个函数</strong><br>注意：所以为了同时兼顾从文件和从代码解析的对象初始化，要同时在initWithCoder: 和 initWithFrame: 中进行初始化</p>
+<p>viewDidLoad,就是view加载完毕之后就会调用，无论手写还是xib</p>
+<p>initwithNibName-&gt;loadView(只负责从XIB中加载，但是如果你重写这个就可以用你自己的代码)-&gt; viewDidLoad 这个顺序</p>
+<p>initWithNibName:<strong>半代码化初始</strong>时使用. 完全IB化初始时不调用,UIViewController代码化初始时会通过init调用,<strong>且调用在[super init]中</strong>.（这是为什么要调用Super init 的原因之一）<br>调用顺序: super init-&gt;initWithNibName(其实在super init中) -&gt;init after self created-&gt;loadView-&gt;ViewDidLoad</p>
+<p>在遍历的时候，使用<strong>strong修改正在遍历的值<br>Fast enumeration variables can’t be modified in ARC by default; declare the variable </strong>strong to allow this<br>Rationale<br>This is an optimization made possible because fast enumeration loops promise to keep the objects retained during enumeration, and the collection itself cannot be synchronously modified. It can be overridden by explicitly qualifying the variable with __strong, which will make the variable mutable again and cause the loop to retain the objects it encounters.</p>
+<h4 id="clipsToBounds和masksToBounds">clipsToBounds和masksToBounds</h4><h4 id="_deleteButton-currentImage-size-width">_deleteButton.currentImage.size.width</h4><h4 id="layoutSubviews">layoutSubviews</h4><p>在5.1之前什么都不做，除此之外<br>the default implementation uses any constraints you have set to determine the size and position of any subviews.</p>
+<p>而且，layoutSubviews 方法只能被系统触发调用，程序员不能手动直接调用该方法</p>
+<p>Stackoverflow 上已经有相关的讨论了（作者在他的博客上有更详细的描述），并且有一位朋友给出了很不错的解答：</p>
+<p>init does not cause layoutSubviews to be called (duh)<br>addSubview causes layoutSubviews to be called on the view being added, the view it’s being added to (target view), and all the subviews of the target<br>view setFrame intelligently calls layoutSubviews on the view having its frame set only if the size parameter of the frame is different<br>scrolling a UIScrollView causes layoutSubviews to be called on the scrollView, and its superview<br>rotating a device only calls layoutSubview on the parent view (the responding viewControllers primary view)<br>Resizing a view will call layoutSubviews on its superview<br>也就是说，layoutSubviews 方法会在这些情况下，在这些 UIView 实例上被调用：</p>
+<ol>
+<li>addSubview 被调用时：target view（一定会），以及被添加的 view（第一次调用会）</li>
+<li>更改 UIView 的 frame 时：被更改 frame 的 view（frame 与之前不同时）</li>
+<li>对于 UIScrollView 而言，滚动式：scroll view</li>
+<li>设备的 orientation 改变时：涉及改变的 UIViewController 的 root view</li>
+<li>使用 CGAffineTransformScale 改变 view 的 transform 属性时，view 的 superview：被改变的 view<br>总结：</li>
+<li>第一次调用 addSubview 的时候，target view 和被添加到 target view 的 view 的 layoutSubviews 方法会被调用。在已经添加完毕后，若 target view 已经拥有该被添加 view，则只有 target view 的 layoutSubviews 方法会被调用。“and all the subviews of the target”这句话是错误的。</li>
+<li>只有 UIView 处于 key window 的 UIView 树中时，该 UIView 的 layoutSubviews 方法才有可能被调用。不在树中的不会被调用。这也是为什么 Stackoverflow 上的讨论中这个答案的第二点会被提出。</li>
+</ol>
+<p>能做的三件事<br>Adjust the size and position of any immediate subviews.<br>Add or remove subviews or Core Animation layers.<br>Force a subview to be redrawn by calling its setNeedsDisplay or setNeedsDisplayInRect: method.<br>//应用程序经常重新布局子视图，当使用一个大的ScrollView<br>发生滚动事件，根视图 setNeedsLayout-&gt;setNeedsLayout重新布局，当视图片滚出可视范围，layoutSubView 移动新的视图到进入的边缘，替换掉原来的视图<br>layoutSubView方法</p>
+<h4 id="Composite_Pattern">Composite Pattern</h4><h4 id="__bridge">__bridge</h4><p>还可以通过 __bridge 转换让局部变量持有返回对象</p>
+<h4 id="你必须有一个类的源码才能为一个类添加extension，所以你无法为系统的类比如NSString添加extension。">你必须有一个类的源码才能为一个类添加extension，所以你无法为系统的类比如NSString添加extension。</h4><p>因为在运行期，对象的内存布局已经确定，如果添加实例变量就会破坏类的内部布局，这对编译型语言来说是灾难性的</p>
+<p><a href="http://tech.meituan.com/DiveIntoCategory.html" target="_blank" rel="external">分类</a></p>
+<h4 id="inLine关键字">inLine关键字</h4><p>上面的例子就是标准的内联函数的用法，使用inline修饰带来的好处我们表面看不出来，其实在内部的工作就是在每个for循环的内部任何调用dbtest(i)的地方都换成了(i%2&gt;0)?”奇”:”偶”这样就避免了频繁调用函数对栈内存重复开辟所带来的消耗。<br>inline的使用是有所限制的，inline只适合涵数体内代码简单的涵数使用，不能包含复杂的结构控制语句例如while、switch，并且不能内联函数本身不能是直接递归函数(自己内部还调用自己的函数)。</p>
+<p>inline函数仅仅是一个建议,对编译器的建议,所以最后能否真正内联,看编译器的意思,它如果认为函数不复杂,能在调用点展开,就会真正内联,并不是说声明了内联就会内联,声明内联只是一个建议而已.<br>其次,因为内联函数要在调用点展开,所以编译器必须随处可见内联函数的定义,要不然,就成了非内联函数的调用了.所以,这要求每个调用了内联函数的文件都出现了该内联函数的定义。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/15/禅与OC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/10/基础知识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="熟悉objective-c" data-title="" data-url="yoursite.com/2015/07/14/熟悉objective-c/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 swagon
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

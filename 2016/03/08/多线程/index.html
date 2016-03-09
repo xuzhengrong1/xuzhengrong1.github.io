@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>swagon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="多线程NSThread
+需要管理线程的生命周期，获取当前线程线程对象[NSThread currentThread],num相当于线程id,
+
+获取主线程[NSThread mainThread]
+
+创建一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start   
+方法2：[NSThread detachN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swagon">
+<meta property="og:url" content="yoursite.com/2016/03/08/多线程/index.html">
+<meta property="og:site_name" content="swagon">
+<meta property="og:description" content="多线程NSThread
+需要管理线程的生命周期，获取当前线程线程对象[NSThread currentThread],num相当于线程id,
+
+获取主线程[NSThread mainThread]
+
+创建一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start   
+方法2：[NSThread detachN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swagon">
+<meta name="twitter:description" content="多线程NSThread
+需要管理线程的生命周期，获取当前线程线程对象[NSThread currentThread],num相当于线程id,
+
+获取主线程[NSThread mainThread]
+
+创建一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start   
+方法2：[NSThread detachN">
+  
+    <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">swagon</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">原谅我不堪回首的过去</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">swagon</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">swagon</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">原谅我不堪回首的过去</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-多线程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/08/多线程/" class="article-date">
+  	<time datetime="2016-03-08T05:37:08.000Z" itemprop="datePublished">3月 8 2016</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="多线程">多线程</h2><h3 id="NSThread">NSThread</h3><ol>
+<li><p>需要管理线程的生命周期，<strong>获取当前线程</strong>线程对象[NSThread currentThread],num相当于线程id,</p>
+</li>
+<li><p><strong>获取主线程</strong>[NSThread mainThread]</p>
+</li>
+<li><p><strong>创建</strong>一个新线程:[]NSThread alloc] initWithTarget(id)对象 selectir ] 开始线程：thread start   </p>
+<p>方法2：[NSThread detachNewThreadSlector] 马上启动线程</p>
+</li>
+<li><p>隐氏创<strong>建线程</strong>[self  performSelectorInBackground]</p>
+</li>
+<li><p><strong>暂停</strong>线程<code>[NSThread sleepTimeInterval:2]</code>  </p>
+<p>[NSThread untilDate:date]</p>
+</li>
+<li><p>在当前线程执行操作[self performselector] </p>
+</li>
+<li><p>在指定线程执行某个操作  [self performSelect:(sel) onTherad] waitUntilDone:No会马上返回</p>
+</li>
+<li><p>[self performSelectOnMainThread]  下载图片后返回到主线程[self.imageView performSelectorOnMainThread]</p>
+</li>
+<li><p>下载图片  进度条，imageview  imageView.contentMode  scaleAspectFit(保持原来的宽高比)</p>
+<p>10.</p>
+</li>
+</ol>
+<h3 id="NSOperation">NSOperation</h3><ol>
+<li><p>不需要考虑线程生命周期，同步，加锁等问题</p>
+</li>
+<li><p>将操作封装在NSOperation对象</p>
+</li>
+<li><p>把对象添加到NSOperationQueue中，<strong>设置依赖关系</strong></p>
+</li>
+<li><p>使用NSOperation的子类  </p>
+<p><strong>NSInvocationOperation</strong>:    [NSInvocationOperation alloc] initWithTarget:   调用autoRelease    </p>
+<p>启动操作[operation start]  默认是同步执行，在主线程中执行  </p>
+<p>监听完成操作，<code>operation.CompletionBlock=^{}</code>，执行完了之后调用</p>
+</li>
+</ol>
+<p><strong>NSBlockOperation</strong>:[NSBlockOperation BlockOperationWithBlock] ,添加附加的操作， operation addExecutionBlock 并行执行，多个操作开启多个线程，并发执行  </p>
+<p>cancle取消某个操作</p>
+<p><strong>自定义NSOperation</strong>  ：重载main方法 <code>-（void）main{ @autoRelease{ if(self.isCancled){ return } 下载图片 判断有没有被取消  }  }</code> 异步执行，main方法可能在其他线程调用，就不能访问主线程的自动释放池，新建一个属于当前线程的自动释放池  </p>
+<p>把对象传递给外面：1.代理  2. Block：  retain对Block没有作用，copy才有用  </p>
+<p>要在dealloc中作释放操作  </p>
+<p>_表示内部  </p>
+<p>属性不能跟父类重复</p>
+<p>NSOperation<strong>Queue</strong>：当前方法在哪里调用，就在哪里执行</p>
+<p> [Queue addOperation:]马上执行操作，不用调用Start，异步操作，做一次Retain操作   先加的就先执行 </p>
+<p> 添加一组  </p>
+<p> 添加依赖：addDependency  队列和队列中的操作之间也可以添加依赖（跨队列） 不能环形依赖  </p>
+<p> 限制并发操作数量：setMaxConcurentOperationCount  </p>
+<p> 取消所有操作[queue cancleallOperation]  </p>
+<p> [queue setSuspended:Yes]:暂停 正在进行不会暂停，执行完后才暂停</p>
+<p> &lt;#可替换的代码块#&gt;</p>
+<h3 id="GCD">GCD</h3><h4 id="使用">使用</h4><ol>
+<li><p>定义好操作，添加到调度队列中</p>
+</li>
+<li><p>并行队列（并发执行），串行队列</p>
+</li>
+<li><p>全局并行队列dispath_get_globle_quque(,0)  </p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取全局队列：<span class="escape">`d</span>ispath_get_globle_quque<span class="escape">` </span>  </span><br><span class="line">异步并行：<span class="escape">`d</span>ispath_get_globle_quque<span class="escape">` </span><span class="escape">`d</span>ispathc_async(quque,block)<span class="escape">` </span>  </span><br><span class="line">异步串行：手动创建：dispatch_quque_create(<span class="string">"xzr"</span>,null) 开启异步任务 <span class="escape">`d</span>ispathc_**async**<span class="escape">`</span><br><span class="line"></span>同步执行：<span class="escape">`d</span>ispath_get_globle_quque<span class="escape">` </span>开启同步任务 <span class="escape">`d</span>ispathc_**sync**<span class="escape">` </span> </span><br><span class="line">循环：dispatch_apply(次数，手动创建/并发队列)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>获取跟主队列 dispatch_get_main_queue();dispatch_async()</p>
+</li>
+<li><p>开启异步任务去下载图片，把操作放到一个异步线程中去计算，  </p>
+</li>
+<li><p>依赖关系：组dispatch_group_async_crate()，并发执行 dispatch_group_async(group,queue,block)，一起执行完， dispatch_group_notify(group,main,block)</p>
+</li>
+<li><p>dispatch_releleas（组和Create的队列）</p>
+</li>
+<li><p>队列的类型只决定任务是并发还是串行，函数名称代表是<strong>异步还是同步</strong> （同步和异步是相对于当前线程）</p>
+</li>
+<li><h5 id="dispatch_once_t每次检测Block是否执行完毕。dispatch_once的作用正如其名：对于某个任务执行一次，且只执行一次。_dispatch_once函数有两个参数，第一个参数predicate用来保证执行一次，第二个参数是要执行一次的任务block。"><code>dispatch_once_t</code>每次检测Block是否执行完毕。<code>dispatch_once</code>的作用正如其名：对于某个任务执行一次，且只执行一次。 <code>dispatch_once</code>函数有两个参数，第一个参数<code>predicate</code>用来保证执行一次，第二个参数是要执行一次的任务block。</h5></li>
+<li><p>dispatch_once，低负载、高可依赖性、接口简单等特性<a href="http://www.dreamingwish.com/article/gcd-guide-dispatch-once-1.html" target="_blank" rel="external">地址</a>，</p>
+</li>
+<li><p>GCD使用函数指针或者上下文指针（取代block），Dispatch queues 和 dispatch sources（后面会介绍到）可以被挂起和恢复</p>
+</li>
+<li><p>GCD的基本概念就是dispatch queue。dispatch queue是一个对象，它可以接受任务，并将任务以先到先执行的顺序来执行。dispatch queue可以是并发的或串行的。并发任务会像NSOperationQueue那样基于系统负载来合适地并发进行，串行队列同一时间只执行单一任务</p>
+<p>​</p>
+</li>
+</ol>
+<h4 id="概念性指引">概念性指引</h4><ol>
+<li>同步和异步（函数返回） ，并发和串行（任务执行）</li>
+<li>死锁 所谓的死锁是指它们都卡住了</li>
+<li>Race Condition 基于特定序列或时机的事件的软件系统以不受控制的方式运行的行为</li>
+<li>Critical Section 两个线程不能同时执行这段代码</li>
+<li>Context Switch 上下文切换 （切换不同线程，恢复执行）多任务应用</li>
+<li>线程安全</li>
+<li>并发和并行    </li>
+<li>调度队列（dispatch queues）自身都是线程安全</li>
+<li>并发队列中的任务能得到的保证是它们会按照被添加的顺序开始执行</li>
+<li>dispatch_async 添加一个 Block 到队列就立即返回了。任务会在之后由 GCD 决定执行。当你需要在后台执行一个基于网络或 CPU 紧张的任务时就使用 dispatch_async ，这样就不会阻塞当前线程。</li>
+<li>并行要求并发，但并发并不能保证并行（不保证）</li>
+</ol>
+<h3 id="gcd">gcd</h3><p>添加任务到合适的队列，GCD生成必要的线程并计划执行任务，开发者只需要把任务添加到合适的队列</p>
+<p>上下文切换，保存线程执行路径</p>
+<p>消耗内存资源，死锁，数据竞争</p>
+<p>串行队列使用一个线程，并行队列使用多个线程</p>
+<p>XUN内核决定应当使用的线程数</p>
+<p>多个串行队列的任务是可以并行执行的，多少个串行队列就有多少个线程</p>
+<p>多个线程更新资源导致数据竞争采用串行队列，但是线程的生成要限制，比如更新数据库表用一个线程</p>
+<p>队列穿件出来后，要自己释放，管理通过retain release</p>
+<p>block会持有这个队列</p>
+<p>系统定义的队列，主， 全局（高/默认/低/后台)</p>
+<ol>
+<li><p>One of the technologies for starting tasks asynchronously is Grand Central Dispatch (GCD)；开始异步任务的技术，把线程管理的代码移到系统级别，我们只需要定义要执行的任务-&gt;加到合适的分发队列，gcd管理线程的创建和运行</p>
+</li>
+<li><p>more elegant，更优雅的代码 it works more effectively 更高效</p>
+</li>
+<li><p>GCD全局dispatch queue仅仅是工作线程池的抽象。这些队列中的Block一旦可用，就会被dispatch到工作线程中。提交至用户队列的Block最终也会通过全局队列进入相同的工作线程池（除非你的用户队列的目标是主线程，但是为了提高运行速度，我们绝不会这么干）。</p>
+</li>
+<li><p>By “drain” the pool is released <strong>immediately</strong> even in an environment with garbage collection enabled. 没有用garbage collection，用release也是可以的</p>
+</li>
+<li><p>线程和cpu的执行是等价的 still one CPU core can execute just one CPU bytecode</p>
+</li>
+<li><p>such as system calls, an executing state for a path, including CPU registers, is stored in one of the memory blocks assigned to each path.</p>
+</li>
+<li><p>内存快回保存每个线程执行路径is stored in one of the <strong>memory blocks</strong> assigned to each path</p>
+</li>
+<li><p>多核CPU the number of threads <strong>equals</strong> the number of CPU cores that can really run in parallel</p>
+<h4 id="多线程引发的问题">多线程引发的问题</h4></li>
+<li><p>更新同一份数据，导致数据不一致 race condition</p>
+</li>
+<li><p>死锁：When multiple threads await an event at the same time (deadlock)</p>
+</li>
+<li><p>内存消耗</p>
+<h4 id="更好的响应">更好的响应</h4></li>
+<li><p>dispatch_set_target_queue:变更优先级通过这个函数，第一个参数是自定义队列，第二参数是目标队列的,把多个串行队列设置到一个串行队列中，那么原本并行执行的几个串行队列，现在将会并行执行</p>
+</li>
+<li><p>dispatch_after,不是指定时间后执行，<strong>而是指定时间后追加到队列</strong>，主线程每隔1/60秒进行runloop</p>
+<p>​</p>
+</li>
+</ol>
+<p>dispatch queue</p>
+<p>a queue to store tasks to be executed（队列存储要执行的任务）</p>
+<ol>
+<li><p>主线程是一个串行队列，Global queuses并发队列（高中低三个优先级），多个串行队列在同一个时间运行，也能达到并发的效果</p>
+</li>
+<li><p>DISPATCH_QUEUE_CONCURRENT    dispatch_queue_t myConcurrentDispatchQueue = dispatch_queue_create( “com.example.gcd.MyConcurrentDispatchQueue”, DISPATCH_QUEUE_CONCURRENT); 第一个参数的目的是为了Debug，在崩溃日志中会显示，调试也很有用</p>
+</li>
+<li><p>不会被当做OC对象 isn’t treated as an Objective-C object dispatch_release(mySerialDispatchQueue);</p>
+</li>
+<li><p>不再使用锁，同步执行</p>
+</li>
+<li><p>When a Block is added to a dispatch queue by a dispatch_async function, say, the Block has ownership of the dispatch queue by the dispatch_retain function</p>
+</li>
+<li><p>f you call the dispatch_retain or dispatch_release function on the main dispatch queue or on a global dispatch queue, nothing happens. No problem</p>
+</li>
+<li><p>使用group的方式 ：dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</p>
+<p>dispatch_group_t group = dispatch_group_create();</p>
+<p>for(id obj in array)</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">dispatch_group_async</span>(group, queue, ^&#123;</span><br><span class="line">    <span class="attr_selector">[self doSomethingIntensiveWith:obj]</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   dispatch_group_wait(group, DISPATCH_TIME_FOREVER);</p>
+<p>   dispatch_release(group);</p>
+<p>   [self doSomethingWith:array];</p>
+<ol>
+<li><p>dispatch_apply 并平行运算，然后等待所有运算结束</p>
+</li>
+<li><p>但是将block提交至queue还是很消耗资源的——block需要被拷贝和入队，同时适当的工作线程需要被通知。不要将一张图片的每个像素作为一个block提交至队列，GCD的优点就半途夭折了。如果你不确定，那么请进行试验。将程序平行计算化是一种优化措施，在修改代码之前你必须再三思索，确定修改是有益的（还有确保你修改了正确的地方）。</p>
+</li>
+<li><p>dispatchI/O  dispatchdata</p>
+</li>
+<li><p>​</p>
+<h2 id="dispatchsource">dispatchsource</h2><p>​</p>
+<ol>
+<li>​</li>
+</ol>
+</li>
+</ol>
+<h3 id="图片">图片</h3><ol>
+<li>图像自动调整大小 <code>【self.imageView sizeToFit】</code></li>
+<li>设置睡眠时间：<code>[NSThread sleepForTimeInterval:2]</code></li>
+<li>获取当前线程<code>[NSThread CurrentThread]</code></li>
+<li>在后台线程中(非主线程)执行:<code>[self performSelectInbackground:]</code>  不能自动回收线程，会建立大量的子线程。所以是<strong>不正确</strong>的，应该使用<code>[self performSelectOnMainThread]</code> waitUntiDone:YES阻塞当前线程，No不会</li>
+<li>使用NSThread的线程，不会自动添加到自动释放池中，使用GCD和NSOpertation也会自动添加自动释放池，NSThread和NSobject不会，需要自己加autoReleasePool</li>
+<li>缓存策略：使用0（会使用本地缓存）,1(忽视本地内存缓存)  206状态码：加载一部分</li>
+<li>写入文件：追加文件 FileHandle （视5频的拖动播放） <code>fp seekToEndOfEnd</code>  <code>fp writeData</code></li>
+<li>InlineBlock快捷代码 在主线程更新UI,回到主线程    <code>dispatch_get_main_queue()</code>   创建一个线程，<code>dispatch_queue_create(&quot;download&quot;,dispatch_queue_serial)</code> ,<code>dispatch_async(q,block)</code></li>
+</ol>
+<h3 id="上传">上传</h3><ol>
+<li><p>post格式：content=”multipart/form-data”</p>
+</li>
+<li><p>put不支持浏览器操作</p>
+<p>3.</p>
+</li>
+</ol>
+<h4 id="死锁造成的原因">死锁造成的原因</h4><ol>
+<li>队列是先进先出，所有会造成死锁，在主线程中加入同步任务，就会造成死锁</li>
+</ol>
+<h2 id="GCD实现">GCD实现</h2><ol>
+<li>XUN上实现</li>
+<li>派发队列通过结构体和链表</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/06/内存管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="多线程" data-title="" data-url="yoursite.com/2016/03/08/多线程/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 swagon
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>swagon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="view programing guide for iOS
+window没有可视区域，但是它提供了一个容器，view是window的一部分，你可以往里面添加内容，你也可以使用视图管理其他视图。  view也可以作为一个容器
+每个程序至少有一个window和一个view用来显示内容,uikit和其他框架提供预定好的视图用来显示内容,如果不满足要求，我们可以自定义view处理
+view是uiview的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swagon">
+<meta property="og:url" content="yoursite.com/2015/06/26/view_programing_guide_for_ios/index.html">
+<meta property="og:site_name" content="swagon">
+<meta property="og:description" content="view programing guide for iOS
+window没有可视区域，但是它提供了一个容器，view是window的一部分，你可以往里面添加内容，你也可以使用视图管理其他视图。  view也可以作为一个容器
+每个程序至少有一个window和一个view用来显示内容,uikit和其他框架提供预定好的视图用来显示内容,如果不满足要求，我们可以自定义view处理
+view是uiview的">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swagon">
+<meta name="twitter:description" content="view programing guide for iOS
+window没有可视区域，但是它提供了一个容器，view是window的一部分，你可以往里面添加内容，你也可以使用视图管理其他视图。  view也可以作为一个容器
+每个程序至少有一个window和一个view用来显示内容,uikit和其他框架提供预定好的视图用来显示内容,如果不满足要求，我们可以自定义view处理
+view是uiview的">
+  
+    <link rel="alternative" href="/atom.xml" title="swagon" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img lazy-src="" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">swagon</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">原谅我不堪回首的过去</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">swagon</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">swagon</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">原谅我不堪回首的过去</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-view_programing_guide_for_ios" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/26/view_programing_guide_for_ios/" class="article-date">
+  	<time datetime="2015-06-26T03:06:59.000Z" itemprop="datePublished">6月 26 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="view_programing_guide_for_iOS">view programing guide for iOS</h2><ol>
+<li>window没有可视区域，但是它提供了一个容器，view是window的一部分，你可以往里面添加内容，你也可以使用视图管理其他视图。  view也可以作为一个容器</li>
+<li>每个程序至少有一个window和一个view用来显示内容,uikit和其他框架提供预定好的视图用来显示内容,如果不满足要求，我们可以自定义view处理</li>
+<li>view是uiview的实例，管理一个长方形的区域在应用程序中</li>
+</ol>
+<h2 id="视图管理_你应用的可视区域">视图管理 你应用的可视区域</h2><ol>
+<li>在视图层级中，父视图是用来放置和规定子视图的大小，动态修改子视图大小，比如旋转和动画的时候；    </li>
+<li>构建视图就像砌砖块一样的构建用户界面，而不是用一个view去展示所有的内容，你经常用很多视图去构建一个视图层级，每个view都是一个特殊的部分在你的界面中，通常优化一个类型的内容，比如uikit,有专门的视图，用来展示图片，文字，和其他类型的内容</li>
+</ol>
+<h3 id="Window调节view的显示">Window调节view的显示</h3><p>window处理所有的用户界面的展示，window通过view来工作，<br>Windows work with views (and their owning view controllers) to manage interactions with, and changes to, the visible view hierarchy，大部门时间，window是不会改变的，一旦创建，他保持着一样，<br> it stays the same and only the views displayed by it change，<br> 每个应用程序至少有一个window来显示用户界面，和设备的的主屏幕，如果一个额外的展示链接到设备中，可以创建第二个window在那个屏幕上</p>
+<h3 id="动画给用户可视的界面反馈">动画给用户可视的界面反馈</h3><ol>
+<li>动画给用户可视的反馈，体现在视图层次的改变，系统定义了基本的动画，展现一个模态视图，在不同的视图组之间过渡，然而很关于view的属性也可以直接动画，比如，你可以改变视图的透明度，他在屏幕中的位置，他的尺寸，他的背景颜色，或者其他属性。如果你直接用view底层的核心动画对象，你可以展现许多其他的动画。</li>
+</ol>
+<h3 id="IB的角色">IB的角色</h3><ol>
+<li>IB是一个应用程序，你可以用来以图像的方式构建和配置你应用程序的windows和view,使用IB，你可以组装自己的视图和对象，当你在运行时加载一个nib文件，里面的对象会被重新构建到实际的对象，你的代码可以操作他们</li>
+<li>IB极大的简化了你创建用户界面的工作</li>
+</ol>
+<h3 id="视图的结构">视图的结构</h3><ol>
+<li>一个tar button item 本身不是一个视图，但是内部管理了一个视图</li>
+<li>绘制代码严重影响性能，能少些就少写，代码被调用，会被缓存起来重复利用，重用生成好的代码，排除昂贵的画循环，通常需要更新视图。重用这些内容，在动画期间非常重要，就是存在的内容可以被操作的时候，这样的重用，相比创建一个新的内容，会 less expensive</li>
+</ol>
+<h3 id="视图的结构-1">视图的结构</h3><ol>
+<li>子视图被放在一个数组中，被放置的顺序影响视图的可见性，如果两个同级的视图重叠，后添加的会再前面添加的顶部</li>
+<li>数组的顺序也会影响到程序如何响应事件，响应链是一级一级向父类传递</li>
+<li>如果没有响应，最终会传递到application对象，这个对象，通常会丢弃他</li>
+</ol>
+<h3 id="view的画循环">view的画循环</h3><ol>
+<li>定需求的画模型来决定视图的显示，如果你没有改变视图的内容，系统会捕捉内容的快照来显示视图的可视区域，那么画的内容就永远不会被再调用，快照图像重用于大多数操作涉及的视图</li>
+<li><p>如果改变了内容，你通知系统视图改变，视图重复绘图的步骤，然后捕捉结果的快照</p>
+</li>
+<li><p>你使用setNeedsDisplay 和 setNeedsDisplayInRect: method是视图无效，这些方法告诉视图内容已经被改变，需要重绘在下一个时机。系统会等到当前运行循环结束后才会开始绘制。这个延迟给你机会去让视图失效，增加或者移除从视图层级中，重置视图大小，所有这些操作在同一时间</p>
+</li>
+<li>改变视图的几何形状不会导致视图重绘，在view的边界中，大多数内容拉伸，重新定位。</li>
+</ol>
+<h3 id="content_modes">content modes</h3><p>UIViewContentModeRedraw会重绘，强制调用drawrect,我们应该避免，在系统的视图中应该不使用他</p>
+<h3 id="Stretchable_Views">Stretchable Views</h3>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/26/学会看xcode文档/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/24/ios层级/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="view_programing_guide_for_ios" data-title="" data-url="yoursite.com/2015/06/26/view_programing_guide_for_ios/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 swagon
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/mobile.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+<! -- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  </div>
+</body>
+</html>

@@ -195,546 +195,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-restful_api" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/29/restful_api/" class="article-date">
-  	<time datetime="2015-07-29T07:07:59.000Z" itemprop="datePublished">7月 29 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="RESTful_Api">RESTful Api</h2><ol>
-<li>REST，即Representational State Transfer的缩写。我对这个词组的翻译是”表现层状态转化”</li>
-<li>我这篇文章的写作目的，就是想在符合架构原理的前提下，理解和评估以网络为基础的应用软件的架构设计，得到一个功能强、性能好、适宜通信的架构</li>
-<li>“表现层”其实指的是”资源”（Resources）的”表现层”。</li>
-<li>互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-pragma_mark_-_getter" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/17/pragma_mark_-_getter/" class="article-date">
-  	<time datetime="2015-07-17T06:45:00.000Z" itemprop="datePublished">7月 17 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@implementation DOPDropDownMenu</p>
-<h1 id="pragma_mark_-_getter">pragma mark - getter</h1><ul>
-<li><p>(UIColor *)indicatorColor {<br>  if (!_indicatorColor) {</p>
-<pre><code><span class="attribute">_indicatorColor </span>=<span class="string"> [UIColor blackColor];</span>
-</code></pre><p>  }<br>  return _indicatorColor;<br>}</p>
-</li>
-<li><p>(UIColor *)textColor {<br>  if (!_textColor) {</p>
-<pre><code><span class="attribute">_textColor </span>=<span class="string"> [UIColor blackColor];</span>
-</code></pre><p>  }<br>  return _textColor;<br>}</p>
-</li>
-<li><p>(UIColor *)separatorColor {<br>  if (!_separatorColor) {</p>
-<pre><code><span class="attribute">_separatorColor </span>=<span class="string"> [UIColor blackColor];</span>
-</code></pre><p>  }<br>  return _separatorColor;<br>}</p>
-</li>
-<li><p>(NSString <em>)titleForRowAtIndexPath:(DOPIndexPath </em>)indexPath {<br>  return [self.dataSource menu:self titleForRowAtIndexPath:indexPath];<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_setter">pragma mark - setter</h1><ul>
-<li><p>(void)setDataSource:(id<dopdropdownmenudatasource>)dataSource {<br>  _dataSource = dataSource;</dopdropdownmenudatasource></p>
-<p>  //configure view<br>  if ([_dataSource respondsToSelector:@selector(numberOfColumnsInMenu:)]) {</p>
-<pre><code><span class="constant">_numOfMenu </span>= [<span class="constant">_dataSource </span><span class="symbol">numberOfColumnsInMenu:</span><span class="keyword">self</span>];
-</code></pre><p>  } else {</p>
-<pre><code><span class="attribute">_numOfMenu </span>=<span class="string"> 1;</span>
-</code></pre><p>  }</p>
-<p>  CGFloat textLayerInterval = self.frame.size.width / ( _numOfMenu * 2);<br>  CGFloat bgLayerInterval = self.frame.size.width / _numOfMenu;</p>
-<p>  NSMutableArray <em>tempTitles = [[NSMutableArray alloc] initWithCapacity:_numOfMenu];<br>  NSMutableArray </em>tempIndicators = [[NSMutableArray alloc] initWithCapacity:_numOfMenu];<br>  NSMutableArray *tempBgLayers = [[NSMutableArray alloc] initWithCapacity:_numOfMenu];</p>
-<p>  for (int i = 0; i &lt; _numOfMenu; i++) {</p>
-<pre><code><span class="comment">//bgLayer</span>
-<span class="built_in">CGPoint</span> bgLayerPosition = <span class="built_in">CGPointMake</span>((i+<span class="number">0.5</span>)*bgLayerInterval, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>/<span class="number">2</span>);
-<span class="built_in">CALayer</span> *bgLayer = [<span class="keyword">self</span> createBgLayerWithColor:[<span class="built_in">UIColor</span> whiteColor] andPosition:bgLayerPosition];
-[<span class="keyword">self</span><span class="variable">.layer</span> addSublayer:bgLayer];
-[tempBgLayers addObject:bgLayer];
-<span class="comment">//title</span>
-<span class="built_in">CGPoint</span> titlePosition = <span class="built_in">CGPointMake</span>( (i * <span class="number">2</span> + <span class="number">1</span>) * textLayerInterval , <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> / <span class="number">2</span>);
-<span class="built_in">NSString</span> *titleString = [_dataSource menu:<span class="keyword">self</span> titleForRowAtIndexPath:[DOPIndexPath indexPathWithCol:i row:<span class="number">0</span>]];
-<span class="built_in">CATextLayer</span> *title = [<span class="keyword">self</span> createTextLayerWith<span class="built_in">NSString</span>:titleString withColor:<span class="keyword">self</span><span class="variable">.textColor</span> andPosition:titlePosition];
-[<span class="keyword">self</span><span class="variable">.layer</span> addSublayer:title];
-[tempTitles addObject:title];
-<span class="comment">//indicator</span>
-<span class="built_in">CAShapeLayer</span> *indicator = [<span class="keyword">self</span> createIndicatorWithColor:<span class="keyword">self</span><span class="variable">.indicatorColor</span> andPosition:<span class="built_in">CGPointMake</span>(titlePosition<span class="variable">.x</span> + title<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> / <span class="number">2</span> + <span class="number">8</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> / <span class="number">2</span>)];
-[<span class="keyword">self</span><span class="variable">.layer</span> addSublayer:indicator];
-[tempIndicators addObject:indicator];
-</code></pre><p>  }<br>  _titles = [tempTitles copy];<br>  _indicators = [tempIndicators copy];<br>  _bgLayers = [tempBgLayers copy];<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_init_method">pragma mark - init method</h1><ul>
-<li><p>(instancetype)initWithOrigin:(CGPoint)origin andHeight:(CGFloat)height {<br>  CGSize screenSize = [UIScreen mainScreen].bounds.size;<br>  self = [self initWithFrame:CGRectMake(origin.x, origin.y, screenSize.width, height)];<br>  if (self) {</p>
-<pre><code>_origin = origin;
-_currentSelectedMenudIndex = -<span class="number">1</span>;
-_show = <span class="literal">NO</span>;
-
-<span class="comment">//tableView init</span>
-_tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(origin<span class="variable">.x</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span> + <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>) style:<span class="built_in">UITableViewStylePlain</span>];
-_tableView<span class="variable">.rowHeight</span> = <span class="number">38</span>;
-_tableView<span class="variable">.dataSource</span> = <span class="keyword">self</span>;
-_tableView<span class="variable">.delegate</span> = <span class="keyword">self</span>;
-_tableView<span class="variable">.separatorStyle</span>=<span class="built_in">UITableViewCellSeparatorStyleNone</span>;
-<span class="comment">//self tapped</span>
-<span class="keyword">self</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="built_in">UIGestureRecognizer</span> *tapGesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(menuTapped:)];
-[<span class="keyword">self</span> addGestureRecognizer:tapGesture];
-
-<span class="comment">//background init and tapped</span>
-_backGroundView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(origin<span class="variable">.x</span>, origin<span class="variable">.y</span>, screenSize<span class="variable">.width</span>, screenSize<span class="variable">.height</span>)];
-_backGroundView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> colorWithWhite:<span class="number">0.0</span> alpha:<span class="number">0.0</span>];
-_backGroundView<span class="variable">.opaque</span> = <span class="literal">NO</span>;
-<span class="built_in">UIGestureRecognizer</span> *gesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(backgroundTapped:)];
-[_backGroundView addGestureRecognizer:gesture];
-
-<span class="comment">//add bottom shadow</span>
-<span class="built_in">UIView</span> *bottomShadow = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>-<span class="number">0.5</span>, screenSize<span class="variable">.width</span>, <span class="number">0.5</span>)];
-bottomShadow<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];
-[<span class="keyword">self</span> addSubview:bottomShadow];
-</code></pre><p>  }<br>  return self;<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_init_support">pragma mark - init support</h1><ul>
-<li><p>(CALayer <em>)createBgLayerWithColor:(UIColor </em>)color andPosition:(CGPoint)position {<br>  CALayer *layer = [CALayer layer];<br>  layer.position = position;<br>  layer.bounds = CGRectMake(0, 0, self.frame.size.width/self.numOfMenu, self.frame.size.height-1);<br>  layer.backgroundColor = color.CGColor;<br>//    NSLog(@”bglayer bounds:%@”,NSStringFromCGRect(layer.bounds));<br>//    NSLog(@”bglayer position:%@”, NSStringFromCGPoint(position));</p>
-<p>  return layer;<br>}</p>
-</li>
-<li><p>(CAShapeLayer <em>)createIndicatorWithColor:(UIColor </em>)color andPosition:(CGPoint)point {<br>  UIImage<em>    backgroundImage = [UIImage imageNamed:@”my”];<br>  CAShapeLayer</em>    layer = [CAShapeLayer new];<br>  CGFloat nativeWidth = CGImageGetWidth(backgroundImage.CGImage);<br>  CGFloat nativeHeight = CGImageGetHeight(backgroundImage.CGImage);<br>  CGRect      startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);<br>  layer.contents = (id)backgroundImage.CGImage;<br>  layer.frame = startFrame;<br>  layer.position = point;<br>  return layer;<br>}</p>
-</li>
-<li><p>(CATextLayer <em>)createTextLayerWithNSString:(NSString </em>)string withColor:(UIColor *)color andPosition:(CGPoint)point {</p>
-<p>  CGSize size = [self calculateTitleSizeWithString:string];</p>
-<p>  CATextLayer *layer = [CATextLayer new];<br>  CGFloat sizeWidth = (size.width &lt; (self.frame.size.width / _numOfMenu) - 25) ? size.width : self.frame.size.width / _numOfMenu - 25;<br>  layer.bounds = CGRectMake(0, 0, sizeWidth, size.height);<br>  layer.string = string;<br>  layer.fontSize = 14.0;<br>  layer.alignmentMode = kCAAlignmentCenter;<br>  layer.foregroundColor = color.CGColor;</p>
-<p>  layer.contentsScale = [[UIScreen mainScreen] scale];</p>
-<p>  layer.position = point;</p>
-<p>  return layer;<br>}</p>
-</li>
-<li><p>(CGSize)calculateTitleSizeWithString:(NSString <em>)string<br>{<br>  CGFloat fontSize = 14.0;<br>  NSDictionary </em>dic = @{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]};<br>  CGSize size = [string boundingRectWithSize:CGSizeMake(280, 0) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dic context:nil].size;<br>  return size;<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_gesture_handle">pragma mark - gesture handle</h1><ul>
-<li><p>(void)menuTapped:(UITapGestureRecognizer *)paramSender {<br>  CGPoint touchPoint = [paramSender locationInView:self];<br>  //calculate index<br>  NSInteger tapIndex = touchPoint.x / (self.frame.size.width / _numOfMenu);</p>
-<p>  for (int i = 0; i &lt; _numOfMenu; i++) {</p>
-<pre><code><span class="tag">if</span> (i != tapIndex) {
-    <span class="attr_selector">[self animateIndicator:_indicators[i]</span> <span class="tag">Forward</span><span class="pseudo">:NO</span> <span class="tag">complete</span>:^{
-        <span class="attr_selector">[self animateTitle:_titles[i]</span> <span class="tag">show</span><span class="pseudo">:NO</span> <span class="tag">complete</span>:^{
-
-        }];
-    }];
-    <span class="attr_selector">[(CALayer *)self.bgLayers[i]</span> <span class="tag">setBackgroundColor</span>:<span class="attr_selector">[UIColor whiteColor]</span><span class="class">.CGColor</span>];
-}
-</code></pre><p>  }</p>
-<p>  if (tapIndex == _currentSelectedMenudIndex &amp;&amp; _show) {</p>
-<pre><code><span class="collection">[self animateIdicator:_indicators<span class="collection">[_currentSelectedMenudIndex]</span> background:_backGroundView tableView:_tableView title:_titles<span class="collection">[_currentSelectedMenudIndex]</span> forward:NO complecte:<span class="comment">^{
-    _currentSelectedMenudIndex = tapIndex;
-    _show = NO;
-}</span>]</span><span class="comment">;</span>
-<span class="collection">[<span class="list">(<span class="keyword">CALayer</span> *)</span>self.bgLayers<span class="collection">[tapIndex]</span> setBackgroundColor:<span class="collection">[UIColor whiteColor]</span>.CGColor]</span><span class="comment">;</span>
-</code></pre><p>  } else {</p>
-<pre><code>_currentSelectedMenudIndex = tapIndex;
-[_tableView reloadData];
-[self <span class="string">animateIdicator:</span>_indicators[tapIndex] <span class="string">background:</span>_backGroundView <span class="string">tableView:</span>_tableView <span class="string">title:</span>_titles[tapIndex] <span class="string">forward:</span>YES <span class="string">complecte:</span>^{
-    _show = YES;
-}];
-[(CALayer *)self.bgLayers[tapIndex] <span class="string">setBackgroundColor:</span>[UIColor <span class="string">colorWithWhite:</span><span class="number">0.9</span> <span class="string">alpha:</span><span class="number">1.0</span>].CGColor];
-</code></pre><p>  }<br>}</p>
-</li>
-<li><p>(void)backgroundTapped:(UITapGestureRecognizer *)paramSender<br>{<br>  [self animateIdicator:_indicators[_currentSelectedMenudIndex] background:_backGroundView tableView:_tableView title:_titles[_currentSelectedMenudIndex] forward:NO complecte:^{</p>
-<pre><code><span class="setting">_show = <span class="value"><span class="keyword">NO</span>;</span></span>
-</code></pre><p>  }];<br>  [(CALayer *)self.bgLayers[_currentSelectedMenudIndex] setBackgroundColor:[UIColor whiteColor].CGColor];<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_animation_method">pragma mark - animation method</h1><ul>
-<li><p>(void)animateIndicator:(CAShapeLayer *)indicator Forward:(BOOL)forward complete:(void(^)())complete {<br>  [CATransaction begin];<br>  [CATransaction setAnimationDuration:0.25];<br>  [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.4 :0.0 :0.2 :1.0]];</p>
-<p>  CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@”transform.rotation”];<br>  //anim.values = forward ? @[ @0, @(M_PI) ] : @[ @(M_PI), @0 ];<br>  anim.values = forward ? @[ @0, @(M_PI_2) ] : @[ @(M_PI_2), @0 ];</p>
-<p>  if (!anim.removedOnCompletion) {</p>
-<pre><code>[indicator <span class="string">addAnimation:</span>anim <span class="string">forKey:</span>anim.keyPath];
-</code></pre><p>  } else {</p>
-<pre><code>[indicator <span class="string">addAnimation:</span>anim <span class="string">forKey:</span>anim.keyPath];
-[indicator <span class="string">setValue:</span>anim.values.lastObject <span class="string">forKeyPath:</span>anim.keyPath];
-</code></pre><p>  }</p>
-<p>  [CATransaction commit];</p>
-<p>  complete();<br>}</p>
-</li>
-</ul>
-<p>//- (void)animateBackGroundView:(UIView *)view show:(BOOL)show complete:(void(^)())complete {<br>//    if (show) {<br>//        [self.superview addSubview:view];<br>//        [view.superview addSubview:self];<br>//<br>//        [UIView animateWithDuration:0.2 animations:^{<br>//            view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];<br>//        }];<br>//    } else {<br>//        [UIView animateWithDuration:0.2 animations:^{<br>//            view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];<br>//        } completion:^(BOOL finished) {<br>//            [view removeFromSuperview];<br>//        }];<br>//    }<br>//    complete();<br>//}</p>
-<ul>
-<li><p>(void)animateTableView:(UITableView *)tableView show:(BOOL)show positionX:(CGFloat)positionX  complete:(void(^)())complete {<br>  if (show) {</p>
-<pre><code><span class="built_in">table</span>View.frame = CGRectMake(<span class="literal">self</span>.origin.x, <span class="literal">self</span>.frame.origin.y + <span class="literal">self</span>.frame.size.height, <span class="literal">self</span>.frame.size.width, <span class="number">0</span>);
-[<span class="literal">self</span>.superview addSubview:<span class="built_in">table</span>View];
-
-CGFloat <span class="built_in">table</span>ViewHeight = ([<span class="built_in">table</span>View numberOfRowsInSection:<span class="number">0</span>] &gt; <span class="number">5</span>) ? (<span class="number">5</span> * <span class="built_in">table</span>View.rowHeight) : ([<span class="built_in">table</span>View numberOfRowsInSection:<span class="number">0</span>] * <span class="built_in">table</span>View.rowHeight);
-
-[UIView animateWithDuration:<span class="number">0.2</span> animations:^{
-    _tableView.frame = CGRectMake(positionX, <span class="literal">self</span>.frame.origin.y + <span class="literal">self</span>.frame.size.height, <span class="literal">self</span>.frame.size.width/<span class="number">2</span>, <span class="built_in">table</span>ViewHeight);
-}];
-</code></pre><p>  } else {</p>
-<pre><code><span class="collection">[UIView animateWithDuration:0.2 animations:<span class="comment">^{
-    _tableView.frame = CGRectMake(positionX, self.frame.origin.y + self.frame.size.height, self.frame.size.width/2, 0);
-}</span> completion:^<span class="list">(<span class="keyword">BOOL</span> finished)</span> <span class="collection">{
-    <span class="collection">[tableView removeFromSuperview]</span><span class="comment">;</span>
-}</span>]</span><span class="comment">;</span>
-</code></pre><p>  }<br>  complete();<br>}</p>
-</li>
-<li><p>(void)animateTitle:(CATextLayer *)title show:(BOOL)show complete:(void(^)())complete {<br>  CGSize size = [self calculateTitleSizeWithString:title.string];<br>  CGFloat sizeWidth = (size.width &lt; (self.frame.size.width / _numOfMenu) - 25) ? size.width : self.frame.size.width / _numOfMenu - 25;<br>  title.bounds = CGRectMake(0, 0, sizeWidth, size.height);<br>  complete();<br>}</p>
-</li>
-<li><p>(void)animateIdicator:(CAShapeLayer <em>)indicator background:(UIView </em>)background tableView:(UITableView <em>)tableView title:(CATextLayer </em>)title forward:(BOOL)forward complecte:(void(^)())complete{</p>
-<p>  [self animateIndicator:indicator Forward:forward complete:^{</p>
-<pre><code>[self <span class="string">animateTitle:</span>title <span class="string">show:</span>forward <span class="string">complete:</span>^{
-</code></pre><p>//           title.backgroundColor=[UIColor redColor].CGColor;<br>//            title.superlayer.backgroundColor=[UIColor greenColor].CGColor;<br>//            NSLog(@”%@”,title.position);<br>//            NSLog(@”%@”,title.bounds.size.width);</p>
-<pre><code>  <span class="built_in">CGFloat</span> coloumWidth= <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.superlayer</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>/<span class="keyword">self</span><span class="variable">.numOfMenu</span>;
-    <span class="comment">//[self animateBackGroundView:background show:forward complete:^{</span>
-        [<span class="keyword">self</span> animateTableView:tableView show:forward positionX:((<span class="built_in">NSInteger</span>)title<span class="variable">.position</span><span class="variable">.x</span>/(<span class="built_in">NSInteger</span>)coloumWidth)*coloumWidth complete:^{
-        }];
-    <span class="comment">//}];</span>
-}];
-</code></pre><p>  }];</p>
-<p>  complete();<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_table_datasource">pragma mark - table datasource</h1><ul>
-<li><p>(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {<br>  NSAssert(self.dataSource != nil, @”menu’s dataSource shouldn’t be nil”);<br>  if ([self.dataSource respondsToSelector:@selector(menu:numberOfRowsInColumn:)]) {</p>
-<pre><code><span class="keyword">return</span> [<span class="keyword">self</span>.dataSource <span class="symbol">menu:</span><span class="keyword">self</span>
-        <span class="symbol">numberOfRowsInColumn:</span><span class="keyword">self</span>.currentSelectedMenudIndex];
-</code></pre><p>  } else {</p>
-<pre><code><span class="built_in">NSAssert</span>(<span class="number">0</span> == <span class="number">1</span>, <span class="string">@"required method of dataSource protocol should be implemented"</span>);
-<span class="keyword">return</span> <span class="number">0</span>;
-</code></pre><p>  }<br>}</p>
-</li>
-<li><p>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>{<br>  static NSString </em>identifier = @”DropDownMenuCell”;<br>  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];<br>  if (!cell) {</p>
-<pre><code>cell = [[UITableViewCell alloc] <span class="string">initWithStyle:</span>UITableViewCellStyleDefault <span class="string">reuseIdentifier:</span>identifier];
-</code></pre><p>  }<br>  NSAssert(self.dataSource != nil, @”menu’s datasource shouldn’t be nil”);<br>  if ([self.dataSource respondsToSelector:@selector(menu:titleForRowAtIndexPath:)]) {</p>
-<pre><code>cell.textLabel.text = [self.dataSource <span class="string">menu:</span>self <span class="string">titleForRowAtIndexPath:</span>[DOPIndexPath <span class="string">indexPathWithCol:</span>self.currentSelectedMenudIndex <span class="string">row:</span>indexPath.row]];
-</code></pre><p>  } else {</p>
-<pre><code>NSAssert<span class="list">(<span class="number">0</span> == <span class="number">1</span>, @<span class="string">"dataSource method needs to be implemented"</span>)</span><span class="comment">;</span>
-</code></pre><p>  }<br>  //UIView *lineView=[cell viewWithTag:100];<br>  //if (!lineView) {</p>
-<pre><code><span class="built_in">UIView</span> *lineView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, _tableView<span class="variable">.rowHeight</span>-<span class="number">1</span>, cell<span class="variable">.contentView</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>/<span class="number">2</span>, <span class="number">1</span>)];
-<span class="comment">//lineView.tag=100;</span>
-lineView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> grayColor];
-</code></pre><p> // }<br>  [cell.contentView addSubview:lineView];<br>  cell.backgroundColor = [UIColor whiteColor];<br>  cell.textLabel.font = [UIFont systemFontOfSize:14.0];<br>  cell.separatorInset = UIEdgeInsetsZero;</p>
-<p>  if (cell.textLabel.text == [(CATextLayer *)[_titles objectAtIndex:_currentSelectedMenudIndex] string]) {</p>
-<pre><code>cell.backgroundColor = [UIColor <span class="string">colorWithWhite:</span><span class="number">0.9</span> <span class="string">alpha:</span><span class="number">1.0</span>];
-</code></pre><p>  }</p>
-<p>  return cell;<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_tableview_delegate">pragma mark - tableview delegate</h1><ul>
-<li><p>(void)tableView:(UITableView <em>)tableView didSelectRowAtIndexPath:(NSIndexPath </em>)indexPath {<br>  if (self.delegate || [self.delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {</p>
-<pre><code>[self <span class="string">confiMenuWithSelectRow:</span>indexPath.row];
-[self.delegate <span class="string">menu:</span>self <span class="string">didSelectRowAtIndexPath:</span>[DOPIndexPath <span class="string">indexPathWithCol:</span>self.currentSelectedMenudIndex <span class="string">row:</span>indexPath.row]];
-</code></pre><p>  } else {</p>
-<pre><code>//<span class="type">TODO</span>: delegate <span class="keyword">is</span> <span class="keyword">nil</span>
-</code></pre><p>  }<br>}</p>
-</li>
-<li><p>(void)confiMenuWithSelectRow:(NSInteger)row {<br>  CATextLayer <em>title = (CATextLayer </em>)_titles[_currentSelectedMenudIndex];<br>  title.string = [self.dataSource menu:self titleForRowAtIndexPath:[DOPIndexPath indexPathWithCol:self.currentSelectedMenudIndex row:row]];</p>
-<p>  [self animateIdicator:_indicators[_currentSelectedMenudIndex] background:_backGroundView tableView:_tableView title:_titles[_currentSelectedMenudIndex] forward:NO complecte:^{</p>
-<pre><code><span class="setting">_show = <span class="value"><span class="keyword">NO</span>;</span></span>
-</code></pre><p>  }];<br>  [(CALayer *)self.bgLayers[_currentSelectedMenudIndex] setBackgroundColor:[UIColor whiteColor].CGColor];</p>
-<p>  CAShapeLayer <em>indicator = (CAShapeLayer </em>)_indicators[_currentSelectedMenudIndex];<br>  indicator.position = CGPointMake(title.position.x + title.frame.size.width / 2 + 8, indicator.position.y);<br>}</p>
-</li>
-</ul>
-<p>@end</p>
-<h3 id="#">#</h3><p>@implementation DOPDropDownMenu</p>
-<h1 id="pragma_mark_-_getter-1">pragma mark - getter</h1><ul>
-<li><p>(UIColor *)indicatorColor<br>{<br>  if (!_indicatorColor) {</p>
-<pre><code><span class="attribute">_indicatorColor </span>=<span class="string"> [UIColor blackColor];</span>
-</code></pre><p>  }<br>  return _indicatorColor;<br>}</p>
-</li>
-<li><p>(UIColor *)textColor<br>{<br>  if (!_textColor) {</p>
-<pre><code><span class="attribute">_textColor </span>=<span class="string"> [UIColor blackColor];</span>
-</code></pre><p>  }<br>  return _textColor;<br>}</p>
-</li>
-<li><p>(UIColor *)separatorColor<br>{<br>  if (!_separatorColor) {</p>
-<pre><code><span class="attribute">_separatorColor </span>=<span class="string"> [UIColor blackColor];</span>
-</code></pre><p>  }<br>  return _separatorColor;<br>}</p>
-</li>
-<li><p>(NSString <em>)titleForRowAtIndexPath:(DOPIndexPath </em>)indexPath<br>{<br>  return [self.dataSource menu:self titleForRowAtIndexPath:indexPath];<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_setter-1">pragma mark - setter</h1><ul>
-<li><p>(void)setDataSource:(id<dopdropdownmenudatasource>)dataSource<br>{<br>  _dataSource = dataSource;</dopdropdownmenudatasource></p>
-<p>  //configure view<br>  if ([_dataSource respondsToSelector:@selector(numberOfColumnsInMenu:)]) {</p>
-<pre><code><span class="constant">_numOfMenu </span>= [<span class="constant">_dataSource </span><span class="symbol">numberOfColumnsInMenu:</span><span class="keyword">self</span>];
-</code></pre><p>  }<br>  else {</p>
-<pre><code><span class="attribute">_numOfMenu </span>=<span class="string"> 1;</span>
-</code></pre><p>  }</p>
-<p>  CGFloat textLayerInterval = self.frame.size.width / (_numOfMenu * 2);<br>  CGFloat bgLayerInterval = self.frame.size.width / _numOfMenu;</p>
-<p>  NSMutableArray <em>tempTitles = [[NSMutableArray alloc] initWithCapacity:_numOfMenu];<br>  NSMutableArray </em>tempIndicators = [[NSMutableArray alloc] initWithCapacity:_numOfMenu];<br>  NSMutableArray *tempBgLayers = [[NSMutableArray alloc] initWithCapacity:_numOfMenu];</p>
-<p>  for (int i = 0; i &lt; _numOfMenu; i++) {</p>
-<pre><code><span class="comment">//bgLayer</span>
-<span class="built_in">CGPoint</span> bgLayerPosition = <span class="built_in">CGPointMake</span>((i + <span class="number">0.5</span>) * bgLayerInterval, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> / <span class="number">2</span>);
-<span class="built_in">CALayer</span> *bgLayer = [<span class="keyword">self</span> createBgLayerWithColor:[<span class="built_in">UIColor</span> whiteColor] andPosition:bgLayerPosition];
-[<span class="keyword">self</span><span class="variable">.layer</span> addSublayer:bgLayer];
-[tempBgLayers addObject:bgLayer];
-<span class="comment">//title</span>
-<span class="built_in">CGPoint</span> titlePosition = <span class="built_in">CGPointMake</span>((i * <span class="number">2</span> + <span class="number">1</span>) * textLayerInterval, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> / <span class="number">2</span>);
-<span class="built_in">NSString</span> *titleString = [_dataSource menu:<span class="keyword">self</span> titleForRowAtIndexPath:[DOPIndexPath indexPathWithCol:i row:<span class="number">0</span>]];
-<span class="built_in">CATextLayer</span> *title = [<span class="keyword">self</span> createTextLayerWith<span class="built_in">NSString</span>:titleString withColor:<span class="keyword">self</span><span class="variable">.textColor</span> andPosition:titlePosition];
-[<span class="keyword">self</span><span class="variable">.layer</span> addSublayer:title];
-[tempTitles addObject:title];
-<span class="comment">//indicator</span>
-<span class="built_in">CAShapeLayer</span> *indicator = [<span class="keyword">self</span> createIndicatorWithColor:<span class="keyword">self</span><span class="variable">.indicatorColor</span> andPosition:<span class="built_in">CGPointMake</span>(titlePosition<span class="variable">.x</span> + title<span class="variable">.bounds</span><span class="variable">.size</span><span class="variable">.width</span> / <span class="number">2</span> + <span class="number">8</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> / <span class="number">2</span>)];
-[<span class="keyword">self</span><span class="variable">.layer</span> addSublayer:indicator];
-[tempIndicators addObject:indicator];
-</code></pre><p>  }<br>  _titles = [tempTitles copy];<br>  _indicators = [tempIndicators copy];<br>  _bgLayers = [tempBgLayers copy];<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_init_method-1">pragma mark - init method</h1><ul>
-<li><p>(instancetype)initWithOrigin:(CGPoint)origin andHeight:(CGFloat)height<br>{<br>  CGSize screenSize = [UIScreen mainScreen].bounds.size;<br>  self = [self initWithFrame:CGRectMake(origin.x, origin.y, screenSize.width, height)];<br>  if (self) {</p>
-<pre><code>_origin = origin;
-_currentSelectedMenudIndex = -<span class="number">1</span>;
-_show = <span class="literal">NO</span>;
-
-<span class="comment">//tableView init</span>
-_tableView = [[<span class="built_in">UITableView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(origin<span class="variable">.x</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.y</span> + <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, <span class="number">0</span>) style:<span class="built_in">UITableViewStylePlain</span>];
-_tableView<span class="variable">.separatorStyle</span> = <span class="built_in">UITableViewCellSeparatorStyleNone</span>;
-<span class="comment">//        _tableView.layer.borderWidth=1;</span>
-<span class="comment">//        _tableView.layer.borderColor=[UIColor grayColor].CGColor;</span>
-_tableView<span class="variable">.rowHeight</span> = <span class="number">38</span>;
-_tableView<span class="variable">.dataSource</span> = <span class="keyword">self</span>;
-_tableView<span class="variable">.delegate</span> = <span class="keyword">self</span>;
-
-<span class="comment">//self tapped</span>
-<span class="keyword">self</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="built_in">UIGestureRecognizer</span> *tapGesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(menuTapped:)];
-[<span class="keyword">self</span> addGestureRecognizer:tapGesture];
-
-<span class="comment">//background init and tapped</span>
-_backGroundView = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(origin<span class="variable">.x</span>, origin<span class="variable">.y</span>, screenSize<span class="variable">.width</span>, screenSize<span class="variable">.height</span>)];
-_backGroundView<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> colorWithWhite:<span class="number">0.0</span> alpha:<span class="number">0.0</span>];
-_backGroundView<span class="variable">.opaque</span> = <span class="literal">NO</span>;
-<span class="built_in">UIGestureRecognizer</span> *gesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(backgroundTapped:)];
-[_backGroundView addGestureRecognizer:gesture];
-
-<span class="comment">//add bottom shadow</span>
-<span class="built_in">UIView</span> *bottomShadow = [[<span class="built_in">UIView</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="keyword">self</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span> - <span class="number">0.5</span>, screenSize<span class="variable">.width</span>, <span class="number">0.5</span>)];
-bottomShadow<span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> lightGrayColor];
-[<span class="keyword">self</span> addSubview:bottomShadow];
-</code></pre><p>  }<br>  return self;<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_init_support-1">pragma mark - init support</h1><ul>
-<li><p>(CALayer <em>)createBgLayerWithColor:(UIColor </em>)color andPosition:(CGPoint)position<br>{<br>  CALayer *layer = [CALayer layer];<br>  layer.position = position;<br>  layer.bounds = CGRectMake(0, 0, self.frame.size.width / self.numOfMenu, self.frame.size.height - 1);<br>  layer.backgroundColor = color.CGColor;<br>  //    NSLog(@”bglayer bounds:%@”,NSStringFromCGRect(layer.bounds));<br>  //    NSLog(@”bglayer position:%@”, NSStringFromCGPoint(position));</p>
-<p>  return layer;<br>}</p>
-</li>
-<li><p>(CAShapeLayer <em>)createIndicatorWithColor:(UIColor </em>)color andPosition:(CGPoint)point<br>{<br>  UIImage <em>backgroundImage = [UIImage imageNamed:@”my”];<br>  CAShapeLayer </em>layer = [CAShapeLayer new];<br>  CGFloat nativeWidth = CGImageGetWidth(backgroundImage.CGImage);<br>  CGFloat nativeHeight = CGImageGetHeight(backgroundImage.CGImage);<br>  CGRect startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);<br>  layer.contents = (id)backgroundImage.CGImage;<br>  layer.frame = startFrame;<br>  layer.position = point;<br>  return layer;<br>}</p>
-</li>
-<li><p>(CATextLayer <em>)createTextLayerWithNSString:(NSString </em>)string withColor:(UIColor *)color andPosition:(CGPoint)point<br>{</p>
-<p>  CGSize size = [self calculateTitleSizeWithString:string];</p>
-<p>  CATextLayer *layer = [CATextLayer new];<br>  CGFloat sizeWidth = (size.width &lt; (self.frame.size.width / _numOfMenu) - 25) ? size.width : self.frame.size.width / _numOfMenu - 25;<br>  layer.bounds = CGRectMake(0, 0, sizeWidth, size.height);<br>  layer.string = string;<br>  layer.fontSize = 14.0;<br>  layer.alignmentMode = kCAAlignmentCenter;<br>  layer.foregroundColor = color.CGColor;</p>
-<p>  layer.contentsScale = [[UIScreen mainScreen] scale];</p>
-<p>  layer.position = point;</p>
-<p>  return layer;<br>}</p>
-</li>
-<li><p>(CGSize)calculateTitleSizeWithString:(NSString <em>)string<br>{<br>  CGFloat fontSize = 14.0;<br>  NSDictionary </em>dic = @{NSFontAttributeName : [UIFont systemFontOfSize:fontSize]};<br>  CGSize size = [string boundingRectWithSize:CGSizeMake(280, 0) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:dic context:nil].size;<br>  return size;<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_gesture_handle-1">pragma mark - gesture handle</h1><ul>
-<li><p>(void)menuTapped:(UITapGestureRecognizer *)paramSender<br>{<br>  CGPoint touchPoint = [paramSender locationInView:self];<br>  //calculate index<br>  NSInteger tapIndex = touchPoint.x / (self.frame.size.width / _numOfMenu);</p>
-<p>  for (int i = 0; i &lt; _numOfMenu; i++) {</p>
-<pre><code><span class="tag">if</span> (i != tapIndex) {
-    <span class="attr_selector">[self animateIndicator:_indicators[i]</span>
-                   <span class="tag">Forward</span><span class="pseudo">:NO</span>
-                  <span class="tag">complete</span>:^{
-                    <span class="attr_selector">[self animateTitle:_titles[i]</span>
-                                  <span class="tag">show</span><span class="pseudo">:NO</span>
-                              <span class="tag">complete</span>:^{
-
-                              }];
-                  }];
-    <span class="attr_selector">[(CALayer *)self.bgLayers[i]</span> <span class="tag">setBackgroundColor</span>:<span class="attr_selector">[UIColor whiteColor]</span><span class="class">.CGColor</span>];
-}
-</code></pre><p>  }</p>
-<p>  if (tapIndex == _currentSelectedMenudIndex &amp;&amp; _show) {</p>
-<pre><code><span class="collection">[self animateIdicator:_indicators<span class="collection">[_currentSelectedMenudIndex]</span>
-           background:_backGroundView
-            tableView:_tableView
-                title:_titles<span class="collection">[_currentSelectedMenudIndex]</span>
-              forward:NO
-            complecte:<span class="comment">^{
-              _currentSelectedMenudIndex = tapIndex;
-              _show = NO;
-            }</span>]</span><span class="comment">;</span>
-<span class="collection">[<span class="list">(<span class="keyword">CALayer</span> *)</span>self.bgLayers<span class="collection">[tapIndex]</span> setBackgroundColor:<span class="collection">[UIColor whiteColor]</span>.CGColor]</span><span class="comment">;</span>
-</code></pre><p>  }<br>  else {</p>
-<pre><code><span class="name">_currentSelectedMenudIndex</span> = <span class="atom">tapIndex</span>;
-[<span class="name">_tableView</span> <span class="atom">reloadData</span>];
-[<span class="atom">self</span> <span class="atom">animateIdicator</span>:<span class="name">_indicators</span>[<span class="atom">tapIndex</span>]
-           <span class="atom">background</span>:<span class="name">_backGroundView</span>
-            <span class="atom">tableView</span>:<span class="name">_tableView</span>
-                <span class="atom">title</span>:<span class="name">_titles</span>[<span class="atom">tapIndex</span>]
-              <span class="atom">forward</span>:<span class="name">YES</span>
-            <span class="atom">complecte</span>:^{
-              <span class="name">_show</span> = <span class="name">YES</span>;
-            }];
-[(<span class="name">CALayer</span> *)<span class="atom">self</span>.<span class="atom">bgLayers</span>[<span class="atom">tapIndex</span>] <span class="atom">setBackgroundColor</span>:[<span class="name">UIColor</span> <span class="atom">colorWithWhite</span>:<span class="number">0.9</span> <span class="atom">alpha</span>:<span class="number">1.0</span>].<span class="name">CGColor</span>];
-</code></pre><p>  }<br>}</p>
-</li>
-<li><p>(void)backgroundTapped:(UITapGestureRecognizer *)paramSender<br>{<br>  [self animateIdicator:_indicators[_currentSelectedMenudIndex]</p>
-<pre><code><span class="rule"><span class="attribute">background</span>:<span class="value">_backGroundView
- tableView:_tableView
-     title:_titles[_currentSelectedMenudIndex]
-   forward:NO
- complecte:^{
-   _show = NO</span></span>;
- }];
-</code></pre><p>  [(CALayer *)self.bgLayers[_currentSelectedMenudIndex] setBackgroundColor:[UIColor whiteColor].CGColor];<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_animation_method-1">pragma mark - animation method</h1><ul>
-<li><p>(void)animateIndicator:(CAShapeLayer *)indicator Forward:(BOOL)forward complete:(void (^)())complete<br>{<br>  [CATransaction begin];<br>  [CATransaction setAnimationDuration:0.25];<br>  [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithControlPoints:0.4:0.0:0.2:1.0]];</p>
-<p>  CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@”transform.rotation”];<br>  //anim.values = forward ? @[ @0, @(M_PI) ] : @[ @(M_PI), @0 ];<br>  anim.values = forward ? @[ @0, @(M_PI_2) ] : @[ @(M_PI_2), @0 ];</p>
-<p>  if (!anim.removedOnCompletion) {</p>
-<pre><code>[indicator <span class="string">addAnimation:</span>anim <span class="string">forKey:</span>anim.keyPath];
-</code></pre><p>  }<br>  else {</p>
-<pre><code>[indicator <span class="string">addAnimation:</span>anim <span class="string">forKey:</span>anim.keyPath];
-[indicator <span class="string">setValue:</span>anim.values.lastObject <span class="string">forKeyPath:</span>anim.keyPath];
-</code></pre><p>  }</p>
-<p>  [CATransaction commit];</p>
-<p>  complete();<br>}</p>
-</li>
-</ul>
-<p>//- (void)animateBackGroundView:(UIView *)view show:(BOOL)show complete:(void(^)())complete {<br>//    if (show) {<br>//        [self.superview addSubview:view];<br>//        [view.superview addSubview:self];<br>//<br>//        [UIView animateWithDuration:0.2 animations:^{<br>//            view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];<br>//        }];<br>//    } else {<br>//        [UIView animateWithDuration:0.2 animations:^{<br>//            view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];<br>//        } completion:^(BOOL finished) {<br>//            [view removeFromSuperview];<br>//        }];<br>//    }<br>//    complete();<br>//}</p>
-<ul>
-<li><p>(void)animateTableView:(UITableView *)tableView show:(BOOL)show positionX:(CGFloat)positionX complete:(void (^)())complete<br>{<br>  if (show) {</p>
-<pre><code><span class="built_in">table</span>View.frame = CGRectMake(<span class="literal">self</span>.origin.x, <span class="literal">self</span>.frame.origin.y + <span class="literal">self</span>.frame.size.height, <span class="literal">self</span>.frame.size.width, <span class="number">0</span>);
-[<span class="literal">self</span>.superview addSubview:<span class="built_in">table</span>View];
-
-CGFloat <span class="built_in">table</span>ViewHeight = ([<span class="built_in">table</span>View numberOfRowsInSection:<span class="number">0</span>] &gt; <span class="number">5</span>) ? (<span class="number">5</span> * <span class="built_in">table</span>View.rowHeight) : ([<span class="built_in">table</span>View numberOfRowsInSection:<span class="number">0</span>] * <span class="built_in">table</span>View.rowHeight);
-
-[UIView animateWithDuration:<span class="number">0.2</span>
-                 animations:^{
-                   _tableView.frame = CGRectMake(positionX, <span class="literal">self</span>.frame.origin.y + <span class="literal">self</span>.frame.size.height, <span class="literal">self</span>.frame.size.width / <span class="number">2</span>, <span class="built_in">table</span>ViewHeight);
-                 }];
-</code></pre><p>  }<br>  else {</p>
-<pre><code><span class="collection">[UIView animateWithDuration:0.2
-    animations:<span class="comment">^{
-      _tableView.frame = CGRectMake(positionX, self.frame.origin.y + self.frame.size.height, self.frame.size.width / 2, 0);
-    }</span>
-    completion:^<span class="list">(<span class="keyword">BOOL</span> finished)</span> <span class="collection">{
-      <span class="collection">[tableView removeFromSuperview]</span><span class="comment">;</span>
-    }</span>]</span><span class="comment">;</span>
-</code></pre><p>  }<br>  complete();<br>}</p>
-</li>
-<li><p>(void)animateTitle:(CATextLayer *)title show:(BOOL)show complete:(void (^)())complete<br>{<br>  CGSize size = [self calculateTitleSizeWithString:title.string];<br>  CGFloat sizeWidth = (size.width &lt; (self.frame.size.width / _numOfMenu) - 25) ? size.width : self.frame.size.width / _numOfMenu - 25;<br>  title.bounds = CGRectMake(0, 0, sizeWidth, size.height);<br>  complete();<br>}</p>
-</li>
-<li><p>(void)animateIdicator:(CAShapeLayer <em>)indicator background:(UIView </em>)background tableView:(UITableView <em>)tableView title:(CATextLayer </em>)title forward:(BOOL)forward complecte:(void (^)())complete<br>{</p>
-<p>  [self animateIndicator:indicator</p>
-<pre><code> Forward:forward
-complete:^{
-  [<span class="keyword">self</span> animateTitle:title
-                show:forward
-            complete:^{
-              <span class="built_in">CGFloat</span> coloumWidth = <span class="keyword">self</span><span class="variable">.layer</span><span class="variable">.superlayer</span><span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span> / <span class="keyword">self</span><span class="variable">.numOfMenu</span>;
-              [<span class="keyword">self</span> animateTableView:tableView
-                                show:forward
-                           positionX:((<span class="built_in">NSInteger</span>)title<span class="variable">.position</span><span class="variable">.x</span> / (<span class="built_in">NSInteger</span>)coloumWidth) * coloumWidth
-                            complete:^{
-                            }];
-            }];
-}];
-</code></pre><p>  complete();<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_table_datasource-1">pragma mark - table datasource</h1><ul>
-<li><p>(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section<br>{<br>  NSAssert(self.dataSource != nil, @”menu’s dataSource shouldn’t be nil”);<br>  if ([self.dataSource respondsToSelector:@selector(menu:numberOfRowsInColumn:)]) {</p>
-<pre><code><span class="keyword">return</span> [<span class="keyword">self</span>.dataSource <span class="symbol">menu:</span><span class="keyword">self</span>
-        <span class="symbol">numberOfRowsInColumn:</span><span class="keyword">self</span>.currentSelectedMenudIndex];
-</code></pre><p>  }<br>  else {</p>
-<pre><code><span class="built_in">NSAssert</span>(<span class="number">0</span> == <span class="number">1</span>, <span class="string">@"required method of dataSource protocol should be implemented"</span>);
-<span class="keyword">return</span> <span class="number">0</span>;
-</code></pre><p>  }<br>}</p>
-</li>
-<li><p>(UITableViewCell <em>)tableView:(UITableView </em>)tableView cellForRowAtIndexPath:(NSIndexPath <em>)indexPath<br>{<br>  static NSString </em>identifier = @”DropDownMenuCell”;<br>  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];<br>  if (!cell) {</p>
-<pre><code>cell = [[UITableViewCell alloc] <span class="string">initWithStyle:</span>UITableViewCellStyleDefault <span class="string">reuseIdentifier:</span>identifier];
-</code></pre><p>  }<br>  NSAssert(self.dataSource != nil, @”menu’s datasource shouldn’t be nil”);<br>  if ([self.dataSource respondsToSelector:@selector(menu:titleForRowAtIndexPath:)]) {</p>
-<pre><code>cell.textLabel.text = [self.dataSource <span class="string">menu:</span>self <span class="string">titleForRowAtIndexPath:</span>[DOPIndexPath <span class="string">indexPathWithCol:</span>self.currentSelectedMenudIndex <span class="string">row:</span>indexPath.row]];
-</code></pre><p>  }<br>  else {</p>
-<pre><code>NSAssert<span class="list">(<span class="number">0</span> == <span class="number">1</span>, @<span class="string">"dataSource method needs to be implemented"</span>)</span><span class="comment">;</span>
-</code></pre><p>  }</p>
-<p>  UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, _tableView.rowHeight - 1, cell.contentView.frame.size.width / 2, 1)];<br>  lineView.backgroundColor = [UIColor grayColor];<br>  [cell.contentView addSubview:lineView];<br>  cell.backgroundColor = [UIColor whiteColor];<br>  cell.textLabel.font = [UIFont systemFontOfSize:14.0];<br>  cell.textLabel.textAlignment = NSTextAlignmentCenter;<br>  cell.separatorInset = UIEdgeInsetsZero;</p>
-<p>  if (cell.textLabel.text == [(CATextLayer *)[_titles objectAtIndex:_currentSelectedMenudIndex] string]) {</p>
-<pre><code>cell.backgroundColor = [UIColor <span class="string">colorWithWhite:</span><span class="number">0.9</span> <span class="string">alpha:</span><span class="number">1.0</span>];
-</code></pre><p>  }</p>
-<p>  return cell;<br>}</p>
-</li>
-</ul>
-<h1 id="pragma_mark_-_tableview_delegate-1">pragma mark - tableview delegate</h1><ul>
-<li><p>(void)tableView:(UITableView <em>)tableView didSelectRowAtIndexPath:(NSIndexPath </em>)indexPath<br>{<br>  if (self.delegate || [self.delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {</p>
-<pre><code>[self <span class="string">confiMenuWithSelectRow:</span>indexPath.row];
-[self.delegate <span class="string">menu:</span>self <span class="string">didSelectRowAtIndexPath:</span>[DOPIndexPath <span class="string">indexPathWithCol:</span>self.currentSelectedMenudIndex <span class="string">row:</span>indexPath.row]];
-</code></pre><p>  }<br>  else {</p>
-<pre><code>//<span class="type">TODO</span>: delegate <span class="keyword">is</span> <span class="keyword">nil</span>
-</code></pre><p>  }<br>}</p>
-</li>
-<li><p>(void)confiMenuWithSelectRow:(NSInteger)row<br>{<br>  CATextLayer <em>title = (CATextLayer </em>)_titles[_currentSelectedMenudIndex];<br>  title.string = [self.dataSource menu:self titleForRowAtIndexPath:[DOPIndexPath indexPathWithCol:self.currentSelectedMenudIndex row:row]];</p>
-<p>  [self animateIdicator:_indicators[_currentSelectedMenudIndex]</p>
-<pre><code><span class="rule"><span class="attribute">background</span>:<span class="value">_backGroundView
- tableView:_tableView
-     title:_titles[_currentSelectedMenudIndex]
-   forward:NO
- complecte:^{
-   _show = NO</span></span>;
- }];
-</code></pre><p>  [(CALayer *)self.bgLayers[_currentSelectedMenudIndex] setBackgroundColor:[UIColor whiteColor].CGColor];</p>
-<p>  CAShapeLayer <em>indicator = (CAShapeLayer </em>)_indicators[_currentSelectedMenudIndex];<br>  indicator.position = CGPointMake(title.position.x + title.frame.size.width / 2 + 8, indicator.position.y);<br>}</p>
-</li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
     <article id="post-mac操作系统" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -1184,6 +644,148 @@ complete:^{
 <li></li>
 </ol>
 
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-学会看xcode文档" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/26/学会看xcode文档/" class="article-date">
+  	<time datetime="2015-06-26T03:13:38.000Z" itemprop="datePublished">6月 26 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="学会看Xcode文档">学会看Xcode文档</h2><p>前面我们讲Xcode的文档结构是在介绍如何能够快速定位到你要找的内容。但是很多人的问题可能是一开始就根本不知道要读什么。</p>
+<p>这里我们就介绍自学iOS开发应该遵循或者说我们推荐的必读文档的阅读顺序。</p>
+<p>阅读顺序：</p>
+<p>《马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today)》<br>《Your First iOS App》<br>《Your Second iOS App: Storyboards》<br>《Your Third iOS App: iCloud》<br>《iOS Technology Overview》<br>《iOS Human Interface Guidelines》<br>《    》和《Programming with Objective-C》<br>《iOS App Programming Guide》<br>《View Programming Guide for iOS》和《View Controller Programming Guide for iOS》<br>《Table View Programming Guide for iOS》<br>首先应该看的是Getting Started里面的《马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today)》（中英文版本皆有，苹果官方的翻译）。这个文档讲的很浅，但是是建立概念的文档，你以后在开发里面经常遇到的概念，在这里都有包含，特别注意是，这个文档看起来简单，但是每页下面的相关文章，不是选读，都是必读。</p>
+<p>即使是很多做了iOS开发很久的同学，其实也有很多概念上的误解，现代程序开发越来越简单，工具越来越强大，往往有些误解也可以继续前行，但是实际上不建立扎实的基础是很吃亏的，往往后面理解和解决一个不难解决小问题都要付出很多辛苦。</p>
+<p>阅读这个文档的目的和检测标准是，以后你看到iOS开发中的基本概念，都大致所有了解。</p>
+<p>读完《马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today)》后，应该去看Your XXX iOS App系列这个系列不是什么很难的文章，你也不必着急先去学习Objective-C，学什么C语言就更不要着急。我推荐的学习方法是有成就的逐步学习法。在学习系统体系架构、Objective-C之前，你可以先按照文档写一个全天下最简单的App，完成学习过程中第一个里程碑。在这个过程中不用担心有什么疑问，有什么不懂，先照着做就是。</p>
+<p>阅读这三个文档的目的和检测标准是，把这三个Demo App做出来在模拟器上跑起来。</p>
+<p>在这个过程中，你对开发工具的基本认识就建立起来了，也有了成就感，去了魅（就是消除了对iOS开发的神秘感）。</p>
+<p>再往下，建议你去看《iOS Technology Overview》（iOS技术概览），iOS不是一个技术，而是一堆技术，前一篇讲到文档导航区域的分类，框架分类的时候，我说不细讲的原因就在于此，你要做一个动画应该用Core Animation还是OpenGL？你要做一些文本相关操作应该用Core Text还是什么，就是看这里。</p>
+<p>学习现代的程序开发，语言和框架并重。我们Tiny4Cocoa叫做这个名字的原因就是，iOS/Mac开发者的代表往往就是这个Cocoa框架，就是这个SDK。大多数你所需要的功能都躺在框架里面，你知道框架的结构，你才知道怎么去寻找相关的技术资料。</p>
+<p>阅读这个文档的目的和检测标准是，遇到具体问题，知道应该去看哪方面的文档。</p>
+<p>再下来，建议阅读的是《iOS Human Interface Guidelines》，Mac/iOS平台虽然也是百花齐放各类程序、App都有，但是总体看来，大多数优秀App的UI看起来都和整个系统很协调。这和Windows以及很多其他平台完全不同。这是为什么呢？</p>
+<p>很大程度就归功于《Human Interface Guidelines》文化，所谓Human Interface Guidelines就是用户界面的规范，在苹果它还专门有一个缩写叫做HIG，是天条一样的东西。所有的App都推荐遵循HIG，遵循了HIG，你做的东西用户看起来就会觉得和整个系统很协调。即使是你要做一些创新的设计，你势必会打破HIG的限制，但是你这个时候仍旧应该遵循HIG的精神。</p>
+<p>此外，你阅读HIG的很重要一点是了解整个UI结构和UE行为的逻辑机理，这样才能在你设计界面的时候有所依据。</p>
+<p>阅读这个文档的目的和检测标准是，看到任何一个App，你可以知道它的任何一个UI是系统控件，还是自定义控件，它的层次关系等等。</p>
+<p>《Learning Objective-C: A Primer》是非常初级和简单的入门，适合先阅读。《Programming with Objective-C》超微复杂一点点，适合后阅读。</p>
+<p>一般人建议先学习语言，我反之建议先做了一个App，然后再学习语言。原因有几个，首先现代开发工具，往往不是用来开发控制台程序的，上来就会有框架，光懂语言不会使用IDE，甚至可能会更麻烦。再其次就是，其实现代语言发展到了面向对象以后，库往往比语言更复杂，更重要，或者说更多的时候，我们是在学习库，而不是语言，语言只是库的一个载体。</p>
+<p>比如，Delegate和Block等等都和Cocoa的UI异步机制关系紧密，光看代码，这些语言元素非常难以学习，也完全不知道其意义在哪里。</p>
+<p>阅读这个文档的目的和检测标准是，看得懂基本的Objective-C代码，方便后面的学习和阅读各种示例代码。</p>
+<p>《iOS App Programming Guide》基本上介绍的就是开发一个App的完整流程，包括App的生命周期、休眠、激活等等，里面介绍的细节颇多。正式开发第一个上线的App之前必看。或者开发了一个App，临到提交前必看才文档。</p>
+<p>阅读这个文档的目的和检测标准是，了解全部流程和很多细节问题。</p>
+<p>《View Programming Guide for iOS》和《View Controller Programming Guide for iOS》非常重要。View是整个图形界面里面最重要的概念。所有的图形、界面绘制都基于View。你看到的一切复杂的用户界面，就是各种不同的View的组合堆叠。</p>
+<p>View Controller是View和某种逻辑在一起的组合，本质上这种组合不是必须的，但是是大大降低编程复杂度的一种设计。很多人不懂什么是View什么是View Controller，这样写起代码来就很痛苦。</p>
+<p>阅读这个文档的目的和检测标准是，深刻理解什么是View，什么是View Controller，理解什么情况用View，什么情况用View Controller。</p>
+<p>UITableView是最重要的一个控件，是最常用的UI界面元素。在UICollectionView出现之前，大量的内容列表展示的自定义控件都是基于UITableView，比如很多书架、图片Grid其实都是UITableView做的。</p>
+<p>所以《Table View Programming Guide for iOS》非常重要，一定要好好阅读。</p>
+<p>阅读这个文档的目的和检测标准是，深刻理解UITableView／UITableViewController的理论和使用方法。</p>
+<p>我推荐的必读文档就这么多，仔细看的话，最多也就是今天就看完了。学习一个东西，如果有一点点耐心，有正确的方法其实不难，不是说脑子非要很聪明，大多数人都可以做到一个星期就学会iOS开发，其实就是读完这些文档，大多数人就会了。</p>
+<p>就像我强调了无数次，阅读英文文档不难，我自己从当年看英文文档非常吃力，必须查词典开始，认真的看英文文档，不会就查词典，一个多月过去，读英文文档就完全不需要查词典了。</p>
+<p>我们公司主程 @sycx 老师，也说他原来英语也很不好，甚至现在英语仍旧很烂，但是看英文文档完全没有问题，也就是几个星期的认真学习以后就突破了。</p>
+<p>其实学习iOS也如此。当然我不是说你看懂这10组文档就再也不用看别的了。而是说，如果你看懂了这10组文档，你就从初学者，或者是虽然会写一些程序，但是对iOS其实还不懂的状态，变成了一个入门者。</p>
+<p>我不希望这个文章可以一句一句的帮你学会iOS是什么，这个文章的目的是帮你快速入门。一旦你入门了，你再遇到问题该看什么，你就不需要我讲了，你自己就知道了。一旦入门了，你就会发现，Xcode里面别的文档讲的内容虽然不同，但是结构你已经很清楚了，你学习起来很方便。<br><strong><br>阅读本文的目的和检测标准是，遇到问题，知道看什么文档，想提升自己技术的时候，知道按照什么脉络自己组织阅读</strong></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-view_programing_guide_for_ios" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/26/view_programing_guide_for_ios/" class="article-date">
+  	<time datetime="2015-06-26T03:06:59.000Z" itemprop="datePublished">6月 26 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="view_programing_guide_for_iOS">view programing guide for iOS</h2><ol>
+<li>window没有可视区域，但是它提供了一个容器，view是window的一部分，你可以往里面添加内容，你也可以使用视图管理其他视图。  view也可以作为一个容器</li>
+<li>每个程序至少有一个window和一个view用来显示内容,uikit和其他框架提供预定好的视图用来显示内容,如果不满足要求，我们可以自定义view处理</li>
+<li>view是uiview的实例，管理一个长方形的区域在应用程序中</li>
+</ol>
+<h2 id="视图管理_你应用的可视区域">视图管理 你应用的可视区域</h2><ol>
+<li>在视图层级中，父视图是用来放置和规定子视图的大小，动态修改子视图大小，比如旋转和动画的时候；    </li>
+<li>构建视图就像砌砖块一样的构建用户界面，而不是用一个view去展示所有的内容，你经常用很多视图去构建一个视图层级，每个view都是一个特殊的部分在你的界面中，通常优化一个类型的内容，比如uikit,有专门的视图，用来展示图片，文字，和其他类型的内容</li>
+</ol>
+<h3 id="Window调节view的显示">Window调节view的显示</h3><p>window处理所有的用户界面的展示，window通过view来工作，<br>Windows work with views (and their owning view controllers) to manage interactions with, and changes to, the visible view hierarchy，大部门时间，window是不会改变的，一旦创建，他保持着一样，<br> it stays the same and only the views displayed by it change，<br> 每个应用程序至少有一个window来显示用户界面，和设备的的主屏幕，如果一个额外的展示链接到设备中，可以创建第二个window在那个屏幕上</p>
+<h3 id="动画给用户可视的界面反馈">动画给用户可视的界面反馈</h3><ol>
+<li>动画给用户可视的反馈，体现在视图层次的改变，系统定义了基本的动画，展现一个模态视图，在不同的视图组之间过渡，然而很关于view的属性也可以直接动画，比如，你可以改变视图的透明度，他在屏幕中的位置，他的尺寸，他的背景颜色，或者其他属性。如果你直接用view底层的核心动画对象，你可以展现许多其他的动画。</li>
+</ol>
+<h3 id="IB的角色">IB的角色</h3><ol>
+<li>IB是一个应用程序，你可以用来以图像的方式构建和配置你应用程序的windows和view,使用IB，你可以组装自己的视图和对象，当你在运行时加载一个nib文件，里面的对象会被重新构建到实际的对象，你的代码可以操作他们</li>
+<li>IB极大的简化了你创建用户界面的工作</li>
+</ol>
+<h3 id="视图的结构">视图的结构</h3><ol>
+<li>一个tar button item 本身不是一个视图，但是内部管理了一个视图</li>
+<li>绘制代码严重影响性能，能少些就少写，代码被调用，会被缓存起来重复利用，重用生成好的代码，排除昂贵的画循环，通常需要更新视图。重用这些内容，在动画期间非常重要，就是存在的内容可以被操作的时候，这样的重用，相比创建一个新的内容，会 less expensive</li>
+</ol>
+<h3 id="视图的结构-1">视图的结构</h3><ol>
+<li>子视图被放在一个数组中，被放置的顺序影响视图的可见性，如果两个同级的视图重叠，后添加的会再前面添加的顶部</li>
+<li>数组的顺序也会影响到程序如何响应事件，响应链是一级一级向父类传递</li>
+<li>如果没有响应，最终会传递到application对象，这个对象，通常会丢弃他</li>
+</ol>
+<h3 id="view的画循环">view的画循环</h3><ol>
+<li>定需求的画模型来决定视图的显示，如果你没有改变视图的内容，系统会捕捉内容的快照来显示视图的可视区域，那么画的内容就永远不会被再调用，快照图像重用于大多数操作涉及的视图</li>
+<li><p>如果改变了内容，你通知系统视图改变，视图重复绘图的步骤，然后捕捉结果的快照</p>
+</li>
+<li><p>你使用setNeedsDisplay 和 setNeedsDisplayInRect: method是视图无效，这些方法告诉视图内容已经被改变，需要重绘在下一个时机。系统会等到当前运行循环结束后才会开始绘制。这个延迟给你机会去让视图失效，增加或者移除从视图层级中，重置视图大小，所有这些操作在同一时间</p>
+</li>
+<li>改变视图的几何形状不会导致视图重绘，在view的边界中，大多数内容拉伸，重新定位。</li>
+</ol>
+<h3 id="content_modes">content modes</h3><p>UIViewContentModeRedraw会重绘，强制调用drawrect,我们应该避免，在系统的视图中应该不使用他</p>
+<h3 id="Stretchable_Views">Stretchable Views</h3>
       
     </div>
     

@@ -195,148 +195,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-学会看xcode文档" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/26/学会看xcode文档/" class="article-date">
-  	<time datetime="2015-06-26T03:13:38.000Z" itemprop="datePublished">6月 26 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="学会看Xcode文档">学会看Xcode文档</h2><p>前面我们讲Xcode的文档结构是在介绍如何能够快速定位到你要找的内容。但是很多人的问题可能是一开始就根本不知道要读什么。</p>
-<p>这里我们就介绍自学iOS开发应该遵循或者说我们推荐的必读文档的阅读顺序。</p>
-<p>阅读顺序：</p>
-<p>《马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today)》<br>《Your First iOS App》<br>《Your Second iOS App: Storyboards》<br>《Your Third iOS App: iCloud》<br>《iOS Technology Overview》<br>《iOS Human Interface Guidelines》<br>《    》和《Programming with Objective-C》<br>《iOS App Programming Guide》<br>《View Programming Guide for iOS》和《View Controller Programming Guide for iOS》<br>《Table View Programming Guide for iOS》<br>首先应该看的是Getting Started里面的《马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today)》（中英文版本皆有，苹果官方的翻译）。这个文档讲的很浅，但是是建立概念的文档，你以后在开发里面经常遇到的概念，在这里都有包含，特别注意是，这个文档看起来简单，但是每页下面的相关文章，不是选读，都是必读。</p>
-<p>即使是很多做了iOS开发很久的同学，其实也有很多概念上的误解，现代程序开发越来越简单，工具越来越强大，往往有些误解也可以继续前行，但是实际上不建立扎实的基础是很吃亏的，往往后面理解和解决一个不难解决小问题都要付出很多辛苦。</p>
-<p>阅读这个文档的目的和检测标准是，以后你看到iOS开发中的基本概念，都大致所有了解。</p>
-<p>读完《马上着手开发 iOS 应用程序 (Start Developing iOS Apps Today)》后，应该去看Your XXX iOS App系列这个系列不是什么很难的文章，你也不必着急先去学习Objective-C，学什么C语言就更不要着急。我推荐的学习方法是有成就的逐步学习法。在学习系统体系架构、Objective-C之前，你可以先按照文档写一个全天下最简单的App，完成学习过程中第一个里程碑。在这个过程中不用担心有什么疑问，有什么不懂，先照着做就是。</p>
-<p>阅读这三个文档的目的和检测标准是，把这三个Demo App做出来在模拟器上跑起来。</p>
-<p>在这个过程中，你对开发工具的基本认识就建立起来了，也有了成就感，去了魅（就是消除了对iOS开发的神秘感）。</p>
-<p>再往下，建议你去看《iOS Technology Overview》（iOS技术概览），iOS不是一个技术，而是一堆技术，前一篇讲到文档导航区域的分类，框架分类的时候，我说不细讲的原因就在于此，你要做一个动画应该用Core Animation还是OpenGL？你要做一些文本相关操作应该用Core Text还是什么，就是看这里。</p>
-<p>学习现代的程序开发，语言和框架并重。我们Tiny4Cocoa叫做这个名字的原因就是，iOS/Mac开发者的代表往往就是这个Cocoa框架，就是这个SDK。大多数你所需要的功能都躺在框架里面，你知道框架的结构，你才知道怎么去寻找相关的技术资料。</p>
-<p>阅读这个文档的目的和检测标准是，遇到具体问题，知道应该去看哪方面的文档。</p>
-<p>再下来，建议阅读的是《iOS Human Interface Guidelines》，Mac/iOS平台虽然也是百花齐放各类程序、App都有，但是总体看来，大多数优秀App的UI看起来都和整个系统很协调。这和Windows以及很多其他平台完全不同。这是为什么呢？</p>
-<p>很大程度就归功于《Human Interface Guidelines》文化，所谓Human Interface Guidelines就是用户界面的规范，在苹果它还专门有一个缩写叫做HIG，是天条一样的东西。所有的App都推荐遵循HIG，遵循了HIG，你做的东西用户看起来就会觉得和整个系统很协调。即使是你要做一些创新的设计，你势必会打破HIG的限制，但是你这个时候仍旧应该遵循HIG的精神。</p>
-<p>此外，你阅读HIG的很重要一点是了解整个UI结构和UE行为的逻辑机理，这样才能在你设计界面的时候有所依据。</p>
-<p>阅读这个文档的目的和检测标准是，看到任何一个App，你可以知道它的任何一个UI是系统控件，还是自定义控件，它的层次关系等等。</p>
-<p>《Learning Objective-C: A Primer》是非常初级和简单的入门，适合先阅读。《Programming with Objective-C》超微复杂一点点，适合后阅读。</p>
-<p>一般人建议先学习语言，我反之建议先做了一个App，然后再学习语言。原因有几个，首先现代开发工具，往往不是用来开发控制台程序的，上来就会有框架，光懂语言不会使用IDE，甚至可能会更麻烦。再其次就是，其实现代语言发展到了面向对象以后，库往往比语言更复杂，更重要，或者说更多的时候，我们是在学习库，而不是语言，语言只是库的一个载体。</p>
-<p>比如，Delegate和Block等等都和Cocoa的UI异步机制关系紧密，光看代码，这些语言元素非常难以学习，也完全不知道其意义在哪里。</p>
-<p>阅读这个文档的目的和检测标准是，看得懂基本的Objective-C代码，方便后面的学习和阅读各种示例代码。</p>
-<p>《iOS App Programming Guide》基本上介绍的就是开发一个App的完整流程，包括App的生命周期、休眠、激活等等，里面介绍的细节颇多。正式开发第一个上线的App之前必看。或者开发了一个App，临到提交前必看才文档。</p>
-<p>阅读这个文档的目的和检测标准是，了解全部流程和很多细节问题。</p>
-<p>《View Programming Guide for iOS》和《View Controller Programming Guide for iOS》非常重要。View是整个图形界面里面最重要的概念。所有的图形、界面绘制都基于View。你看到的一切复杂的用户界面，就是各种不同的View的组合堆叠。</p>
-<p>View Controller是View和某种逻辑在一起的组合，本质上这种组合不是必须的，但是是大大降低编程复杂度的一种设计。很多人不懂什么是View什么是View Controller，这样写起代码来就很痛苦。</p>
-<p>阅读这个文档的目的和检测标准是，深刻理解什么是View，什么是View Controller，理解什么情况用View，什么情况用View Controller。</p>
-<p>UITableView是最重要的一个控件，是最常用的UI界面元素。在UICollectionView出现之前，大量的内容列表展示的自定义控件都是基于UITableView，比如很多书架、图片Grid其实都是UITableView做的。</p>
-<p>所以《Table View Programming Guide for iOS》非常重要，一定要好好阅读。</p>
-<p>阅读这个文档的目的和检测标准是，深刻理解UITableView／UITableViewController的理论和使用方法。</p>
-<p>我推荐的必读文档就这么多，仔细看的话，最多也就是今天就看完了。学习一个东西，如果有一点点耐心，有正确的方法其实不难，不是说脑子非要很聪明，大多数人都可以做到一个星期就学会iOS开发，其实就是读完这些文档，大多数人就会了。</p>
-<p>就像我强调了无数次，阅读英文文档不难，我自己从当年看英文文档非常吃力，必须查词典开始，认真的看英文文档，不会就查词典，一个多月过去，读英文文档就完全不需要查词典了。</p>
-<p>我们公司主程 @sycx 老师，也说他原来英语也很不好，甚至现在英语仍旧很烂，但是看英文文档完全没有问题，也就是几个星期的认真学习以后就突破了。</p>
-<p>其实学习iOS也如此。当然我不是说你看懂这10组文档就再也不用看别的了。而是说，如果你看懂了这10组文档，你就从初学者，或者是虽然会写一些程序，但是对iOS其实还不懂的状态，变成了一个入门者。</p>
-<p>我不希望这个文章可以一句一句的帮你学会iOS是什么，这个文章的目的是帮你快速入门。一旦你入门了，你再遇到问题该看什么，你就不需要我讲了，你自己就知道了。一旦入门了，你就会发现，Xcode里面别的文档讲的内容虽然不同，但是结构你已经很清楚了，你学习起来很方便。<br><strong><br>阅读本文的目的和检测标准是，遇到问题，知道看什么文档，想提升自己技术的时候，知道按照什么脉络自己组织阅读</strong></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-view_programing_guide_for_ios" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/26/view_programing_guide_for_ios/" class="article-date">
-  	<time datetime="2015-06-26T03:06:59.000Z" itemprop="datePublished">6月 26 2015</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="view_programing_guide_for_iOS">view programing guide for iOS</h2><ol>
-<li>window没有可视区域，但是它提供了一个容器，view是window的一部分，你可以往里面添加内容，你也可以使用视图管理其他视图。  view也可以作为一个容器</li>
-<li>每个程序至少有一个window和一个view用来显示内容,uikit和其他框架提供预定好的视图用来显示内容,如果不满足要求，我们可以自定义view处理</li>
-<li>view是uiview的实例，管理一个长方形的区域在应用程序中</li>
-</ol>
-<h2 id="视图管理_你应用的可视区域">视图管理 你应用的可视区域</h2><ol>
-<li>在视图层级中，父视图是用来放置和规定子视图的大小，动态修改子视图大小，比如旋转和动画的时候；    </li>
-<li>构建视图就像砌砖块一样的构建用户界面，而不是用一个view去展示所有的内容，你经常用很多视图去构建一个视图层级，每个view都是一个特殊的部分在你的界面中，通常优化一个类型的内容，比如uikit,有专门的视图，用来展示图片，文字，和其他类型的内容</li>
-</ol>
-<h3 id="Window调节view的显示">Window调节view的显示</h3><p>window处理所有的用户界面的展示，window通过view来工作，<br>Windows work with views (and their owning view controllers) to manage interactions with, and changes to, the visible view hierarchy，大部门时间，window是不会改变的，一旦创建，他保持着一样，<br> it stays the same and only the views displayed by it change，<br> 每个应用程序至少有一个window来显示用户界面，和设备的的主屏幕，如果一个额外的展示链接到设备中，可以创建第二个window在那个屏幕上</p>
-<h3 id="动画给用户可视的界面反馈">动画给用户可视的界面反馈</h3><ol>
-<li>动画给用户可视的反馈，体现在视图层次的改变，系统定义了基本的动画，展现一个模态视图，在不同的视图组之间过渡，然而很关于view的属性也可以直接动画，比如，你可以改变视图的透明度，他在屏幕中的位置，他的尺寸，他的背景颜色，或者其他属性。如果你直接用view底层的核心动画对象，你可以展现许多其他的动画。</li>
-</ol>
-<h3 id="IB的角色">IB的角色</h3><ol>
-<li>IB是一个应用程序，你可以用来以图像的方式构建和配置你应用程序的windows和view,使用IB，你可以组装自己的视图和对象，当你在运行时加载一个nib文件，里面的对象会被重新构建到实际的对象，你的代码可以操作他们</li>
-<li>IB极大的简化了你创建用户界面的工作</li>
-</ol>
-<h3 id="视图的结构">视图的结构</h3><ol>
-<li>一个tar button item 本身不是一个视图，但是内部管理了一个视图</li>
-<li>绘制代码严重影响性能，能少些就少写，代码被调用，会被缓存起来重复利用，重用生成好的代码，排除昂贵的画循环，通常需要更新视图。重用这些内容，在动画期间非常重要，就是存在的内容可以被操作的时候，这样的重用，相比创建一个新的内容，会 less expensive</li>
-</ol>
-<h3 id="视图的结构-1">视图的结构</h3><ol>
-<li>子视图被放在一个数组中，被放置的顺序影响视图的可见性，如果两个同级的视图重叠，后添加的会再前面添加的顶部</li>
-<li>数组的顺序也会影响到程序如何响应事件，响应链是一级一级向父类传递</li>
-<li>如果没有响应，最终会传递到application对象，这个对象，通常会丢弃他</li>
-</ol>
-<h3 id="view的画循环">view的画循环</h3><ol>
-<li>定需求的画模型来决定视图的显示，如果你没有改变视图的内容，系统会捕捉内容的快照来显示视图的可视区域，那么画的内容就永远不会被再调用，快照图像重用于大多数操作涉及的视图</li>
-<li><p>如果改变了内容，你通知系统视图改变，视图重复绘图的步骤，然后捕捉结果的快照</p>
-</li>
-<li><p>你使用setNeedsDisplay 和 setNeedsDisplayInRect: method是视图无效，这些方法告诉视图内容已经被改变，需要重绘在下一个时机。系统会等到当前运行循环结束后才会开始绘制。这个延迟给你机会去让视图失效，增加或者移除从视图层级中，重置视图大小，所有这些操作在同一时间</p>
-</li>
-<li>改变视图的几何形状不会导致视图重绘，在view的边界中，大多数内容拉伸，重新定位。</li>
-</ol>
-<h3 id="content_modes">content modes</h3><p>UIViewContentModeRedraw会重绘，强制调用drawrect,我们应该避免，在系统的视图中应该不使用他</p>
-<h3 id="Stretchable_Views">Stretchable Views</h3>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
     <article id="post-ios层级" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -655,6 +513,90 @@ NSInteger v2 = [versionTwoComp count] &gt; <span class="keyword">pos</span> ? [[
         <h3 id="reveal">reveal</h3><ol>
 <li>命令 reveal_load_sim</li>
 </ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-开发问题" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/03/开发问题/" class="article-date">
+  	<time datetime="2015-06-03T01:56:07.000Z" itemprop="datePublished">6月 3 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="开发">开发</h2><h3 id="不同字体设置背景颜色">不同字体设置背景颜色</h3><p> <code>UILabel *lable= [[UILabel alloc] initWithFrame:CGRectMake(50, 50, 100, 15)];
+    NSMutableAttributedString *s =
+    [[NSMutableAttributedString alloc] initWithString:@&quot;111&quot;];
+    [s addAttribute:NSBackgroundColorAttributeName
+              value:[UIColor greenColor]
+              range:NSMakeRange(0, s.length-2)];
+    lable.attributedText = s;
+    [self.view addSubview:lable];</code></p>
+<h3 id="新的_IB_和_Size_Classes_系统可以说无情地给手写代码判了个死缓">新的 IB 和 Size Classes 系统可以说无情地给手写代码判了个死缓</h3><p>缓存池本质是NSSet NSArray NSDictionnary Cell的本质是NSSet</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-基础" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/05/28/基础/" class="article-date">
+  	<time datetime="2015-05-28T12:21:53.000Z" itemprop="datePublished">5月 28 2015</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>self.textFiled.inputView<br>设置本地化属性，NSLocale 模式<br>//<br>uicontrol delegate  valueChange </p>
 
       
     </div>
